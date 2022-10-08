@@ -1,0 +1,68 @@
+<?php
+require "../PDOPHP/DB.php";
+class Query extends DB
+{
+
+    public function verify_customer_by_id($customer_id)
+    {
+        $state = false;
+        $query = "SELECT * FROM `customer` WHERE `CustomerID`=?";
+        $statement = $this->connect()->prepare($query);
+        $row_count = count($statement->fetchAll());
+        if ($row_count == 1) {
+            $state = true;
+        }
+        return $state;
+    }
+    public function insert_customer_purchase($unique_id, $dnt, $qty, $customer_id, $sample_id)
+    {
+        $query = "INSERT INTO `customer_purchase_history` (`unique_id`,`dnt`,`qty`,`CustomerID`,`sampleID`) 
+        VALUE (?,?,?,?,?)";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$unique_id, $dnt, $qty, $customer_id, $sample_id]);
+    }
+    public function insert_just($unique_id)
+    {
+        $query = "INSERT INTO `just_check` (`column_1`) 
+        VALUE (?)";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$unique_id]);
+    }
+
+    public function get_sample_id($sample_unique_id){
+         $id = 0;
+         $query = "SELECT * FROM `samples` WHERE `UniqueId` = ?";
+         $statement = $this->connect()->prepare($query);
+         $statement->execute([$sample_unique_id]);
+         $resultset = $statement->fetchAll();
+         $row_count = count($resultset);
+         if($row_count==1){
+            $id = $resultset[0]["sampleID"];
+         }
+         return $id;
+    }
+    public function get_user_id($user_unique_id){
+        $id = 0;
+        $query = "SELECT * FROM `customer` WHERE `Unique_ID` = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$user_unique_id]);
+        $resultset = $statement->fetchAll();
+        $row_count = count($resultset);
+        if($row_count==1){
+           $id = $resultset[0]["CustomerID"];
+        }
+        return $id;
+    }
+    public function get_user_id_from_stripe($email){
+        $id = 0;
+        $query = "SELECT * FROM `customer` WHERE `Email` = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$email]);
+        $resultset = $statement->fetchAll();
+        $row_count = count($resultset);
+        if($row_count==1){
+           $id = $resultset[0]["CustomerID"];
+        }
+        return $id;
+    }
+}
