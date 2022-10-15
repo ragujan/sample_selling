@@ -21,12 +21,12 @@ class Query extends DB
         $statement = $this->connect()->prepare($query);
         $statement->execute([$unique_id, $dnt, $qty, $customer_id, $sample_id]);
     }
-    public function insert_just($unique_id)
+    public function insert_just($unique_id,$event_name)
     {
-        $query = "INSERT INTO `just_check` (`column_1`) 
-        VALUE (?)";
+        $query = "INSERT INTO `just_check` (`column_1`,`event_name`) 
+        VALUE (?,?)";
         $statement = $this->connect()->prepare($query);
-        $statement->execute([$unique_id]);
+        $statement->execute([$unique_id,$event_name]);
     }
 
     public function get_sample_id($sample_unique_id){

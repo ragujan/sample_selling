@@ -4,7 +4,11 @@ include "../vendor/autoload.php";
 
 // This is your test secret API key.
 \Stripe\Stripe::setApiKey('sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K');
-
+$stripe = new \Stripe\StripeClient(
+  'sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K'
+);
+$token = $_POST['stripeToken'];
+$email = $_POST['stripeEmail'];
 header('Content-Type: application/json');
 
 $YOUR_DOMAIN = 'http://localhost:80/sampleSelling-master';
@@ -25,6 +29,11 @@ if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId
     $user = new CheckUser();
     $userId = $user->getCustomerUniqueIdByEmail($userEmail);
   }
+  \Stripe\Customer::create(array(
+    "source"  => $token,
+    "email" => $email,
+    "description" => "It Worked!"
+  ));
   for ($i = 0; $i < count($sampleids); $i++) {
     $qty = $qtys[$i];
     if ($object->checkId($sampleids[$i])) {
