@@ -43,20 +43,32 @@ $customer_entered_email = "brojogan";
 switch ($event->type) {
   case 'customer.created':
     $paymentIntent = $event->data->object;
-    $customer_entered_email = $paymentIntent->email;
+    $customer_entered_email = $paymentIntent->id;
+    // $customer_entered_email = $event->data->object->customer_creation;
     $event_name = $paymentIntent->object;
     $customer = new Query();
-    $customer->insert_just($customer_entered_email,$event_name);
+    $customer->insert_just($customer_entered_email, $event_name);
     break;
-   case 'checkout.session.completed':
+  case 'checkout.session.completed':
     $event_name = $event->data->object->object;
     $checkout_session_id = $event->data->object->id;
+
+    $customer_creation = $event->data->object->customer_creation;
+
+    $customer_creation = $event->data->object->customer;
     \Stripe\Stripe::setApiKey('sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K');
     $stripe = new \Stripe\StripeClient(
       'sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K'
     );
+    //$customer_search = $stripe->customers->retrieve([
+    //  "'${$customer_creation}'",
+    // ]);
+    // $customer_email = $customer_search->email;
+    $customer_search =  $stripe->customers->retrieve(
+      $customer_creation
 
-
+    );
+    $customer_email = $customer_search->email;
     $line_items = \Stripe\Checkout\Session::allLineItems($checkout_session_id);
 
     $listname = $line_items->object;
@@ -74,15 +86,13 @@ switch ($event->type) {
       $unique_id = uniqid();
       if ($user_id == "not_a_logged_in_user") {
         $user_id = 0;
-
       } else {
         $customer_id = $customer->get_user_id($user_id);
       }
       $dnt = date("Y-m-d h:i:s");
 
 
-      $customer->insert_just($customer_email_from_invoice,$event_name);
-
+      $customer->insert_just($customer_email, $event_name);
     }
     break;
 
