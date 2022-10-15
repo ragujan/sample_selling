@@ -39,13 +39,13 @@ class SendMail
             $mail->isSMTP();
             $mail->Host       = 'smtp-mail.outlook.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = "jasonmarhsallrag33@outlook.com";
-            $mail->Password   = 'ragrag**39000';
+            $mail->Username   = "";
+            $mail->Password   = '';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
-            $mail->setFrom("jasonmarhsallrag33@outlook.com", 'jason');
+            $mail->setFrom();
             $mail->addAddress($this->sendersEmail);
-            $mail->addReplyTo("jasonmarhsallrag33@outlook.com", 'jason');
+            $mail->addReplyTo();
             // $mail->addCC('cc@example.com');
             // $mail->addBCC('bcc@example.com');
             $mail->isHTML(true);
@@ -64,7 +64,7 @@ class SendMail
     }
 }
 $email = new SendMail();
-$email->setSenderEmail("stiflerwedontgiveup@gmail.com");
+$email->setSenderEmail("");
 $email->setHeader("blah blah");
 $email->setBody("You know what it is ");
 $email->sendEmail();
