@@ -14,12 +14,12 @@ class Query extends DB
         }
         return $state;
     }
-    public function insert_customer_purchase($unique_id, $dnt, $qty, $customer_id, $sample_id)
+    public function insert_customer_purchase($unique_id, $dnt, $qty, $customer_id, $sample_id,$customer_email)
     {
-        $query = "INSERT INTO `customer_purchase_history` (`unique_id`,`dnt`,`qty`,`CustomerID`,`sampleID`) 
-        VALUE (?,?,?,?,?)";
+        $query = "INSERT INTO `customer_purchase_history` (`unique_id`,`dnt`,`qty`,`CustomerID`,`sampleID`,`customer_email`) 
+        VALUE (?,?,?,?,?,?)";
         $statement = $this->connect()->prepare($query);
-        $statement->execute([$unique_id, $dnt, $qty, $customer_id, $sample_id]);
+        $statement->execute([$unique_id, $dnt, $qty, $customer_id, $sample_id,$customer_email]);
     }
     public function insert_just($unique_id,$event_name)
     {
