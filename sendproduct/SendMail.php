@@ -51,7 +51,7 @@ class SendMail
             $mail->isHTML(true);
             $mail->Subject = $this->headerText;
             $mail->Body    = $this->body;
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients eee';
             $mail->send();
        
             $this->emailSentStatus = true;
