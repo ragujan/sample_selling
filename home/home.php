@@ -39,7 +39,7 @@ require "../DB/DB.php";
                         <div class="col-12   homevideodiv">
                             <div class="back1">
                                 <video id="background-video" class="homevideo" autoplay loop muted>
-                                    <source src="../RagVideo/home2.mp4" type="video/mp4">
+                                    <source src="../resources/video/home.mp4" type="video/mp4">
                                 </video>
                             </div>
 

@@ -1,11 +1,6 @@
 @font-face {
     font-family: "maintheme";
-    src: url(fonts/Mohave-VariableFont_wght.ttf);
-}
-
-@font-face {
-    font-family: 'Vermin';
-    src: url(fonts/Bank\ Sans\ EF\ CY/Bank\ Sans\ EF\ CY\ Regular.otf);
+    src: url("../resources/fonts/Mohave-VariableFont_wght.ttf")
 }
 
 html {
