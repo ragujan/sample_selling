@@ -269,6 +269,16 @@ class queryFunctions extends DBh
         $statement1->execute([$id]);
         return $statement1->fetchAll();
     }
+    public function get_top_three_products(){
+        $query = "SELECT SUM(qty),sampleID,unique_id,CustomerID,dnt,customer_email 
+        FROM customer_purchase_history GROUP BY sampleID  ORDER BY qty  DESC LIMIT 3 ";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute();
+        $rows = count($statement->fetchAll());
+        if($rows>2){
+            return $statement->fetchAll();
+        }
+    }
 
 }
 

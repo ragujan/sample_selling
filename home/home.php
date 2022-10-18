@@ -84,7 +84,7 @@ require "../DB/DB.php";
 
                                                 <?php
                                                 $popularsamples = new Search();
-                                                $popularsamples->limitsearch("samples", "null", "null");
+                                                $popularsamples->limitsearch();
                                                 ?>
                                             </div>
                                         </div>
