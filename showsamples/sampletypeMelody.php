@@ -9,7 +9,7 @@ $stopnumber = 0;
 $outputpage = 0;
 $valueforBTN = 0;
 $exactResultsPerPage = 8;
-$DefaultSampleTypeNumber = 2;
+$DefaultSampleTypeNumber = 1;
 $A;
 
 $object = new queryFunctions();

@@ -83,7 +83,7 @@ session_start();
                                                     <input id="searchBox" class="text-dark px-2 py-1 " type="text">
                                                 </div>
                                                 <div class="col-lg-2 col-5 text-lg-start text-center">
-                                                    <img id="searchButton" class="searchIconImage" src="../icons/search.png" alt="" srcset="">
+                                                    <img id="searchButton" class="searchIconImage" src="../resources/icons/search.png" alt="" srcset="">
                                                 </div>
                                             </div>
 
