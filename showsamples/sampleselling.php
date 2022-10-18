@@ -13,8 +13,7 @@ session_start();
     <link rel="stylesheet" href="../style/bootstrap.css">
 
 
-    <link rel="stylesheet" href="../style/sampleselling.css">
-    <link rel="stylesheet" href="sampleselling.css">
+    <link rel="stylesheet" href="../style/showsamples.css">
     <link rel="stylesheet" href="../style/navbar.css">
 
     <title>BeatSample</title>
@@ -236,7 +235,7 @@ session_start();
         </div>
     </div>
     <div id="newDivId"></div>
-    <script src="sampleselling.js"></script>
+    <script src="script.js"></script>
 
 </body>
 
