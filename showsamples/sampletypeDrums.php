@@ -108,8 +108,8 @@ if (count($melody) == 0 or $melody[0] == "Nothing") {
                                             Your browser does not support the audio element.
                                         </audio>
                                         <img src="<?=$imagePath?>" class="beatPACKIMAGE " alt="">
-                                        <img  id="playmusic<?php echo $melodyID ?>" onclick="playmusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview" src="../BrymoImages/play-button.png" alt="">
-                                        <img  id="pausemusic<?php echo $melodyID ?>" onclick="pausemusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview d-none" src="../BrymoImages/pause.png" alt="">
+                                        <img  id="playmusic<?php echo $melodyID ?>" onclick="playmusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview" src="../resources/play_back_images/play.png" alt="">
+                                        <img  id="pausemusic<?php echo $melodyID ?>" onclick="pausemusic('<?php echo $melodyID ?>');" class="playcolrols audiopreview d-none" src="../resources/play_back_images/pause.png" alt="">
                                     </div>
 
                                     <div class="col-12 d-flex  flex-column pb-3 px-4 ">                               
