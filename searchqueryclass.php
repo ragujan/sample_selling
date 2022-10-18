@@ -25,6 +25,7 @@ class Search
             $searchquery = DB::forsearch("SELECT * FROM {$tablename} WHERE $concell='" . $value . "' LIMIT 3; ");
         }
         $getrows = $searchquery->num_rows;
+        echo "Number of rows is"." ".$getrows;
         if ($getrows >= 1) {
             for ($i = 0; $i < $getrows; $i++) {
 

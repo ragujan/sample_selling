@@ -19,14 +19,14 @@ if (!isset($_SESSION["userEmail"])) {
             <div class="py-0 col-lg-2  offset-lg-0 text-lg-end  my-auto col-md-3 col-5 offset-0   cartNCustomerDiv">
                 <div class="row">
                     <div id="cartItemsDiv" style="position: relative;" class="col-lg-8 col-5  text-end">
-                        <img src="../icons/cartBag.png" alt="">
+                        <img src="../resources/icons/cartBag.png" alt="">
                         <span id="cartItems" class="cartQtyRowCount px-2">0</span>
                     </div>
                     <div id="userButton" class="col-lg-4 col-4 text-end ">
-                        <img src="../icons/user.png" alt="">
+                        <img src="../resources/icons/user.png" alt="">
                     </div>
                     <div id="burgerMenu" class="col-lg-4 col-3 d-md-block d-lg-none  text-end ">
-                        <img src="../icons/burderMenu.png" alt="">
+                        <img src="../resources/icons/burderMenu.png" alt="">
                     </div>
          
                 </div>
