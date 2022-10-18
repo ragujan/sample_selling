@@ -157,19 +157,19 @@ require "../DB/DB.php";
                         <div class="col-6 offset-3 pt-2 pb-5">
                             <div class="row">
                                 <div class="col text-center">
-                                    <img src="../paymentMethods/1.png" class="paymentmethods" alt="">
+                                    <img src="../resources/payment_method_images/1.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="../paymentMethods/2.png" class="paymentmethods" alt="">
+                                    <img src="../resources/payment_method_images/2.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="../paymentMethods/3.png" class="paymentmethods" alt="">
+                                    <img src="../resources/payment_method_images/3.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="../paymentMethods/4.png" class="paymentmethods" alt="">
+                                    <img src="../resources/payment_method_images/4.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="../paymentMethods/5.png" class="paymentmethods" alt="">
+                                    <img src="../resources/payment_method_images/5.png" class="paymentmethods" alt="">
                                 </div>
                             </div>
                         </div>
