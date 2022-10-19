@@ -1,7 +1,8 @@
 
 <?php
-require "../PDOPHP/Sample_query_functions.php";
-require "../PDOPHP/Pagination.php";
+require "../query/Sample_query_functions.php";
+require "../utils/Pagination.php";
+require "../utils/ShowHTML.php";
 // require "../PDOPHP/Validations.php";
 $pageName = "sampleTypeMelody";
 $pagenumber;
@@ -76,6 +77,5 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     $allowedPages = ceil($totalCount / $exactResultsPerPage);
 }
 
-require "../PDOPHP/ShowHTML.php";
 $htmlContentObject = new ShowHTML();
 echo $htmlContentObject->htmlContent($getRows, $allowedPages, $A, $valueforBTN, $pageName,$jsMethodName);

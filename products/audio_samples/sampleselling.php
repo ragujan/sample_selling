@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require "../query/Sample_query_functions.php";
 ?>
 
 <!DOCTYPE html>
@@ -10,12 +10,12 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/bootstrap.css">
+    <link rel="stylesheet" href="../../style/bootstrap.css">
 
 
-    <link rel="stylesheet" href="../style/showsamples.css">
-    <link rel="stylesheet" href="../style/navbar.css">
-
+        <link rel="stylesheet" href="../../style/sampleselling.css">
+  
+    <link rel="stylesheet" href="../../style/navbar.css">
     <title>BeatSample</title>
 </head>
 
@@ -64,7 +64,7 @@ session_start();
                             </div>
                         </div>
                         <?php
-                        require "../siteHeader/header.php"
+                        require "../../siteHeader/header.php"
                         ?>
 
 
@@ -110,7 +110,7 @@ session_start();
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
                                                             <select name="" onchange="showsubsamplesdrums();" class="selectTAG py-2 px-1" id="subSampleDrumID">
                                                                 <?php
-                                                                require "../PDOPHP/Sample_query_functions.php";
+                                                              
                                                                 $query_object = new Sample_query_functions();
                                                                 $subsamples = $query_object->listSubSampleTypes("melodies");
                                                                 $arrsize = count($subsamples);

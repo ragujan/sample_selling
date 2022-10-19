@@ -11,7 +11,7 @@ if (!isset($_SESSION["userEmail"])) {
             <div class="py-0 col-lg-9 d-none d-lg-block col-md-9 col-8 offset-0  my-auto">
                 <div class="row">
                     <div class="col-3 text-center"><a href="../home/home.php" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
-                    <div class="col-3 text-center"><a href="../showsamples/sampleselling.php" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
+                    <div class="col-3 text-center"><a href="../products/audio_samples/sampleselling.php" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
                     <div class="col-3 text-center"><a href="../midiFiles/sample.php" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
                     <div class="col-3 text-center"><a href="" class="  text-white navLinkTexts  text-decoration-none">Contact & Services</a></div>
                 </div>
@@ -39,7 +39,7 @@ if (!isset($_SESSION["userEmail"])) {
             <div class="py-1 d-block d-lg-none  col-12 offset-0  my-auto">
                 <div class="row">
                     <div class="col-10 offset-1 text-center py-3"><a href="../home/home.php" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
-                    <div class="col-10 offset-1 text-center py-3"><a href="../showsamples/sampleselling.php" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
+                    <div class="col-10 offset-1 text-center py-3"><a href="../products/audio_samples/sampleselling.php" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
                     <div class="col-10 offset-1 text-center py-3"><a href="../midiFiles/sample.php" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
                     <div class="col-10 offset-1 text-center py-3"><a href="" class="  text-white navLinkTexts  text-decoration-none">Contact & Services</a></div>
                 </div>
