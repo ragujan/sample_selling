@@ -38,9 +38,9 @@ class ShowHTML{
                                                     <source src="<?php echo $audioPath; ?>" type="audio/mpeg">
                                                     Your browser does not support the audio element.
                                                 </audio>
-                                                <img src="../samplesImages/Iceberg-White_1024x1024.jpg" class="beatPACKIMAGE " alt="">
-                                                <img  id="playmusic<?php echo $inputarrayID ?>" onclick="playmusic('<?php echo $inputarrayID ?>');" class="playcolrols audiopreview" src="../BrymoImages/play-button.png" alt="">
-                                                <img  id="pausemusic<?php echo $inputarrayID ?>" onclick="pausemusic('<?php echo $inputarrayID ?>');" class="playcolrols audiopreview d-none" src="../BrymoImages/pause.png" alt="">
+                                                <img src="<?php echo $imagePath ?>" class="beatPACKIMAGE " alt="">
+                                                <img  id="playmusic<?php echo $inputarrayID ?>" onclick="playmusic('<?php echo $inputarrayID ?>');" class="playcolrols audiopreview" src="../resources/play_back_images/play.png" alt="">
+                                                <img  id="pausemusic<?php echo $inputarrayID ?>" onclick="pausemusic('<?php echo $inputarrayID ?>');" class="playcolrols audiopreview d-none" src="../resources/play_back_images/pause.png" alt="">
                                             </div>
         
                                             <div class="col-12 d-flex  flex-column pb-3 px-4 ">                               
