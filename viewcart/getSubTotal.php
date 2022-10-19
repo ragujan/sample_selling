@@ -4,8 +4,8 @@ if(isset($_POST["cartRows"])){
     $cartRows = $_POST["cartRows"];
     $subTotal=0;
     $a= json_decode($cartRows);
-    require "../PDOPHP/queryFunctions.php";
-    $object = new queryFunctions();
+    require "../PDOPHP/Sample_query_functions.php";
+    $object = new Sample_query_functions();
     foreach($a as $c){
         if(intval($c->id) && $c->id>0 && intval($c->qty) && $c->qty>0){
             $pid= $c->id;

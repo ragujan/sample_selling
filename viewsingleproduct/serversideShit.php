@@ -1,11 +1,11 @@
 <?php
-// require "../PDOPHP/queryFunctions.php";
+// require "../PDOPHP/Sample_query_functions.php";
 // require "../PDOPHP/Pagination.php";
-// $object = new queryFunctions();
+// $object = new Sample_query_functions();
 // $melody = $object->subSampleType(4, 0);
 // $totalCount = $object->returnTotalCount(); 
 
-require "../PDOPHP/queryFunctions.php";
+require "../PDOPHP/Sample_query_functions.php";
 require "../PDOPHP/Pagination.php";
 $pagenumber;
 $allowedPages = 0;
@@ -16,7 +16,7 @@ $exactResultsPerPage =4;
 $DefaultSampleTypeNumber = 1;
 $A;
 
-$object = new queryFunctions();
+$object = new Sample_query_functions();
 if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     
     $A = $_POST["PG"];  

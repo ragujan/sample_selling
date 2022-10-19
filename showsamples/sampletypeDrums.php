@@ -1,5 +1,5 @@
 <?php
-require "../PDOPHP/queryFunctions.php";
+require "../PDOPHP/Sample_query_functions.php";
 require "../PDOPHP/Pagination.php";
 require "../PDOPHP/Validations.php";
 $pageName = "sampleTypeMelody";
@@ -12,7 +12,7 @@ $exactResultsPerPage = 8;
 $DefaultSampleTypeNumber = 2;
 $A;
 
-$object = new queryFunctions();
+$object = new Sample_query_functions();
 
 
 

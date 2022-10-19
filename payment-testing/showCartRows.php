@@ -1,8 +1,8 @@
 <?php
 
 if ($_POST["cartArrays"] && !empty($_POST["cartArrays"]) && isset($_POST["cartArrays"])) {
-    require "../PDOPHP/queryFunctions.php";
-    $object = new queryFunctions();
+    require "../PDOPHP/Sample_query_functions.php";
+    $object = new Sample_query_functions();
     $a  = $_POST["cartArrays"];
     $b = json_decode($a);
     $idQtyArray = [];

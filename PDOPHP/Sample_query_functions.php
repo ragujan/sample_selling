@@ -1,7 +1,7 @@
 <?php
 require "connectDB.php";
 
-class queryFunctions extends DBh
+class Sample_query_functions extends DBh
 {
 
 

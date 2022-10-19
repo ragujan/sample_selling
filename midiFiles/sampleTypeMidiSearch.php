@@ -15,9 +15,9 @@ $subsampletypenumber = $_POST["searchText"];
 $jsMethodName = "nextfunctionsearch";
 $pageName = "sampleTypeMidi";
 if ($validation == 1) {
-  require "../PDOPHP/queryFunctions.php";
+  require "../PDOPHP/Sample_query_functions.php";
  
-  $object = new queryFunctions();
+  $object = new Sample_query_functions();
   if ($_POST["searchText"] == "" OR !isset($_POST["searchText"])) {
   
     $getPages = $object->searchByTextPages($_POST["searchText"]);

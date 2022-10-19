@@ -23,8 +23,8 @@
         <option value="null">"   " </option>
 
         <?php
-        require "../PDOPHP/queryFunctions.php";
-        $object = new queryFunctions();
+        require "../PDOPHP/Sample_query_functions.php";
+        $object = new Sample_query_functions();
         $sampleDB = $object->showSampleTypes();
         $typenum_rows = count($sampleDB);
         if ($typenum_rows > 0) {

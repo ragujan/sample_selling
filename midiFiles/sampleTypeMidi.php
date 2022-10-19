@@ -12,9 +12,9 @@ $subsampletypenumber = $_POST["SSTN"];
 $jsMethodName = "commonNextFunction";
 $pageName = "sampleTypeMidi";
 if ($validation == 1) {
-  require "../PDOPHP/queryFunctions.php";
+  require "../PDOPHP/Sample_query_functions.php";
  
-  $object = new queryFunctions();
+  $object = new Sample_query_functions();
   if ($_POST["SSTN"] == 0 OR !isset($_POST["SSTN"])) {
    
     $getPages = $object->sampleTypePages(3);

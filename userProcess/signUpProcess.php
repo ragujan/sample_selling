@@ -38,7 +38,7 @@ if (isset($_POST["FN"]) && isset($_POST["LN"]) && isset($_POST["PWD"]) && isset(
         $userRegState =$checkUser->checkUandE($userName,$email);
         if($userRegState==false){
            
-          // require "../PDOPHP/queryFunctions.php";
+          // require "../PDOPHP/Sample_query_functions.php";
          
            $checkUser->signUpUsers($firstName,$lastName,$userName,$hashPassword,$email);
            exit("Success");
