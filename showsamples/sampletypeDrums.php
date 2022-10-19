@@ -1,7 +1,7 @@
 <?php
 require "../PDOPHP/Sample_query_functions.php";
 require "../PDOPHP/Pagination.php";
-require "../PDOPHP/Validations.php";
+// require "../PDOPHP/Validations.php";
 $pageName = "sampleTypeMelody";
 $pagenumber;
 $allowedPages = 0;
