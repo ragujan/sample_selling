@@ -1,11 +1,11 @@
 <?php
 
 if ($_POST["id"] && !empty($_POST["id"]) ) {
-    require "../PDOPHP/queryFunctions.php";
+    require "../PDOPHP/Sample_query_functions.php";
     $ID = $_POST["id"];
    
     if (intval($ID) && $ID>0 ) {
-        $object = new queryFunctions();
+        $object = new Sample_query_functions();
         $row = $object->validateCardproductID($ID);
         if ($row == 1) {
             $validatedArray = array("id"=>$ID,"qty"=> 1);

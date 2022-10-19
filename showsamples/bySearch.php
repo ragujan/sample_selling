@@ -1,5 +1,5 @@
 <?php
-require "../PDOPHP/queryFunctions.php";
+require "../PDOPHP/Sample_query_functions.php";
 require "../PDOPHP/Pagination.php";
 $pageName = "bySearch";
 $pagenumber;
@@ -11,7 +11,7 @@ $exactResultsPerPage = 8;
 $DefaultSampleTypeNumber = 1;
 $A;
 
-$object = new queryFunctions();
+$object = new Sample_query_functions();
 if (isset($_POST["PG"]) && intval(($_POST["PG"])) && !empty(($_POST["PG"]))   && isset($_POST["searchText"])) {
    
     $A = $_POST["PG"];
