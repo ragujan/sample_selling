@@ -1,0 +1,24 @@
+{
+    "paths": [
+        {
+            "directory_name": "zip_file",
+            "actual_path": "/sampleSelling-master/products/samples/zip/"
+        },
+        {
+            "directory_name": "image",
+            "actual_path": "/sampleSelling-master/products/samples/image/"
+        },
+        {
+            "directory_name": "audio",
+            "actual_path": "/sampleSelling-master/products/samples/audio/"
+        },
+        {
+            "directory_name": "style",
+            "actual_path": "/sampleSelling-master/style/"
+        },
+        {
+            "path_name": "resource",
+            "actual_path": "/sampleSelling-master/resource/"
+        }
+    ]
+}

@@ -3,12 +3,12 @@
 require_once "../uploadSamples/SampleUniqueiDProcess.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/sampleSelling-master/util/path_config/global_link_files.php";
 
-$image_path = GlobalLinkFiles::getProductDirectories("image");
-$image_file_relative = GlobalLinkFiles::getProductDirectories("image_file_relative");
-$zip_path = GlobalLinkFiles::getProductDirectories("zip_file");
-$zip_file_relative = GlobalLinkFiles::getProductDirectories("zip_file_relative");
-$audio_src_path = GlobalLinkFiles::getProductDirectories("audio");
-$audio_file_relative = GlobalLinkFiles::getProductDirectories("audio_file_relative");
+$image_path = GlobalLinkFiles::getDirectoryPath("image");
+
+$zip_path = GlobalLinkFiles::getDirectoryPath("zip_file");
+
+$audio_src_path = GlobalLinkFiles::getDirectoryPath("audio");
+
 class FileHandler
 {
     public $thecommonfile;
