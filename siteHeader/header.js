@@ -1,6 +1,6 @@
 document.getElementById("cartItemsDiv").addEventListener("click", () => {
   window.location = "../payment-testing/viewcart.php";
-  k
+  
 });
 const burgerMenu = document.getElementById("burgerMenu");
 

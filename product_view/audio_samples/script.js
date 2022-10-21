@@ -24,7 +24,7 @@ window.addEventListener("load", async () => {
   let form = new FormData();
   // form.append('PG', val)
   setTimeout(async ()=>{
-    let url = "../showsamples/sampletypeMelody.php";
+    let url = "sampletypeMelody.php";
     let abc = await fetch(url, { body: form, method: "POST" })
       .then((response) =>response.text()  )
       .then((text) => {
@@ -35,7 +35,7 @@ window.addEventListener("load", async () => {
         samplebox1.innerHTML = text;
       });
   
-    let url2 = "../showsamples/sampletypeDrums.php";
+    let url2 = "sampletypeDrums.php";
     let def = await fetch(url2, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
@@ -79,7 +79,7 @@ function showsubsamples() {
   }
   form.append("PG", val);
 
-  let url = "../showsamples/sampletypeMelody.php";
+  let url = "sampletypeMelody.php";
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -98,7 +98,7 @@ function showsubsamplesdrums() {
     form.append("SSTN", sampleselect);
   }
 
-  let url = "../showsamples/sampletypeDrums.php";
+  let url = "sampletypeDrums.php";
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -123,7 +123,7 @@ function nextfunctionmelody(x, y) {
 
   form.append("PG", val);
 
-  let url = "../showsamples/sampletypeMelody.php";
+  let url = "sampletypeMelody.php";
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -147,7 +147,7 @@ function nextfunctiondrums(x, y) {
 
   form.append("PG", val);
 
-  let url = "../showsamples/sampletypeDrums.php";
+  let url = "sampletypeDrums.php";
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -168,7 +168,7 @@ function nextfunctionsearch(x, y, name) {
 
   form.append("PG", val);
 
-  let url = "../showsamples/bySearch.php";
+  let url = "bySearch.php";
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -202,7 +202,7 @@ function commonNextFunction(x, y, pageName) {
 
   form.append("PG", val);
 
-  let url = `../showsamples/${pageName}.php`;
+  let url = `${pageName}.php`;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -276,7 +276,7 @@ searchButton.addEventListener("click", () => {
   let sBox = document.getElementById("searchBox");
   let form = new FormData();
   form.append("searchText", sBox.value);
-  let url = "../showsamples/bySearch.php";
+  let url = "bySearch.php";
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {

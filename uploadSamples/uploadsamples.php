@@ -64,7 +64,9 @@
     <input type="file" id="sampleImage"> <button id="uploadImageOnly">UploadImage</button>
     <br>
     <button class="text-dark" id="uploadbutton">Upload</button>
+    <div id="showmessage">
 
+</div>
     <script src="uploadsamples.js"></script>
 </body>
 
