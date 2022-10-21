@@ -68,7 +68,7 @@ upBTN.addEventListener('click', function() {
     let url = "storeSamples.php";
     fetch(url, { body: form_2, method: "POST" })
         .then(response => response.text())
-        .then((text) => { alert(text); })
+        .then((text) => { document.getElementById("showmessage").innerHTML = text; })
 
 
 

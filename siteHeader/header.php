@@ -118,6 +118,6 @@ if (!isset($_SESSION["userEmail"])) {
 <?php
 }
 ?>
-    <script src="../siteHeader/header.js"></script>
+    <script src="header.js"></script>
 <?php
 ?>

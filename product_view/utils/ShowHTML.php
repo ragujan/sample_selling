@@ -39,8 +39,8 @@ class ShowHTML{
                                                     Your browser does not support the audio element.
                                                 </audio>
                                                 <img src="<?php echo $imagePath ?>" class="beatPACKIMAGE " alt="">
-                                                <img  id="playmusic<?php echo $inputarrayID ?>" onclick="playmusic('<?php echo $inputarrayID ?>');" class="playcolrols audiopreview" src="../resources/play_back_images/play.png" alt="">
-                                                <img  id="pausemusic<?php echo $inputarrayID ?>" onclick="pausemusic('<?php echo $inputarrayID ?>');" class="playcolrols audiopreview d-none" src="../resources/play_back_images/pause.png" alt="">
+                                                <img  id="playmusic<?php echo $inputarrayID ?>" onclick="playmusic('<?php echo $inputarrayID ?>');" class="playcolrols audiopreview" src="../../resources/play_back_images/play.png" alt="">
+                                                <img  id="pausemusic<?php echo $inputarrayID ?>" onclick="pausemusic('<?php echo $inputarrayID ?>');" class="playcolrols audiopreview d-none" src="../../resources/play_back_images/pause.png" alt="">
                                             </div>
         
                                             <div class="col-12 d-flex  flex-column pb-3 px-4 ">                               
@@ -66,7 +66,7 @@ class ShowHTML{
         
                             <div class="row">
                                 <?php
-                                require "../PDOPHP/PageButtons.php";
+                                require "page_buttons.php";
                                 $P = new PageButtons();
         
                                 $pageBtn = $P->produceBtns($allowedPages, $A, $valueforBTN, $jsMethodName, $pageName);

@@ -28,6 +28,18 @@ class Sample_query_functions extends DB
     INNER JOIN sampleimages
     ON sampleimages.sampleID=samples.sampleID";
 
+    public function listSubSampleTypes($sample_type_name)
+    {
+        $query = "SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`='drums');";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute();
+        $resultset = $statement->fetchAll();
+        if (count($resultset) > 0) {
+            return $resultset;
+        } else {
+            return $resultset;
+        }
+    }
 
 
     public function subSampleType($id, $PG)
@@ -151,7 +163,7 @@ class Sample_query_functions extends DB
                 $PG = 0;
             }
             if ($searchtext == "") {
-                $sql = $this->sampleTypeQuery." "."LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG ";
+                $sql = $this->sampleTypeQuery . " " . "LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG ";
                 $statement2 = $this->connect()->prepare($sql);
                 $statement2->execute();
             } else {
@@ -172,7 +184,7 @@ class Sample_query_functions extends DB
     public function searchByTextPages($searchtext)
     {
         if ($searchtext == "") {
-            $cal =$this->sampleTypeQuery;
+            $cal = $this->sampleTypeQuery;
             $statement1 = $this->connect()->prepare($cal);
             $statement1->execute();
         } else {
@@ -269,17 +281,17 @@ class Sample_query_functions extends DB
         $statement1->execute([$id]);
         return $statement1->fetchAll();
     }
-    public function get_top_three_products(){
+    public function get_top_three_products()
+    {
         $query = "SELECT SUM(qty),sampleID,unique_id,CustomerID,dnt,customer_email 
         FROM customer_purchase_history GROUP BY sampleID  ORDER BY qty  DESC LIMIT 3 ";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         $rows = count($statement->fetchAll());
-        if($rows>2){
+        if ($rows > 2) {
             return $statement->fetchAll();
         }
     }
-
 }
 
 // $bbc = "INNER JOIN sampletype
