@@ -1,8 +1,14 @@
 <?php
 session_start();
-$root = $_SERVER["DOCUMENT_ROOT"];
-// require_once $root."/sampleSelling-maste/util/path_config/global_link_files.php";
-require "../query/Sample_query_functions.php";
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+// $style_path = GlobalLinkFiles::getStylePath();
+// $site_header = GlobalLinkFiles::getLink("site_header");
+// $site_header_script = GlobalLinkFiles::getScriptLink("site_header");
+// $query_path = GlobalLinkFiles::getLink("sample_queries");
+include_once $site_header;
+include_once $query_path;
+
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +18,12 @@ require "../query/Sample_query_functions.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../style/bootstrap.css">
+    <link rel="stylesheet" href="<?= $style_path ?>bootstrap.css">
 
 
-        <link rel="stylesheet" href="../../style/sampleselling.css">
-  
-    <link rel="stylesheet" href="../../style/navbar.css">
+    <link rel="stylesheet" href="<?= $style_path ?>showsamples.css">
+    <link rel="stylesheet" href="<?= $style_path ?>navbar.css">
+
     <title>BeatSample</title>
 </head>
 
@@ -32,7 +38,7 @@ require "../query/Sample_query_functions.php";
             <div class="row">
                 <div class="maindiv col-12">
                     <div class="row">
-                        <!-- <div class="col-12 py-3 d-none">
+                        <div class="col-12 py-3 d-none">
                             <div class="row">
                                 <div class="col-4 text-start py-2">
                                     <a href="#"> <img class="sitelogo" src="../RagImages/RAG JN.png" alt="">
@@ -64,16 +70,16 @@ require "../query/Sample_query_functions.php";
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <?php
-                        // require GlobalLinkFiles::getLink("site_header");
+
                         ?>
 
 
 
                         <div style="position: relative;" class="thecontentdiv  col-12 ">
                             <div class="row">
-                                <!-- <div class="col-12 pt-4">
+                                <div class="col-12 pt-4">
                                     <div class="row">
                                         <div class="col-lg-7 col-5 text-start   text-lg-end">
                                             <h1 class="sampleheading text-white">Samples & Drums</h1>
@@ -92,7 +98,7 @@ require "../query/Sample_query_functions.php";
 
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div id="mainsampleDiv" class="col-12">
                                     <div class="row">
                                         <div class="col-12">
@@ -110,9 +116,9 @@ require "../query/Sample_query_functions.php";
                                                             <span class="fs-5 fw-bolder">Filter By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select name=""  class="selectTAG py-3 px-1" id="subSampleDrumID">
+                                                            <select name="" onchange="showsubsamplesdrums();" class="selectTAG py-2 px-1" id="subSampleDrumID">
                                                                 <?php
-                                                              
+                                                          
                                                                 $query_object = new Sample_query_functions();
                                                                 $subsamples = $query_object->listSubSampleTypes("melodies");
                                                                 $arrsize = count($subsamples);
@@ -163,9 +169,9 @@ require "../query/Sample_query_functions.php";
                                                             <span class="fs-5 fw-bolder">Filter By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select name="" class="selectTAG py-2 px-1" id="subSampleDrumID">
+                                                            <select name="" onchange="showsubsamplesdrums();" class="selectTAG py-2 px-1" id="subSampleDrumID">
                                                                 <?php
-         
+
                                                                 $subsamples = $query_object->listSubSampleTypes("drums");
                                                                 $arrsize = count($subsamples);
                                                                 if (!$subsamples > 0) {

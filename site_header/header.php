@@ -1,11 +1,17 @@
 <?php
 
+
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT."/sampleSelling-master/util/path_config/global_link_files.php";
+$site_header_script = GlobalLinkFiles::getFilePath("site_header_script");
+
+
 if (!isset($_SESSION["userEmail"])) {
 ?>
     <div style="height: 70px;" class="col-12   navbarMainDivHolder ">
         <div class="row ">
             <div class="py-0 col-lg-1  col-md-9 col-7 text-md-start  text-start my-auto">
-                <img src="../resources/icon_images/logo_transparent.png " class=" navbarImage p-0" alt="">
+                <img src="/sampleSelling-master/resources/icon_images/logo_transparent.png " class=" navbarImage p-0" alt="">
             </div>
 
             <div class="py-0 col-lg-9 d-none d-lg-block col-md-9 col-8 offset-0  my-auto">
@@ -118,6 +124,6 @@ if (!isset($_SESSION["userEmail"])) {
 <?php
 }
 ?>
-    <script src="header.js"></script>
+    <script src="<?=$site_header_script ?>"></script>
 <?php
 ?>

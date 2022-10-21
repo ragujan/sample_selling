@@ -1,0 +1,16 @@
+{
+    "paths": [
+        {
+            "path_name": "site_header_php",
+            "actual_path": "/sampleSelling-master/site_header/header.php"
+        },
+        {
+            "path_name": "sample_queries",
+            "actual_path": "/sampleSelling-master/product_view/query/Sample_query_functions.php"
+        },
+        {
+            "path_name": "site_header_script",
+            "actual_path": "/sampleSelling-master/site_header/header.js"
+        }
+    ]
+}
