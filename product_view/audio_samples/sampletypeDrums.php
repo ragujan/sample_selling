@@ -1,7 +1,11 @@
 <?php
+
+use Stripe\Product;
+
 require "../query/Sample_query_functions.php";
-require "../utils/Pagination.php";
-require "../utils/ShowHTML.php";
+require "../utils/pagination.php";
+require "../utils/product_view.php";
+require "../utils/page_buttons.php";
 // require "../PDOPHP/Validations.php";
 $pageName = "sampleTypeMelody";
 $pagenumber;
@@ -77,5 +81,5 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
 }
 
 
-$htmlContentObject = new ShowHTML();
-echo $htmlContentObject->htmlContent($getRows, $allowedPages, $A, $valueforBTN, $pageName,$jsMethodName);
+$htmlContentObject = new ProductView();
+echo $htmlContentObject->view_audio_samples($getRows, $allowedPages, $A, $valueforBTN, $pageName,$jsMethodName);
