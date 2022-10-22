@@ -1,8 +1,8 @@
 <?php
 
-class ShowHTML{
+class ProductView{
     
-   public function htmlContent ($inputarray,$allowedPages, $A, $valueforBTN, $pageName,$jsMethodName){
+   public function view_audio_samples ($inputarray,$allowedPages, $A, $valueforBTN, $pageName,$jsMethodName){
    
     if (count($inputarray) == 0 or $inputarray[0] == "Nothing") {
         ?>
