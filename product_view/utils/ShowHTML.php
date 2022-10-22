@@ -66,7 +66,7 @@ class ShowHTML{
         
                             <div class="row">
                                 <?php
-                                require "page_buttons.php";
+                 
                                 $P = new PageButtons();
         
                                 $pageBtn = $P->produceBtns($allowedPages, $A, $valueforBTN, $jsMethodName, $pageName);

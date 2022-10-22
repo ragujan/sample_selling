@@ -1,14 +1,11 @@
 <?php
 session_start();
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
-require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
-// $style_path = GlobalLinkFiles::getStylePath();
-// $site_header = GlobalLinkFiles::getLink("site_header");
-// $site_header_script = GlobalLinkFiles::getScriptLink("site_header");
-// $query_path = GlobalLinkFiles::getLink("sample_queries");
-include_once $site_header;
-include_once $query_path;
-
+require $ROOT."/sampleSelling-master/util/path_config/global_link_files.php";
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$resouces_path = GlobalLinkFiles::getDirectoryPath("resources");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
+require_once "../query/Sample_query_functions.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +15,15 @@ include_once $query_path;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= $style_path ?>bootstrap.css">
+    <link rel="stylesheet" href="<?=$style_path ?>bootstrap.css">
 
 
-    <link rel="stylesheet" href="<?= $style_path ?>showsamples.css">
-    <link rel="stylesheet" href="<?= $style_path ?>navbar.css">
+    <link rel="stylesheet" href="<?=$style_path ?>showsamples.css">
+    <link rel="stylesheet" href="<?=$style_path?>navbar.css">
 
     <title>BeatSample</title>
 </head>
+
 
 <body>
 
@@ -38,41 +36,9 @@ include_once $query_path;
             <div class="row">
                 <div class="maindiv col-12">
                     <div class="row">
-                        <div class="col-12 py-3 d-none">
-                            <div class="row">
-                                <div class="col-4 text-start py-2">
-                                    <a href="#"> <img class="sitelogo" src="../RagImages/RAG JN.png" alt="">
-                                    </a>
-                                </div>
-
-                                <div class="py-2 col-6">
-                                    <div class="row">
-                                        <div class="col-8 text-center col-lg-6 fs-5 offset-2 fw-light offset-lg-3 my-2">
-                                            <div class="row">
-                                                <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none " href="../home/home.php">Home</a></div>
-                                                <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none" href="../showsamples/sampleselling.php">Samples</a></div>
-                                                <div class="col-4 navlinksdiv"><a class="navlinks text-decoration-none" href="#">Contact</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="py-2 col-2">
-                                    <div class="row">
-                                        <div class="col-6  my-2 fs-4">
-                                            <a href="#"> <i class="text-white bi bi-bag"></i></a>
-
-                                        </div>
-                                        <div class="col-6 my-2 fs-4">
-                                            <a href="#" class=""> <i class="text-white bag2 bi bi-person-check"></i></a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    
                         <?php
-
+                        require_once $site_header;
                         ?>
 
 
@@ -91,7 +57,7 @@ include_once $query_path;
                                                     <input id="searchBox" class="text-dark px-2 py-1 " type="text">
                                                 </div>
                                                 <div class="col-lg-2 col-5 text-lg-start text-center">
-                                                    <img id="searchButton" class="searchIconImage" src="../resources/icons/search.png" alt="" srcset="">
+                                                    <img id="searchButton" class="searchIconImage" src="<?=$resouces_path?>icons/search.png" alt="" srcset="">
                                                 </div>
                                             </div>
 
@@ -116,9 +82,9 @@ include_once $query_path;
                                                             <span class="fs-5 fw-bolder">Filter By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select name="" onchange="showsubsamplesdrums();" class="selectTAG py-2 px-1" id="subSampleDrumID">
+                                                            <select name=""  class="selectTAG py-3 px-1" id="subSampleDrumID">
                                                                 <?php
-                                                          
+                                                              
                                                                 $query_object = new Sample_query_functions();
                                                                 $subsamples = $query_object->listSubSampleTypes("melodies");
                                                                 $arrsize = count($subsamples);
@@ -169,9 +135,9 @@ include_once $query_path;
                                                             <span class="fs-5 fw-bolder">Filter By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select name="" onchange="showsubsamplesdrums();" class="selectTAG py-2 px-1" id="subSampleDrumID">
+                                                            <select name="" class="selectTAG py-2 px-1" id="subSampleDrumID">
                                                                 <?php
-
+         
                                                                 $subsamples = $query_object->listSubSampleTypes("drums");
                                                                 $arrsize = count($subsamples);
                                                                 if (!$subsamples > 0) {

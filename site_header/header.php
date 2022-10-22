@@ -4,7 +4,7 @@
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT."/sampleSelling-master/util/path_config/global_link_files.php";
 $site_header_script = GlobalLinkFiles::getFilePath("site_header_script");
-
+$resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 
 if (!isset($_SESSION["userEmail"])) {
 ?>
@@ -25,14 +25,14 @@ if (!isset($_SESSION["userEmail"])) {
             <div class="py-0 col-lg-2  offset-lg-0 text-lg-end  my-auto col-md-3 col-5 offset-0   cartNCustomerDiv">
                 <div class="row">
                     <div id="cartItemsDiv" style="position: relative;" class="col-lg-8 col-5  text-end">
-                        <img src="../resources/icons/cartBag.png" alt="">
+                        <img src="<?=$resource_path?>icons/cartBag.png" alt="">
                         <span id="cartItems" class="cartQtyRowCount px-2">0</span>
                     </div>
                     <div id="userButton" class="col-lg-4 col-4 text-end ">
-                        <img src="../resources/icons/user.png" alt="">
+                        <img src="<?=$resource_path?>icons/user.png" alt="">
                     </div>
                     <div id="burgerMenu" class="col-lg-4 col-3 d-md-block d-lg-none  text-end ">
-                        <img src="../resources/icons/burderMenu.png" alt="">
+                        <img src="<?=$resource_path?>icons/burderMenu.png" alt="">
                     </div>
          
                 </div>
@@ -72,20 +72,20 @@ if (!isset($_SESSION["userEmail"])) {
             <div style="position: relative;" class="py-0 col-lg-2   offset-lg-0 text-lg-end  my-auto col-md-3 col-5 offset-0   cartNCustomerDiv">
                 <div class="row">
                     <div id="cartItemsDiv" style="position: relative;" class="col-lg-8 col-5  text-end">
-                        <img src="../icons/cartBag.png" alt="">
+                        <img src="<?=$resource_path?>icons/cartBag.png" alt="">
                         <span id="cartItems" class="cartQtyRowCount px-2">4</span>
                     </div>
                     <div id="userButtonSignUp" class=" col-lg-4 col-4 text-end ">
                         <div class="row">
                             <div class="col-12 ">
-                                <img src="../icons/user.png" alt="">
+                                <img src="<?=$resource_path?>icons/user.png" alt="">
                             </div>
                         </div>
 
                     </div>
 
                     <div id="burgerMenu" class="col-lg-4 col-3 d-md-block d-lg-none  text-end ">
-                        <img src="../icons/burderMenu.png" alt="">
+                        <img src="<?=$resource_path?>icons/burderMenu.png" alt="">
                     </div>
 
                     <div style="position: absolute;z-index: 25;margin-top: 50px;" id="userOptions" class=" text-start userOptions col-12   d-none">

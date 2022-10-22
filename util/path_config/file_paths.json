@@ -12,5 +12,9 @@
             "path_name": "site_header_script",
             "actual_path": "/sampleSelling-master/site_header/header.js"
         }
+        ,{
+            "path_name":"page_buttons",
+            "actual_path" : "/sampleSelling-master/product_view/utils/page_buttons.php"
+        }
     ]
 }
