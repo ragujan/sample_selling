@@ -17,8 +17,8 @@
             "actual_path": "/sampleSelling-master/style/"
         },
         {
-            "path_name": "resource",
-            "actual_path": "/sampleSelling-master/resource/"
+            "directory_name": "resources",
+            "actual_path": "/sampleSelling-master/resources/"
         }
     ]
 }

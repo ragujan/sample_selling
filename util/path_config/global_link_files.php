@@ -24,6 +24,7 @@ class GlobalLinkFiles
         $object = json_decode($unparsed_json_file);
         $actual_path = "";
         foreach ($object->paths as $key => $value) {
+       
             if ($value->directory_name == $path_name) {
                 $actual_path = $value->actual_path;
                 break;
