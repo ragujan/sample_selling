@@ -1,8 +1,8 @@
 <span class="text-dark">Drum types</span>
 <select name="" id="submelodyType">
     <?php
-    require "../PDOPHP/Sample_query_functions.php";
-    $object = new Sample_query_functions();
+    require "../query/sample_queries.php";
+    $object = new SampleQueries();
     $melodytypesearch = $object->showSubSampleTypes(2);
     $melodytyperows = count($melodytypesearch);
     if ($melodytyperows >= 1) {

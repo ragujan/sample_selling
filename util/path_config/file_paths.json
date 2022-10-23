@@ -15,6 +15,10 @@
         ,{
             "path_name":"page_buttons",
             "actual_path" : "/sampleSelling-master/product_view/utils/page_buttons.php"
+        },
+        {
+            "path_name":"db",
+            "actual_path":"/sampleSelling-master/db_connection/db.php"
         }
     ]
 }
