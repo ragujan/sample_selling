@@ -7,7 +7,7 @@ let uploadAudioOnly = document.getElementById('uploadAudioOnly');
 let uploadImageOnly = document.getElementById('uploadImageOnly');
 let sampletypeselect = document.getElementById('sampleType');
 
-const upload_process_url = "../process/store_samples.php";
+const upload_process_url = "../process/store_audio_samples.php";
 const load_sub_melodies_url = "../process/sub_melodies.php";
 const load_sub_drums_url = "../process/sub_drums.php";
 

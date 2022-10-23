@@ -19,6 +19,10 @@
         {
             "path_name":"db",
             "actual_path":"/sampleSelling-master/db_connection/db.php"
+        },
+        {
+            "path_name":"file_handler",
+            "actual_path":"/sampleSelling-master/util/file_handler.php"
         }
     ]
 }
