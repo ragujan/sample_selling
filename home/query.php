@@ -1,21 +1,11 @@
 <?php
-
-class Search
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+$db_path = GlobalLinkFiles::getFilePath("db");
+require_once $db_path;
+class Search extends Db
 {
 
-    function getData($table, $concell, $value)
-    {
-        if (empty($concell)) {
-            $searchquery = DB::forsearch("SELECT * FROM $table; ");
-        } else {
-            $searchquery = DB::forsearch("SELECT * FROM `$table` WHERE $concell='" . $value . "'; ");
-        }
-        $getrows = $searchquery->num_rows;
-        if ($getrows >= 1) {
-            for ($i = 0; $i < $getrows; $i++) {
-            }
-        }
-    }
     function limitsearch()
     {
         $searchquery = "SELECT SUM(qty),customer_purchase_history.sampleID,unique_id,CustomerID,dnt,customer_email,source_URL,SamplePrice,Sample_Name 
@@ -25,27 +15,24 @@ ON sampleimages.sampleID = customer_purchase_history.sampleID
 INNER JOIN samples
 ON samples.sampleID = customer_purchase_history.sampleID
 GROUP BY sampleID  ORDER BY qty  DESC LIMIT 3 ";
-        $resultset = DB::forsearch($searchquery);
-
-
-
-        $getrows = $resultset->num_rows;
+        $statement = $this->connect()->prepare($searchquery);
+        $statement->execute([]);
+        $resultset = $statement->fetchAll();
+        $getrows = count($resultset);
 
         if ($getrows >= 1) {
             for ($i = 0; $i < $getrows; $i++) {
 
 
 
-                $melodydetails = $resultset->fetch_assoc();
+                $melodydetails = $resultset[0];
                 $melodyname = $melodydetails["Sample_Name"];
-                $melodyprice = $melodydetails["SamplePrice"];
                 $melodyID = $melodydetails["sampleID"];
-                $getImage = DB::forsearch("SELECT * FROM `sampleimages` WHERE `sampleID`='" . $melodyID . "' ;");
-                $getImagepath = $getImage->fetch_assoc();
-                $imagePath = $getImagepath["source_URL"];
-                $getaudio = DB::forsearch("SELECT * FROM `sampleaudio` WHERE `sampleID`='" . $melodyID . "' ;");
-                $getaudiopathrow = $getaudio->fetch_assoc();
-                $audioPath = $getaudiopathrow["sampleAudioSrc"];
+                $imagePath = $melodydetails["source_URL"];
+
+
+
+
 ?>
                 <div class="col-lg-4 py-3   col-4 col-md-4 ">
                     <div class="row">
