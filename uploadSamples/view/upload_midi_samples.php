@@ -19,19 +19,19 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
 </head>
 
 <body>
-    <span class="text-dark">SampleName</span>
+    <span class="text-dark">Midi name</span>
     <input type="text" id="sampleName">
-    <span class="text-dark">SamplePrice</span>
+    <span class="text-dark">sample price</span>
     <input type="text" id="samplePrice">
     <br>
-    <span class="text-dark">SampleType</span>
+    <span class="text-dark">sample type</span>
     <select name="" id="sampleType">
         <option value="null">"   " </option>
 
         <?php
         require "../query/sample_queries.php";
         $object = new SampleQueries();
-        $sampleDB = $object->showSampleTypes();
+        $sampleDB = $object->showMidiTypes();
     
         $typenum_rows = count($sampleDB);
         if ($typenum_rows > 0) {
@@ -64,9 +64,7 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
     <span class="text-dark">File</span>
     <input type="file" id="sampleFile"> <button id="uploadFileOnly">UploadZipFile</button>
     <br>
-    <span class="text-dark">SampleAudio</span>
-    <input type="file" id="sampleAudio"> <button id="uploadAudioOnly">UploadAudioSample</button>
-    <br>
+
     <span class="text-dark">Image</span>
     <input type="file" id="sampleImage"> <button id="uploadImageOnly">UploadImage</button>
     <br>
@@ -74,7 +72,7 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
     <div id="showmessage">
 
 </div>
-    <script src="upload_audio_samples.js"></script>
+    <script src="upload_midi_sample.js"></script>
 </body>
 
 </html>

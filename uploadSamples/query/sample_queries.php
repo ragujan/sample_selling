@@ -41,14 +41,28 @@ class SampleQueries extends Db
     }
     public function showSampleTypes()
     {
-        $cal = "SELECT * FROM sampletype";
+        $cal = "SELECT * FROM sampletype WHERE `typeName` != 'midi' OR `sampleTypeID` != '4' ";
         $statement1 = $this->connect()->prepare($cal);
         $statement1->execute();
         return $statement1->fetchAll();
     }
     public function showSubSampleTypes($id)
     {
-        $cal = "SELECT * FROM subsampletype WHERE sampleTypeID =?";
+        $cal = "SELECT * FROM subsampletype WHERE sampleTypeID =? AND `sampleTypeId` != '4'";
+        $statement1 = $this->connect()->prepare($cal);
+        $statement1->execute([$id]);
+        return $statement1->fetchAll();
+    }
+        public function showMidiTypes()
+    {
+        $cal = "SELECT * FROM sampletype WHERE `typeName` = 'midi' AND `sampleTypeID` = '4' ";
+        $statement1 = $this->connect()->prepare($cal);
+        $statement1->execute();
+        return $statement1->fetchAll();
+    }
+    public function showSubSampleMidiTypes($id)
+    {
+        $cal = "SELECT * FROM subsampletype WHERE sampleTypeID =? AND `sampleTypeId` = '4'";
         $statement1 = $this->connect()->prepare($cal);
         $statement1->execute([$id]);
         return $statement1->fetchAll();

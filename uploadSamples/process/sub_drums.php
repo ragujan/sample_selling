@@ -1,9 +1,12 @@
+<?php
+$id = 2;
+?>
 <span class="text-dark">Drum types</span>
 <select name="" id="submelodyType">
     <?php
     require "../query/sample_queries.php";
     $object = new SampleQueries();
-    $melodytypesearch = $object->showSubSampleTypes(2);
+    $melodytypesearch = $object->showSubSampleTypes($id);
     $melodytyperows = count($melodytypesearch);
     if ($melodytyperows >= 1) {
         for ($i = 0; $i < $melodytyperows; $i++) {
