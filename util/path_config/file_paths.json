@@ -23,6 +23,16 @@
         {
             "path_name":"file_handler",
             "actual_path":"/sampleSelling-master/util/file_handler.php"
+        },{
+            "path_name":"sample_display_page",
+            "actual_path":"/sampleSelling-master/audio_samples/sample_display.php"
+        },
+        {
+            "path_name":"midi_display_page",
+            "actual_path":"localhost/sampleSelling-master/midi_files/midi_display.php"
+        },{
+            "path_name":"home_page",
+            "actual_path":"localhost/sampleSelling-master/home/home.php"
         }
     ]
 }

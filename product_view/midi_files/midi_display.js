@@ -6,6 +6,9 @@ let uploadFilesOnly = document.getElementById("uploadFileOnly");
 let uploadAudioOnly = document.getElementById("uploadAudioOnly");
 let uploadImageOnly = document.getElementById("uploadImageOnly");
 
+
+
+
 let c =(text)=>{console.log(text)};
 
 function sanitizerInput(data) {
@@ -24,7 +27,7 @@ window.addEventListener("load", async () => {
     form.append("SSTN", sampleselect);
     form.append("PG", val);
      
-    let url = "../midiFiles/sampleTypeMidi.php";
+    let url = "sampleTypeMidi.php";
     fetch(url, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
@@ -51,7 +54,7 @@ function showsubsamples() {
     form.append("SSTN", sampleselect);
     form.append("PG", val);
      
-    let url = "../midiFiles/sampleTypeMidi.php";
+    let url = "sampleTypeMidi.php";
     fetch(url, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
