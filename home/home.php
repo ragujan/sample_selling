@@ -1,5 +1,12 @@
 <?php
 session_start();
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
+$query_path = GlobalLinkFiles::getFilePath("sample_queries");
+
+include_once $query_path;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,9 +15,9 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/bootstrap.css">
+    <link rel="stylesheet" href="<?=$style_path?>bootstrap.css">
     <link rel="stylesheet" href="../home/home.css">
-    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="<?=$style_path?>navbar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 
     <title>BeatSample</title>
@@ -27,7 +34,7 @@ session_start();
                     <div class="row">
              
                         <?php
-                        require "../siteHeader/header.php"
+                        require $site_header
                         ?>
 
                     </div>
@@ -75,14 +82,14 @@ session_start();
                                         </div>
                                         <div class="col-12 offset-0 col-md-8 offset-md-2">
                                             <?php
-                                            require "../searchqueryclass.php";
+                                            // require "../searchqueryclass.php";
 
                                             ?>
                                             <div class="row">
 
                                                 <?php
-                                                $popularsamples = new Search();
-                                                $popularsamples->limitsearch();
+                                                // $popularsamples = new Search();
+                                                // $popularsamples->limitsearch();
                                                 ?>
                                             </div>
                                         </div>
