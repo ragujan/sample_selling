@@ -28,11 +28,20 @@ class Sample_query_functions extends DBh
     INNER JOIN sampleimages
     ON sampleimages.sampleID=samples.sampleID";
 
+private $midi_sample_query = "SELECT * FROM samples 
+INNER JOIN subsampletype
+ON subsampletype.subsampleID =samples.SubsampleID
+INNER JOIN sampletype
+ON sampletype.sampleTypeID = subsampletype.sampleTypeID
+INNER JOIN sampleimages
+ON sampleimages.sampleID=samples.sampleID";
+
+
     public function listSubSampleTypes($sample_type_name)
     {
-        $query = "SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`='drums');";
+        $query = "SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`= ?);";
         $statement = $this->connect()->prepare($query);
-        $statement->execute();
+        $statement->execute([$sample_type_name]);
         $resultset = $statement->fetchAll();
         if (count($resultset) > 0) {
             return $resultset;
@@ -89,7 +98,12 @@ class Sample_query_functions extends DBh
 
     public function sampleType($id, $PG)
     {
-        $cal =  $this->sampleTypeQuery . " " . "WHERE sampletype.sampleTypeID = ?;";
+        $joined_query = $this->sampleTypeQuery;
+        if($id == 4){
+            echo "id is 4";
+           $joined_query = $this->midi_sample_query; 
+        }
+        $cal =  $joined_query . " " . "WHERE sampletype.sampleTypeID = ? ;";
 
         $statement1 = $this->connect()->prepare($cal);
         $statement1->execute([$id]);
@@ -108,7 +122,7 @@ class Sample_query_functions extends DBh
             }
 
 
-            $sql = $this->sampleTypeQuery . " " . "WHERE sampletype.sampleTypeID = ? LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG  ";
+            $sql = $joined_query . " " . "WHERE sampletype.sampleTypeID = ? LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG  ";
 
             $statement2 = $this->connect()->prepare($sql);
             $statement2->execute([$id]);
@@ -119,17 +133,27 @@ class Sample_query_functions extends DBh
 
     public function sampleTypePages($id)
     {
-        $cal =  $this->sampleTypeQuery . " " . "WHERE sampletype.sampleTypeID = ? ;";
+        $joined_query = $this->sampleTypeQuery;
+        if($id == 4){
+            echo "id is 4";
+           $joined_query = $this->midi_sample_query; 
+        }
+        $cal =  $joined_query . " " . "WHERE sampletype.sampleTypeID = ? ;";
 
         $statement1 = $this->connect()->prepare($cal);
         $statement1->execute([$id]);
         $this->totalcount = count($statement1->fetchAll());
         if ($this->totalcount == 0) {
             $this->fetcharray = array("Nothing");
+            echo "array nothing <br>";
             return 0;
         } else {
+            echo "there is a count <br>";
             // echo count($statement1->fetchAll());
             $totalPages = (ceil($this->totalcount / $this->exactResultsPerPage) - 1);
+            echo "total count is ". $this->totalcount;
+            echo "<br>";
+            echo $totalPages;
             return $totalPages;
         }
     }

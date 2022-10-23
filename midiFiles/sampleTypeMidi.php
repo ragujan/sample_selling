@@ -16,14 +16,15 @@ if ($validation == 1) {
  
   $object = new Sample_query_functions();
   if ($_POST["SSTN"] == 0 OR !isset($_POST["SSTN"])) {
-   
-    $getPages = $object->sampleTypePages(3);
+    echo "echo becho";
+    $getPages = $object->sampleTypePages(4);
     if ($A >= $getPages) {
       $A = $getPages;
     } else if ($A <= 0) {
       $A = 0;
     }
-    $getRows = $object->sampleType(3, $A * $exactResultsPerPage);
+    echo $getPages;
+    $getRows = $object->sampleType(4, $A * $exactResultsPerPage);
     $valueforBTN = 0;
     $totalCount = $object->returnTotalCount();
     $allowedPages = ceil($totalCount / $exactResultsPerPage);

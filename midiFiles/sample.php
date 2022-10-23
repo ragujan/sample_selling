@@ -1,5 +1,12 @@
 <?php
+session_start();
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
+$query_path = GlobalLinkFiles::getFilePath("sample_queries");
 
+include_once $query_path;
 
 ?>
 
@@ -33,7 +40,7 @@
                     <div class="row">
               
                         <?php
-                         require "../siteHeader/header.php"
+                         require $site_header; 
                         ?>
 
 
@@ -79,17 +86,12 @@
                                                         <div class="col-lg-4 col-md-4 col-5 text-start">
                                                             <select name="" onchange="showsubsamples();" class="selectTAG py-2 px-1" id="subSampleMelodyID">
                                                                 <?php
-
-                                                                require "../DB/DB.php";
-                                                                $mysearchquery = DB::forsearch("SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`='MidiKits');");
-                                                                $searchobject = new SearchClass();
-                                                                $searchobject->searchqueryinput = $mysearchquery;
-                                                                $searchobject->search();
-                                                                $fetchedresults = $searchobject->returnfetch();
-                                                                $serachfinalrows = $searchobject->returnrows();
-                                                                $searchedarrays = $searchobject->returnarrays();
-                                                                $arrsize = count($searchedarrays);
-                                                                if ($searchedarrays[0] == "Nothing") {
+                                                     
+                                                                $query_object = new Sample_query_functions();
+                                                                $subsamples = $query_object->listSubSampleTypes("midi");
+                                                                $arrsize = count($subsamples);
+                                                                $arrsize = count($subsamples);
+                                                                if ($subsamples[0] == "Nothing") {
                                                                 ?>
                                                                     <option value="0" class="text-white"> NOPE</option>
                                                                 <?php
@@ -99,8 +101,8 @@
                                                                     <option value="0" class="text-white"> ALL</option>
                                                                     <?php
                                                                     for ($i = 0; $i < $arrsize; $i++) {
-                                                                        $sampleName = $searchedarrays[$i]['subsampleName'];
-                                                                        $sampleID = $searchedarrays[$i]['subsampleID'];
+                                                                        $sampleName = $subsamples[$i]['subsampleName'];
+                                                                        $sampleID = $subsamples[$i]['subsampleID'];
                                                                         echo "<br/>";
                                                                         echo "<br/>";
                                                                     ?>

@@ -5,7 +5,9 @@ $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT."/sampleSelling-master/util/path_config/global_link_files.php";
 $site_header_script = GlobalLinkFiles::getFilePath("site_header_script");
 $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
-
+$midi_display_page = GlobalLinkFiles::getFilePath("midi_display_page");
+$sample_display_page = GlobalLinkFiles::getFilePath("sample_display_page");
+$home_page = GlobalLinkFiles::getFilePath("home_page");
 if (!isset($_SESSION["userEmail"])) {
 ?>
     <div style="height: 70px;" class="col-12   navbarMainDivHolder ">
@@ -17,9 +19,9 @@ if (!isset($_SESSION["userEmail"])) {
             <div class="py-0 col-lg-9 d-none d-lg-block col-md-9 col-8 offset-0  my-auto">
                 <div class="row">
                     <div class="col-3 text-center"><a href="../home/home.php" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
-                    <div class="col-3 text-center"><a href="../products/audio_samples/sampleselling.php" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
-                    <div class="col-3 text-center"><a href="../midiFiles/sample.php" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
-                    <div class="col-3 text-center"><a href="" class="  text-white navLinkTexts  text-decoration-none">Contact & Services</a></div>
+                    <div class="col-3 text-center"><a href="<?=$sample_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
+                    <div class="col-3 text-center"><a href="<?=$midi_display_page?>" class="  text-white navlinktexts  text-decoration-none">midi packs</a></div>
+                    <div class="col-3 text-center"><a href="" class="  text-white navlinktexts  text-decoration-none">contact & services</a></div>
                 </div>
             </div>
             <div class="py-0 col-lg-2  offset-lg-0 text-lg-end  my-auto col-md-3 col-5 offset-0   cartNCustomerDiv">
