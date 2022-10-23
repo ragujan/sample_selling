@@ -1,7 +1,9 @@
 <?php
-
-require "../PDOPHP/connectDB.php";
-class SampleUniqueiDProcess extends DBh
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+$db_path = GlobalLinkFiles::getFilePath("db");
+require_once $db_path;
+class SampleUniqueiDProcess extends Db
 {
     public function genRandomUniqueId(): string
     {

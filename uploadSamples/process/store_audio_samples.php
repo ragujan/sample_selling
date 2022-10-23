@@ -1,6 +1,7 @@
 <?php
 
-require_once "../uploadSamples/SampleUniqueiDProcess.php";
+require_once "../utils/sample_unique_process.php";
+require_once "../query/sample_queries.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/sampleSelling-master/util/path_config/global_link_files.php";
 
 $image_path = GlobalLinkFiles::getDirectoryPath("image");
@@ -74,10 +75,7 @@ if (
 
 
 
-
-            require "../DB/DB.php";
-            $typesearch = DB::forsearch("SELECT * FROM `sampletype`;");
-            $availabletypes;
+            $query = new SampleQueries();
 
             $sname = $_POST["SampleName"];
             $sprice = $_POST["SamplePrice"];
@@ -86,30 +84,35 @@ if (
 
             $date = date("Y-m-d h:i:s");
             $sampleUniqueiDProcess = new SampleUniqueiDProcess();
-
-            DB::insert("INSERT INTO `samples` (`Sample_Name`,`Sample_Date`,`SamplePrice`,`SubsampleID`,`SampleDescription`,`UniqueId`)VALUES('" . $sname . "','" . $date . "','" . $sprice . "','" . $subSampletype . "','" . $sampledescription . "','" . $sampleUniqueiDProcess->getCheckedRandomUniqueId() . "') ");
-            $lastID = DB::$dbms->insert_id;
+            $checked_random_id = $sampleUniqueiDProcess->getCheckedRandomUniqueId();
+            $query->insertSamples($sname, $date, $sprice, $subSampletype, $sampledescription, $checked_random_id);
+            $last_id = $query->get_sample_id($checked_random_id); 
+            if($last_id!= null){
 
             if (isset($_FILES["SampleFile"])) {
                 $fileHandlerforzip = new FileHandler();
                 $fileHandlerforzip->filedetails($_FILES["SampleFile"], $zip_path, "50000000", "zip");
-                $zippathname =$zip_path . $fileHandlerforzip->getFilename();
+                $zippathname = $zip_path . $fileHandlerforzip->getFilename();
 
-                DB::insert("INSERT INTO `samplePath`(`samplePath`,`sampleID`) VALUES ('" . $zippathname . "','" . $lastID . "') ");
+                // DB::insert("INSERT INTO `samplePath`(`samplePath`,`sampleID`) VALUES ('" . $zippathname . "','" . $lastID . "') ");
+                $query->insertAudioSampleZipSrc($zippathname,$last_id);
             }
             if (isset($_FILES["SampleAudio"])) {
 
                 $fileHandlerforzip = new FileHandler();
                 $fileHandlerforzip->filedetails($_FILES["SampleAudio"], $audio_src_path, "50000000", "mp3");
-                $audiopathname =$audio_src_path . $fileHandlerforzip->getFilename();
-                DB::insert("INSERT INTO `sampleaudio`(`sampleAudioSrc`,`sampleID`) VALUES ('" . $audiopathname . "','" . $lastID . "') ");
+                $audiopathname = $audio_src_path . $fileHandlerforzip->getFilename();
+                // DB::insert("INSERT INTO `sampleaudio`(`sampleAudioSrc`,`sampleID`) VALUES ('" . $audiopathname . "','" . $lastID . "') ");
+                $query->insertAudioSampleSrc($audiopathname,$last_id);
             }
             if (isset($_FILES["SampleImage"])) {
 
                 $fileHandlerforzip = new FileHandler();
                 $fileHandlerforzip->filedetails($_FILES["SampleImage"], $image_path, "50000000", "jpg");
                 $imagepathname = $image_path . $fileHandlerforzip->getFilename();
-                DB::insert("INSERT INTO `sampleimages`(`source_URL`,`sampleID`) VALUES ('" . $imagepathname . "','" . $lastID . "') ");
+                // DB::insert("INSERT INTO `sampleimages`(`source_URL`,`sampleID`) VALUES ('" . $imagepathname . "','" . $lastID . "') ");
+                $query->insertImageSrc($imagepathname,$last_id);
+            }
             }
         } else {
 
