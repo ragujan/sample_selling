@@ -6,7 +6,7 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $query_path = GlobalLinkFiles::getFilePath("sample_queries");
 
-include_once $query_path;
+// include_once $query_path;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,14 +82,14 @@ include_once $query_path;
                                         </div>
                                         <div class="col-12 offset-0 col-md-8 offset-md-2">
                                             <?php
-                                            // require "../searchqueryclass.php";
+                                            require_once "query.php";
 
                                             ?>
                                             <div class="row">
 
                                                 <?php
-                                                // $popularsamples = new Search();
-                                                // $popularsamples->limitsearch();
+                                                $popularsamples = new Search();
+                                                $popularsamples->limitsearch();
                                                 ?>
                                             </div>
                                         </div>
