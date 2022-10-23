@@ -1,12 +1,13 @@
-<span class="text-dark">Melody type</span>
 <?php
-$id = 1;
+$id = 4;
 ?>
-<select name="" id="submelodyType">
+
+<span class="text-dark">Midi Types</span>
+<select name="" id="subMidiType">
     <?php
     require "../query/sample_queries.php";
     $object = new SampleQueries();
-    $melodytypesearch = $object->showSubSampleTypes($id);
+    $melodytypesearch = $object->showSubSampleMidiTypes($id);
     $melodytyperows = count($melodytypesearch);
     if ($melodytyperows >= 1) {
         for ($i = 0; $i < $melodytyperows; $i++) {

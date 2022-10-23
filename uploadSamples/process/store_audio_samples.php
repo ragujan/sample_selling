@@ -4,11 +4,11 @@ require_once "../utils/sample_unique_process.php";
 require_once "../query/sample_queries.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/sampleSelling-master/util/path_config/global_link_files.php";
 
-$image_path = GlobalLinkFiles::getDirectoryPath("image");
+$image_path = GlobalLinkFiles::getDirectoryPath("audio_sample_image");
 
-$zip_path = GlobalLinkFiles::getDirectoryPath("zip_file");
+$zip_path = GlobalLinkFiles::getDirectoryPath("audio_sample_zip_file");
 
-$audio_src_path = GlobalLinkFiles::getDirectoryPath("audio");
+$audio_src_path = GlobalLinkFiles::getDirectoryPath("audio_sample_audio");
 
 $file_handler_path = GlobalLinkFiles::getFilePath("file_handler");
 

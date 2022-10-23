@@ -7,7 +7,8 @@ let uploadAudioOnly = document.getElementById('uploadAudioOnly');
 let uploadImageOnly = document.getElementById('uploadImageOnly');
 let sampletypeselect = document.getElementById('sampleType');
 
-const upload_process_url = "../process/store_audio_samples.php";
+const upload_audio_process_url = "../process/store_audio_samples.php";
+const upload_midi_process_url = "../process/store_midi_samples.php";
 const load_sub_melodies_url = "../process/sub_melodies.php";
 const load_sub_drums_url = "../process/sub_drums.php";
 
@@ -46,7 +47,7 @@ function uploadProcess() {
 
 }
 
-upBTN.addEventListener('click', function() {
+upBTN.addEventListener('click', function () {
     let samplePrice = document.getElementById('samplePrice');
     let sampleName = document.getElementById('sampleName');
     let sampleType = document.getElementById('sampleType');
@@ -68,9 +69,9 @@ upBTN.addEventListener('click', function() {
     form_2.append('SampleSubMelody', submelodytype.value);
     form_2.append('SampleDescription', sampledescription.value);
 
-  
+
     let url = "";
-    fetch(upload_process_url, { body: form_2, method: "POST" })
+    fetch(upload_audio_process_url, { body: form_2, method: "POST" })
         .then(response => response.text())
         .then((text) => { document.getElementById("showmessage").innerHTML = text; })
 
