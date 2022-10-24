@@ -7,7 +7,7 @@ class Sample_query_functions extends DB
 
     private $totalcount;
     private $fetcharray;
-    private $exactResultsPerPage = 8;
+    private $exactResultsPerPage = 2;
     private $subSamplesQuery = "SELECT * FROM samples 
     INNER JOIN subsampletype
     ON subsampletype.subsampleID =samples.SubsampleID
@@ -35,7 +35,10 @@ class Sample_query_functions extends DB
     ON sampletype.sampleTypeID = subsampletype.sampleTypeID
     INNER JOIN sampleimages
     ON sampleimages.sampleID=samples.sampleID";
-
+    public function getExactResultsPerPage()
+    {
+        return $this->exactResultsPerPage;
+    }
     public function listSubSampleTypes($sample_type_name)
     {
         $query = "SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`= ?);";
@@ -99,7 +102,7 @@ class Sample_query_functions extends DB
     public function sampleType($id, $PG)
     {
         $joined_query = $this->sampleTypeQuery;
-    
+
         $cal =  $joined_query . " " . "WHERE sampletype.sampleTypeID = ? ;";
 
         $statement1 = $this->connect()->prepare($cal);
@@ -129,8 +132,9 @@ class Sample_query_functions extends DB
     }
 
     public function sampleTypePages($id)
-    {   $joined_query = $this->sampleTypeQuery;
-    
+    {
+        $joined_query = $this->sampleTypeQuery;
+
         $cal =  $joined_query . " " . "WHERE sampletype.sampleTypeID = ? ;";
 
         $statement1 = $this->connect()->prepare($cal);
@@ -138,7 +142,7 @@ class Sample_query_functions extends DB
         $this->totalcount = count($statement1->fetchAll());
         if ($this->totalcount == 0) {
             $this->fetcharray = array("Nothing");
-         
+
             return 0;
         } else {
             // echo count($statement1->fetchAll());
@@ -155,7 +159,7 @@ class Sample_query_functions extends DB
         $this->totalcount = count($statement1->fetchAll());
         if ($this->totalcount == 0) {
             $this->fetcharray = array("Nothing");
-    
+
             return 0;
         } else {
             // echo count($statement1->fetchAll());
@@ -163,7 +167,7 @@ class Sample_query_functions extends DB
             return $totalPages;
         }
     }
-    
+
     public function sampleTypeMidi($id, $PG)
     {
         $cal =  $this->midi_sample_query . " " . "WHERE sampletype.sampleTypeID = ?;";
@@ -195,7 +199,7 @@ class Sample_query_functions extends DB
     }
 
 
- 
+
 
     public function searchByText($searchtext, $PG)
     {
@@ -343,7 +347,8 @@ class Sample_query_functions extends DB
         $statement1 = $this->connect()->prepare($cal);
         $statement1->execute([$id]);
         return $statement1->fetchAll();
-    }       public function showMidiTypes()
+    }
+    public function showMidiTypes()
     {
         $cal = "SELECT * FROM sampletype WHERE `typeName` = 'midi' AND `sampleTypeID` = '4' ";
         $statement1 = $this->connect()->prepare($cal);

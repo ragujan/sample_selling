@@ -6,6 +6,8 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $resouces_path = GlobalLinkFiles::getDirectoryPath("resources");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 require_once "../query/Sample_query_functions.php";
+$sample_display_melodies_process_div = "sample_display_melodies_process";
+$sample_display_drums_process_div = "sample_display_drums_process";
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +84,7 @@ require_once "../query/Sample_query_functions.php";
                                                             <span class="fs-5 fw-bolder">Filter By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select name=""  class="selectTAG py-3 px-1" id="subSampleDrumID">
+                                                            <select onchange="showsubsamples()"  class="selectTAG py-3 px-1" id="sub_sample_melody_id">
                                                                 <?php
                                                               
                                                                 $query_object = new Sample_query_functions();
@@ -115,7 +117,7 @@ require_once "../query/Sample_query_functions.php";
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="sampleTypeMelody" style="padding-left: 2.5%;padding-right: 2.5%;" class="col-12 pb-5 pt-3">
+                                        <div id="<?=$sample_display_melodies_process_div?>" style="padding-left: 2.5%;padding-right: 2.5%;" class="col-12 pb-5 pt-3">
 
                                         </div>
 
@@ -132,10 +134,10 @@ require_once "../query/Sample_query_functions.php";
                                                 <div class="col-12">
                                                     <div class="row">
                                                         <div class="col-lg-1 col-md-2 col-3 py-2 text-center">
-                                                            <span class="fs-5 fw-bolder">Filter By</span>
+                                                            <span class="fs-5 fw-bolder">Filter33 By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select name="" class="selectTAG py-2 px-1" id="subSampleDrumID">
+                                                            <select  onchange="showsubsamples();" class="selectTAG py-2 px-1" id="subSampleDrumID">
                                                                 <?php
          
                                                                 $subsamples = $query_object->listSubSampleTypes("drums");
@@ -167,7 +169,7 @@ require_once "../query/Sample_query_functions.php";
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 " id="sampleTypeDrums">
+                                        <div class="col-12 " id="<?=$sample_display_drums_process_div?>">
 
                                         </div>
 

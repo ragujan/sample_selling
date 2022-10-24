@@ -6,6 +6,12 @@ let uploadFilesOnly = document.getElementById("uploadFileOnly");
 let uploadAudioOnly = document.getElementById("uploadAudioOnly");
 let uploadImageOnly = document.getElementById("uploadImageOnly");
 
+const sample_display_drums_process_url = "/sampleSelling-master/product_view/audio_samples/sample_display_drums_process.php";
+const sample_display_melodies_process_url = "/sampleSelling-master/product_view/audio_samples/sample_display_melodies_process.php";
+const common_next_function_url_template = "/sampleSelling-master/product_view/audio_samples/";
+const drum_sample_div = "sample_display_drums_process";
+const melody_sample_div = "sample_display_melodies_process";
+
 let c =(text)=>{console.log(text)};
 
 function sanitizerInput(data) {
@@ -16,26 +22,25 @@ function sanitizerInput(data) {
 document.getElementsByClassName('container-fluid')[0].style.display = "none";
 window.addEventListener("load", async () => {
   //  let val = 0
-  let samplebox1 = document.getElementById("sampleTypeMelody");
-  let samplebox2 = document.getElementById("sampleTypeDrums");
+  let samplebox1 = document.getElementById(melody_sample_div);
+  let samplebox2 = document.getElementById(drum_sample_div);
 
  
   document.getElementById('loadingScreen').classList.toggle('d-none');
   let form = new FormData();
   // form.append('PG', val)
   setTimeout(async ()=>{
-    let url = "sampletypeMelody.php";
+  let url = sample_display_melodies_process_url;
     let abc = await fetch(url, { body: form, method: "POST" })
       .then((response) =>response.text()  )
       .then((text) => {
         
         let sanitizeData = sanitizerInput(text);
-       let whtsup= ()=>{console.log("so hwts up")};
-       whtsup();
+   
         samplebox1.innerHTML = text;
-      });
+      }).catch((error)=>console.error(error));
   
-    let url2 = "sampletypeDrums.php";
+    let url2 = sample_display_drums_process_url;
     let def = await fetch(url2, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
@@ -43,47 +48,30 @@ window.addEventListener("load", async () => {
         samplebox2.innerHTML = text;
         document.getElementById('loadingScreen').classList.toggle('d-none');
         document.getElementsByClassName('container-fluid')[0].style.display = "block";
-      });
+      }).catch((error)=>console.error(error));
 
   },500)
 
 });
-async function loadwin() {
-  let val = 1;
 
-  let form = new FormData();
-  form.append("PG", val);
-  let url = "SampleSellingPaginationMelodies.php";
-  let abc = await fetch(url, { body: form, method: "POST" })
-    .then((response) => response.text())
-    .then((text) => {
-      let samplebox2 = document.getElementById("showmelodysamples");
-      samplebox2.innerHTML = text;
-    });
-
-  let url2 = "samplesellingpaginationdrums.php";
-  let def = await fetch(url2, { body: form, method: "POST" })
-    .then((response) => response.text())
-    .then((text) => {
-      let samplebox2 = document.getElementById("showdrumsamples");
-      samplebox2.innerHTML = text;
-    });
-}
 function showsubsamples() {
+
   let val = 0;
-  let sampleselect = document.getElementById("subSampleMelodyID").value;
+  let sub_sample_id = document.getElementById("sub_sample_melody_id").value;
 
   let form = new FormData();
-  if (sampleselect !== "ALL") {
-    form.append("SSTN", sampleselect);
+  if (sub_sample_id !== "ALL") {
+    form.append("sub_sample_id", sub_sample_id);
   }
-  form.append("PG", val);
 
-  let url = "sampletypeMelody.php";
+  form.append("page_number", val);
+
+  let url = sample_display_melodies_process_url;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
-      let samplebox = document.getElementById("sampleTypeMelody");
+      console.log(text);
+      let samplebox = document.getElementById(drum_sample_div);
       samplebox.innerHTML = text;
     });
 }
@@ -97,12 +85,12 @@ function showsubsamplesdrums() {
   if (sampleselect !== "ALL") {
     form.append("SSTN", sampleselect);
   }
-
-  let url = "sampletypeDrums.php";
+   
+  let url = sample_display_drums_process_url;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
-      let samplebox = document.getElementById("sampleTypeDrums");
+      let samplebox = document.getElementById(drum_sample_div);
       samplebox.innerHTML = text;
     });
 }
@@ -123,7 +111,7 @@ function nextfunctionmelody(x, y) {
 
   form.append("PG", val);
 
-  let url = "sampletypeMelody.php";
+  let url = sample_display_melodies_process_url;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -147,7 +135,7 @@ function nextfunctiondrums(x, y) {
 
   form.append("PG", val);
 
-  let url = "sampletypeDrums.php";
+  let url = sample_display_drums_process_url;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -202,7 +190,7 @@ function commonNextFunction(x, y, pageName) {
 
   form.append("PG", val);
 
-  let url = `${pageName}.php`;
+  let url = `${common_next_function_url_template}${pageName}.php`;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
