@@ -71,7 +71,7 @@ function showsubsamples() {
     .then((response) => response.text())
     .then((text) => {
       console.log(text);
-      let samplebox = document.getElementById(drum_sample_div);
+      let samplebox = document.getElementById(melody_sample_div);
       samplebox.innerHTML = text;
     });
 }
