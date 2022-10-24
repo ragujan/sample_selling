@@ -82,7 +82,7 @@ require_once "../query/Sample_query_functions.php";
                                                             <span class="fs-5 fw-bolder">Filter By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select name=""  class="selectTAG py-3 px-1" id="subSampleDrumID">
+                                                            <select name="" onchange="showsubsamples();"  class="selectTAG py-3 px-1" id="subSampleDrumID">
                                                                 <?php
                                                               
                                                                 $query_object = new Sample_query_functions();

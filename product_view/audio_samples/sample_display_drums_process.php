@@ -1,22 +1,24 @@
-
 <?php
+
+use Stripe\Product;
+
 require "../query/Sample_query_functions.php";
 require "../utils/pagination.php";
 require "../utils/product_view.php";
 require "../utils/page_buttons.php";
 // require "../PDOPHP/Validations.php";
-$pageName = "sampleTypeMidi";
+
+$query_object = new Sample_query_functions();
+$pageName = "sample_display_drums_process";
 $pagenumber;
 $allowedPages = 0;
 $stopnumber = 0;
 $outputpage = 0;
 $valueforBTN = 0;
-$exactResultsPerPage = 8;
-$DefaultSampleTypeNumber = 4;
+$exactResultsPerPage = $query_object->getExactResultsPerPage();
+$DefaultSampleTypeNumber = 2;
 $jsMethodName = "commonNextFunction";
 $A;
-
-$object = new Sample_query_functions();
 
 
 
@@ -27,30 +29,30 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     $A = $_POST["PG"];
     $subsampletypenumber = $_POST["SSTN"];
     if ($subsampletypenumber == 0) {
-     
+
         $valueforBTN = 0;
 
-        $samplePage = $object->sampleTypePagesMidi($DefaultSampleTypeNumber);
+        $samplePage = $query_object->sampleTypePages($DefaultSampleTypeNumber);
         if ($A >= $samplePage) {
             $A = $samplePage;
         } else if ($A <= 0) {
             $A = 0;
         }
 
-        $getRows = $object->sampleTypeMidi($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
-        $totalCount = $object->returnTotalCount();
+        $getRows = $query_object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+        $totalCount = $query_object->returnTotalCount();
         $allowedPages = ceil($totalCount / $exactResultsPerPage);
     } else {
         $valueforBTN = $subsampletypenumber;
 
-        $samplePage = $object->subSampleTypePages($subsampletypenumber);
+        $samplePage = $query_object->subSampleTypePages($subsampletypenumber);
         if ($A >= $samplePage) {
             $A = $samplePage;
         } else if ($A <= 0) {
             $A = 0;
         }
-        $getRows = $object->sampleType($DefaultSampleTypeNumber,$A * $exactResultsPerPage);
-        $totalCount = $object->returnTotalCount();
+        $getRows = $query_object->sampleType($DefaultSampleTypeNumber,$A * $exactResultsPerPage);
+        $totalCount = $query_object->returnTotalCount();
         $allowedPages = ceil($totalCount / $exactResultsPerPage);
     }
 } else if (isset($_POST["PG"])) {
@@ -58,25 +60,26 @@ if (isset($_POST["PG"]) && isset($_POST["SSTN"])) {
     $A = $_POST["PG"];
 
     $valueforBTN = 0;
-    $samplePage = $object->sampleTypePages($DefaultSampleTypeNumber);
+    $samplePage = $query_object->sampleTypePages($DefaultSampleTypeNumber);
     if ($A >= $samplePage) {
         $A = $samplePage;
     } else if ($A <= 0) {
         $A = 0;
     }
  
-    $getRows = $object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
-    $totalCount = $object->returnTotalCount();
+    $getRows = $query_object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+    $totalCount = $query_object->returnTotalCount();
     $allowedPages = ceil($totalCount / $exactResultsPerPage);
 } else {
     
     $A = 0;
     $valueforBTN = 0;
-    $getRows = $object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
+    $getRows = $query_object->sampleType($DefaultSampleTypeNumber, $A * $exactResultsPerPage);
 
-    $totalCount = $object->returnTotalCount();
+    $totalCount = $query_object->returnTotalCount();
     $allowedPages = ceil($totalCount / $exactResultsPerPage);
 }
 
+
 $htmlContentObject = new ProductView();
-echo $htmlContentObject->view_midi_samples($getRows, $allowedPages, $A, $valueforBTN, $pageName,$jsMethodName);
+echo $htmlContentObject->view_audio_samples($getRows, $allowedPages, $A, $valueforBTN, $pageName,$jsMethodName);
