@@ -80,7 +80,33 @@ class Sample_query_functions extends DB
             return $statement2->fetchAll();
         }
     }
+    public function subSampleTypeMidi($id, $PG)
+    {
+        $cal =  $this->midi_sample_query . " " . "WHERE subsampletype.subsampleID = ?;";
 
+        $statement1 = $this->connect()->prepare($cal);
+        $statement1->execute([$id]);
+        $this->totalcount = count($statement1->fetchAll());
+        if ($this->totalcount == 0) {
+            $this->fetcharray = array("Nothing");
+            return $this->fetcharray;
+        } else {
+            $totalPages = ceil($this->totalcount / $this->exactResultsPerPage);
+
+            if ($PG >= ($totalPages - 1) * $this->exactResultsPerPage) {
+                $PG = ($totalPages - 1) * $this->exactResultsPerPage;
+            } else if ($PG <= 0) {
+                $PG = 0;
+            }
+
+            $sql = $this->midi_sample_query . " " . "WHERE subsampletype.subsampleID = ? LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG  ";
+
+            $statement2 = $this->connect()->prepare($sql);
+            $statement2->execute([$id]);
+
+            return $statement2->fetchAll();
+        }
+    }
     public function subSampleTypePages($id)
     {
         $cal =  $this->subSamplesQuery . " " . "WHERE subsampletype.subsampleID = ?;";
@@ -97,7 +123,22 @@ class Sample_query_functions extends DB
             return $totalPages;
         }
     }
+    public function subSampleTypePagesMidi($id)
+    {
+        $cal =  $this->midi_sample_query . " " . "WHERE subsampletype.subsampleID = ?;";
 
+        $statement1 = $this->connect()->prepare($cal);
+        $statement1->execute([$id]);
+        $this->totalcount = count($statement1->fetchAll());
+        if ($this->totalcount == 0) {
+            $this->fetcharray = array("Nothing");
+            return 0;
+        } else {
+            // echo count($statement1->fetchAll());
+            $totalPages = (ceil($this->totalcount / $this->exactResultsPerPage) - 1);
+            return $totalPages;
+        }
+    }
 
     public function sampleType($id, $PG)
     {
