@@ -7,7 +7,7 @@ let uploadAudioOnly = document.getElementById("uploadAudioOnly");
 let uploadImageOnly = document.getElementById("uploadImageOnly");
 
 const midi_display_process_url = "/sampleSelling-master/product_view/midi_files/sample_display_midies_process.php"
-const common_next_function_url_template = "/sampleSelling-master/product_view/audio_samples/";
+const common_next_function_url_template = "/sampleSelling-master/product_view/midi_files/";
 const midi_sample_div = "sample_display_midies_process";
 document.getElementsByClassName('container-fluid')[0].style.display = "none";
 window.addEventListener("load", async () => {
@@ -18,13 +18,12 @@ window.addEventListener("load", async () => {
     let sampleselect=0;
     let form = new FormData();
     form.append("sub_sample_id", sampleselect);
-    form.append("page_number", val);
+    form.append("current_page_number", val);
      
     let url = midi_display_process_url;
     fetch(url, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
-          console.log(text);
         let samplebox = document.getElementById(midi_sample_div);
         samplebox.innerHTML = text;
         document.getElementById('loadingScreen').classList.toggle('d-none');
@@ -41,23 +40,20 @@ window.addEventListener("load", async () => {
 
 function showsubsamples() {
     let val = 0;
-    let sampleselect = document.getElementById("sub_sample_id_midis").value;
+    let sampleselect = document.getElementById("sub_sample_id_midies").value;
   
     let form = new FormData();
-    // if (sampleselect !== "ALL") {
-    //   
-    // }
     form.append("sub_sample_id", sampleselect);
-    form.append("page_number", val);
-     
+    form.append("current_page_number", val);
+    console.log(sampleselect)
     let url = midi_display_process_url;
     fetch(url, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
-          console.log(text);
-        let samplebox = document.getElementById("sampleTypeMidi");
+          
+        let samplebox = document.getElementById(midi_sample_div);
         samplebox.innerHTML = text;
-      });
+      }).catch((error)=>{console.error(error)});
   }
   
 
@@ -73,7 +69,7 @@ function nextfunctionsearch(x, y, name) {
     form.append("searchText", sampleselect);
   }
 
-  form.append("page_number", val);
+  form.append("current_page_number", val);
 
   let url = "../midiFiles/sampleTypeMidiSearch.php";
   fetch(url, { body: form, method: "POST" })
@@ -88,13 +84,10 @@ function nextfunctionsearch(x, y, name) {
     });
 }
 function commonNextFunction(current_page_number, sub_sample_id, pageName) {
-  console.log(x,y,pageName);
-  let val = x;
-  let sampleselect = y;
   let form = new FormData();
 
-  form.append("sub_sample_id", sampleselect);
-  form.append("page_number", val);
+  form.append("sub_sample_id", sub_sample_id);
+  form.append("current_page_number", current_page_number);
 
   let url = `${common_next_function_url_template}${pageName}.php`;
 

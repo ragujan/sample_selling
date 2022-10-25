@@ -8,6 +8,7 @@ $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 require_once "../query/Sample_query_functions.php";
 $sample_display_melodies_process_div = "sample_display_melodies_process";
 $sample_display_drums_process_div = "sample_display_drums_process";
+
 ?>
 
 <!DOCTYPE html>
