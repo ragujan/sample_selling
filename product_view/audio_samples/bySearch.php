@@ -3,76 +3,74 @@ require "../query/Sample_query_functions.php";
 require "../utils/pagination.php";
 require "../utils/product_view.php";
 require "../utils/page_buttons.php";
+$query_object = new Sample_query_functions();
 $pageName = "bySearch";
 $jsMethodName = "nextfunctionsearch";
-$pagenumber;
 $allowedPages = 0;
-$stopnumber = 0;
-$outputpage = 0;
 $valueforBTN = 0;
-$exactResultsPerPage = 8;
-$DefaultSampleTypeNumber = 1;
-$A;
+$exactResultsPerPage = $query_object->getExactResultsPerPage();
 
-$object = new Sample_query_functions();
-if (isset($_POST["PG"]) && intval(($_POST["PG"])) && !empty(($_POST["PG"]))   && isset($_POST["searchText"])) {
+$current_page_number;
+
+
+if (isset($_POST["current_page_number"]) && intval(($_POST["current_page_number"])) && !empty(($_POST["current_page_number"]))   && isset($_POST["search_text"])) {
    
-    $A = $_POST["PG"];
-    $searchText = $_POST["searchText"];
-    $valueforBTN = $searchText;
-    $samplePage = $object->searchByTextPages($searchText);
-    if ($A >= $samplePage) {
-        $A = $samplePage;
-    } else if ($A <= 0) {
-        $A = 0;
+    $current_page_number = $_POST["current_page_number"];
+    $search_text = $_POST["search_text"];
+    $valueforBTN = $search_text;
+    $max_page_number = $query_object->searchByTextPages($search_text);
+    if ($current_page_number >= $max_page_number) {
+        $current_page_number = $max_page_number;
+    } else if ($current_page_number <= 0) {
+        $current_page_number = 0;
     }
 
-    $melody = $object->searchByText($searchText, $A * $exactResultsPerPage);
-    $totalCount = $object->returnTotalCount();
+    $melody = $query_object->searchByText($search_text, $current_page_number * $exactResultsPerPage);
+    $totalCount = $query_object->returnTotalCount();
     $allowedPages = ceil($totalCount / $exactResultsPerPage);
-} else if (isset($_POST["searchText"])) {
-    $A = 0;
+} else if (isset($_POST["search_text"])) {
+    $current_page_number = 0;
     
-    $searchText = $_POST["searchText"];
-    if ($searchText == "") {
+    $search_text = $_POST["search_text"];
+    if ($search_text == "") {
       
     }
     
-    $valueforBTN = $searchText;
-    $samplePage = $object->searchByTextPages($searchText);
-    if ($A >= $samplePage) {
-        $A = $samplePage;
-    } else if ($A <= 0) {
-        $A = 0;
+    $valueforBTN = $search_text;
+    $max_page_number = $query_object->searchByTextPages($search_text);
+    if ($current_page_number >= $max_page_number) {
+        $current_page_number = $max_page_number;
+    } else if ($current_page_number <= 0) {
+        $current_page_number = 0;
     }
-    $melody = $object->searchByText($searchText, 0);
-    $totalCount = $object->returnTotalCount();
+    $melody = $query_object->searchByText($search_text, 0);
+    $totalCount = $query_object->returnTotalCount();
     $allowedPages = ceil($totalCount / $exactResultsPerPage);
-} else if (isset($_POST["PG"])) {
-    $A = $_POST["PG"];
+} else if (isset($_POST["current_page_number"])) {
+    $current_page_number = $_POST["current_page_number"];
 
-    $searchText = "";
+    $search_text = "";
    
-    $valueforBTN = $searchText;
-    $samplePage = $object->searchByTextPages($searchText);
-    if ($A >= $samplePage) {
-        $A = $samplePage;
-    } else if ($A <= 0) {
-        $A = 0;
+    $valueforBTN = $search_text;
+    $max_page_number = $query_object->searchByTextPages($search_text);
+    if ($current_page_number >= $max_page_number) {
+        $current_page_number = $max_page_number;
+    } else if ($current_page_number <= 0) {
+        $current_page_number = 0;
     }
-    $melody = $object->searchByText($searchText, 0);
-    $totalCount = $object->returnTotalCount();
+    $melody = $query_object->searchByText($search_text, 0);
+    $totalCount = $query_object->returnTotalCount();
     $allowedPages = ceil($totalCount / $exactResultsPerPage);
 } else {
 
-    $A = 0;
+    $current_page_number = 0;
     
     $valueforBTN = "null";
-    $melody = $object->searchByText($searchText, $A * $exactResultsPerPage);
-    $totalCount = $object->returnTotalCount();
+    $melody = $query_object->searchByText($search_text, $current_page_number * $exactResultsPerPage);
+    $totalCount = $query_object->returnTotalCount();
     $allowedPages = ceil($totalCount / $exactResultsPerPage);
 }
 $getRows = $melody;
-$htmlContentObject = new ProductView();
-echo $htmlContentObject->view_audio_samples($getRows, $allowedPages, $A, $valueforBTN, $pageName,$jsMethodName);
+$htmlContentquery_object = new ProductView();
+echo $htmlContentquery_object->view_audio_samples($getRows, $allowedPages, $current_page_number, $valueforBTN, $pageName,$jsMethodName);
 ?>

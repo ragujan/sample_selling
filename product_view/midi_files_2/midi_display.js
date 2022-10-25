@@ -6,16 +6,9 @@ let uploadFilesOnly = document.getElementById("uploadFileOnly");
 let uploadAudioOnly = document.getElementById("uploadAudioOnly");
 let uploadImageOnly = document.getElementById("uploadImageOnly");
 
-const midi_display_process_url = "/sampleSelling-master/product_view/midi_files/midi_display_process.php"
-
-
-let c =(text)=>{console.log(text)};
-
-function sanitizerInput(data) {
-  const div = document.createElement("div");
-  div.textContent = data;
-  return div.innerHTML;
-}
+const midi_display_process_url = "/sampleSelling-master/product_view/midi_files/sample_display_midies_process.php"
+const common_next_function_url_template = "/sampleSelling-master/product_view/audio_samples/";
+const midi_sample_div = "sample_display_midies_process";
 document.getElementsByClassName('container-fluid')[0].style.display = "none";
 window.addEventListener("load", async () => {
   //  let val = 0
@@ -24,15 +17,15 @@ window.addEventListener("load", async () => {
     let val = 0;
     let sampleselect=0;
     let form = new FormData();
-    form.append("SSTN", sampleselect);
-    form.append("PG", val);
+    form.append("sub_sample_id", sampleselect);
+    form.append("page_number", val);
      
     let url = midi_display_process_url;
     fetch(url, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
           console.log(text);
-        let samplebox = document.getElementById("sampleTypeMidi");
+        let samplebox = document.getElementById(midi_sample_div);
         samplebox.innerHTML = text;
         document.getElementById('loadingScreen').classList.toggle('d-none');
         document.getElementsByClassName('container-fluid')[0].style.display = "block";
@@ -48,14 +41,14 @@ window.addEventListener("load", async () => {
 
 function showsubsamples() {
     let val = 0;
-    let sampleselect = document.getElementById("subSampleMelodyID").value;
+    let sampleselect = document.getElementById("sub_sample_id_midis").value;
   
     let form = new FormData();
     // if (sampleselect !== "ALL") {
     //   
     // }
-    form.append("SSTN", sampleselect);
-    form.append("PG", val);
+    form.append("sub_sample_id", sampleselect);
+    form.append("page_number", val);
      
     let url = midi_display_process_url;
     fetch(url, { body: form, method: "POST" })
@@ -70,31 +63,6 @@ function showsubsamples() {
 
 
 
-function nextfunctiondrums(x, y) {
-  let sampleContainer = document.getElementById("thesamplecontainer1");
-  // sampleContainer.scrollIntoView()
-  console.log(x, y);
-  let val = x;
-  let sampleselect = y;
-  let form = new FormData();
-
-  if (y !== null) {
-    form.append("SSTN", sampleselect);
-  } else {
-    alert("hey");
-  }
-
-  form.append("PG", val);
-
-  let url = midi_display_process_url;
-  fetch(url, { body: form, method: "POST" })
-    .then((response) => response.text())
-    .then((text) => {
-      let samplebox = document.getElementById("showdrumsamples");
-      samplebox.innerHTML = text;
-    });
-}
-
 function nextfunctionsearch(x, y, name) {
   
   let val = x;
@@ -105,7 +73,7 @@ function nextfunctionsearch(x, y, name) {
     form.append("searchText", sampleselect);
   }
 
-  form.append("PG", val);
+  form.append("page_number", val);
 
   let url = "../midiFiles/sampleTypeMidiSearch.php";
   fetch(url, { body: form, method: "POST" })
@@ -119,22 +87,21 @@ function nextfunctionsearch(x, y, name) {
       samplebox.innerHTML = text;
     });
 }
-function commonNextFunction(x, y, pageName) {
+function commonNextFunction(current_page_number, sub_sample_id, pageName) {
   console.log(x,y,pageName);
   let val = x;
   let sampleselect = y;
   let form = new FormData();
 
-  form.append("SSTN", sampleselect);
-  form.append("PG", val);
+  form.append("sub_sample_id", sampleselect);
+  form.append("page_number", val);
 
-  let url = `../midiFiles/${pageName}.php`;
-  url = midi_display_process_url;
+  let url = `${common_next_function_url_template}${pageName}.php`;
+
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
-      let mainsampleBox = document.getElementById("sampleTypeMidi");
-      //console.log(text);
+
       let samplebox = document.getElementById(`${pageName}`);
       samplebox.innerHTML = text;
     });
