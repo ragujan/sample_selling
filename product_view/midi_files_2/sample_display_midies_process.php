@@ -7,7 +7,7 @@ require "../utils/page_buttons.php";
 // require "../PDOPHP/Validations.php";
 
 $query_object = new Sample_query_functions();
-$pageName = "midi_display_process";
+$pageName = "sample_display_midies_process";
 $pagenumber;
 $allowedPages = 0;
 $stopnumber = 0;

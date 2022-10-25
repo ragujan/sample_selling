@@ -12,30 +12,23 @@ const common_next_function_url_template = "/sampleSelling-master/product_view/au
 const drum_sample_div = "sample_display_drums_process";
 const melody_sample_div = "sample_display_melodies_process";
 
-let c = (text) => { console.log(text) };
 
-function sanitizerInput(data) {
-  const div = document.createElement("div");
-  div.textContent = data;
-  return div.innerHTML;
-}
 document.getElementsByClassName('container-fluid')[0].style.display = "none";
 window.addEventListener("load", async () => {
-  //  let val = 0
+
   let samplebox1 = document.getElementById(melody_sample_div);
   let samplebox2 = document.getElementById(drum_sample_div);
 
 
   document.getElementById('loadingScreen').classList.toggle('d-none');
   let form = new FormData();
-  // form.append('PG', val)
+  
   setTimeout(async () => {
     let url = sample_display_melodies_process_url;
     let abc = await fetch(url, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
 
-        let sanitizeData = sanitizerInput(text);
 
         samplebox1.innerHTML = text;
       }).catch((error) => console.error(error));
@@ -64,13 +57,12 @@ function show_sub_melody_samples() {
     form.append("sub_sample_id", sub_sample_id);
   }
 
-  form.append("page_number", val);
+  form.append("current_page_number", val);
 
   let url = sample_display_melodies_process_url;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
-      console.log(text);
       let samplebox = document.getElementById(melody_sample_div);
       samplebox.innerHTML = text;
     });
@@ -85,7 +77,7 @@ function show_sub_drum_samples() {
     form.append("sub_sample_id", sub_sample_id);
   }
 
-  form.append("page_number", val);
+  form.append("current_page_number", val);
   let url = sample_display_drums_process_url;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
@@ -94,83 +86,36 @@ function show_sub_drum_samples() {
       samplebox.innerHTML = text;
     });
 }
-
-function nextfunctionmelody(x, y) {
-  let sampleContainer = document.getElementById("thesamplecontainer1");
-  // sampleContainer.scrollIntoView()
-  console.log(x, y);
-  let val = x;
-  let sampleselect = y;
+let searchButton = document.getElementById("searchButton");
+searchButton.addEventListener("click", () => {
+  let sBox = document.getElementById("searchBox");
   let form = new FormData();
-
-  if (y !== null) {
-    form.append("SSTN", sampleselect);
-  } else {
-    alert("hey");
-  }
-
-  form.append("PG", val);
-
-  let url = sample_display_melodies_process_url;
+  form.append("search_text", sBox.value);
+  let url = "bySearch.php";
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
-      let samplebox = document.getElementById("showmelodysamples");
+      let mainsampleBox = document.getElementById("mainsampleDiv");
+      mainsampleBox.innerHTML = " ";
+      mainsampleBox.classList.add("d-none");
+      let samplebox = document.getElementById("bySearch");
       samplebox.innerHTML = text;
     });
-}
-function nextfunctiondrums(x, y) {
-  let sampleContainer = document.getElementById("thesamplecontainer1");
-  // sampleContainer.scrollIntoView()
-  console.log(x, y);
-  let val = x;
-  let sampleselect = y;
+});
+
+function nextfunctionsearch(page_number, search_text, name) {
   let form = new FormData();
 
-  if (y !== null) {
-    form.append("SSTN", sampleselect);
-  } else {
-    alert("hey");
+  if (search_text !== null) {
+    form.append("search_text", search_text);
   }
 
-  form.append("PG", val);
-
-  let url = sample_display_drums_process_url;
-  fetch(url, { body: form, method: "POST" })
-    .then((response) => response.text())
-    .then((text) => {
-      let samplebox = document.getElementById("showdrumsamples");
-      samplebox.innerHTML = text;
-    });
-}
-
-function nextfunctionsearch(x, y, name) {
-  console.log("hey", x, "hey", y, "hey", name);
-  let val = x;
-  let sampleselect = y;
-  let form = new FormData();
-
-  if (y !== null) {
-    form.append("searchText", sampleselect);
-  }
-
-  form.append("PG", val);
+  form.append("page_number", page_number);
 
   let url = "bySearch.php";
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
-      console.log(text);
-      // let mainsampleBox = document.getElementById('mainsampleDiv')
-
-      // let samplebox = document.getElementById('bySearch')
-      // samplebox.innerHTML = text
-
-      // let mainsampleBox = document.getElementById('mainsampleDiv')
-      // mainsampleBox.innerHTML =" ";
-      // mainsampleBox.classList.add('d-none')
-      let mainsampleBox = document.getElementById("mainsampleDiv");
-
       let samplebox = document.getElementById("bySearch");
       samplebox.innerHTML = text;
     });
@@ -181,7 +126,7 @@ function commonNextFunction(page_number, sub_sample_id, pageName) {
   let form = new FormData();
   
   form.append("sub_sample_id",sub_sample_id) ; 
-  form.append("page_number", page_number);
+  form.append("current_page_number", page_number);
   console.log(form)
   let url = `${common_next_function_url_template}${pageName}.php`;
   fetch(url, { body: form, method: "POST" })
@@ -250,23 +195,9 @@ function pausemusic(x) {
 function viewbuy(x) {
   window.location = "../viewsingleproduct/viewsingleproduct.php?X=" + x;
 }
-let searchButton = document.getElementById("searchButton");
 
-searchButton.addEventListener("click", () => {
-  let sBox = document.getElementById("searchBox");
-  let form = new FormData();
-  form.append("searchText", sBox.value);
-  let url = "bySearch.php";
-  fetch(url, { body: form, method: "POST" })
-    .then((response) => response.text())
-    .then((text) => {
-      let mainsampleBox = document.getElementById("mainsampleDiv");
-      mainsampleBox.innerHTML = " ";
-      mainsampleBox.classList.add("d-none");
-      let samplebox = document.getElementById("bySearch");
-      samplebox.innerHTML = text;
-    });
-});
+
+
 
 function upDateCartBagGui(arrayName) {
   let cartRowCount = Object.keys(arrayName).length;
