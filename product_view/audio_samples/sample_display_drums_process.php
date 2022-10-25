@@ -5,7 +5,7 @@ require "../utils/product_view.php";
 require "../utils/page_buttons.php";
 // require "../PDOPHP/Validations.php";
 $query_object = new Sample_query_functions();
-$pageName = "sample_display_melodies_process";
+$pageName = str_replace( array( '.php' ), '', basename(__FILE__));
 
 $allowedPages = 0;
 $valueforBTN = 0;

@@ -5,7 +5,7 @@ require_once $ROOT."/sampleSelling-master/util/path_config/global_link_files.php
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $resouces_path = GlobalLinkFiles::getDirectoryPath("resources");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
-$sample_display_script_page = GlobalLinkFiles::getRelativePath("sample_display_page_script");
+$sample_display_script_page = GlobalLinkFiles::getRelativePath("audio_sample_display_page_script");
 
 require_once "../query/Sample_query_functions.php";
 $sample_display_melodies_process_div = "sample_display_melodies_process";
@@ -190,7 +190,8 @@ $sample_display_drums_process_div = "sample_display_drums_process";
         </div>
     </div>
     <div id="newDivId"></div>
-    <script src="<?=$sample_display_script_page?>"></script>
+    <script src="<?= $sample_display_script_page?>"></script>
+ 
 
 </body>
 

@@ -5,8 +5,9 @@ $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT."/sampleSelling-master/util/path_config/global_link_files.php";
 $site_header_script = GlobalLinkFiles::getRelativePath("site_header_script");
 $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
-$midi_display_page = GlobalLinkFiles::getRelativePath("midi_display_page");
-$sample_display_page = GlobalLinkFiles::getRelativePath("sample_display_page_shortend");
+$midi_display_page = GlobalLinkFiles::getRelativePath("midi_sample_display_page");
+$sample_audio_display_page = GlobalLinkFiles::getRelativePath("audio_sample_display_page_shortend");
+$sample_midi_display_page = GlobalLinkFiles::getRelativePath("midi_sample_display_page_shortend");
 $home_page = GlobalLinkFiles::getRelativePath("home_page");
 if (!isset($_SESSION["userEmail"])) {
 ?>
@@ -19,8 +20,8 @@ if (!isset($_SESSION["userEmail"])) {
             <div class="py-0 col-lg-9 d-none d-lg-block col-md-9 col-8 offset-0  my-auto">
                 <div class="row">
                     <div class="col-3 text-center"><a href="<?=$home_page?>" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
-                    <div class="col-3 text-center"><a href="<?=$sample_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
-                    <div class="col-3 text-center"><a href="<?=$midi_display_page?>" class="  text-white navLinkTexts  text-decoration-none">midi packs</a></div>
+                    <div class="col-3 text-center"><a href="<?=$sample_audio_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
+                    <div class="col-3 text-center"><a href="<?=$sample_midi_display_page?>" class="  text-white navLinkTexts  text-decoration-none">midi packs</a></div>
                     <div class="col-3 text-center"><a href="" class="  text-white navLinkTexts  text-decoration-none">contact & services</a></div>
                 </div>
             </div>

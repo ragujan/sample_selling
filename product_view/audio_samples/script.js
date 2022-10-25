@@ -8,6 +8,7 @@ let uploadImageOnly = document.getElementById("uploadImageOnly");
 
 const sample_display_drums_process_url = "/sampleSelling-master/product_view/audio_samples/sample_display_drums_process.php";
 const sample_display_melodies_process_url = "/sampleSelling-master/product_view/audio_samples/sample_display_melodies_process.php";
+const sample_search_url = "/sampleSelling-master/product_view/audio_samples/bySearch.php";
 const common_next_function_url_template = "/sampleSelling-master/product_view/audio_samples/";
 const drum_sample_div = "sample_display_drums_process";
 const melody_sample_div = "sample_display_melodies_process";
@@ -22,7 +23,7 @@ window.addEventListener("load", async () => {
 
   document.getElementById('loadingScreen').classList.toggle('d-none');
   let form = new FormData();
-  
+
   setTimeout(async () => {
     let url = sample_display_melodies_process_url;
     let abc = await fetch(url, { body: form, method: "POST" })
@@ -91,7 +92,8 @@ searchButton.addEventListener("click", () => {
   let sBox = document.getElementById("searchBox");
   let form = new FormData();
   form.append("search_text", sBox.value);
-  let url = "bySearch.php";
+  let url = sample_search_url;
+  console.log(url);
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -100,7 +102,7 @@ searchButton.addEventListener("click", () => {
       mainsampleBox.classList.add("d-none");
       let samplebox = document.getElementById("bySearch");
       samplebox.innerHTML = text;
-    });
+    }).catch((error) => console.error(error));
 });
 
 function nextfunctionsearch(current_page_number, search_text, name) {
@@ -112,7 +114,7 @@ function nextfunctionsearch(current_page_number, search_text, name) {
 
   form.append("current_page_number", current_page_number);
 
-  let url = "bySearch.php";
+  let url = sample_search_url;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
@@ -121,11 +123,11 @@ function nextfunctionsearch(current_page_number, search_text, name) {
     });
 }
 function commonNextFunction(current_page_number, sub_sample_id, pageName) {
-  console.log("page number is "+current_page_number," sub_sample_type_number is "+sub_sample_id," page name is "+pageName)
+  console.log("page number is " + current_page_number, " sub_sample_type_number is " + sub_sample_id, " page name is " + pageName)
 
   let form = new FormData();
-  
-  form.append("sub_sample_id",sub_sample_id) ; 
+
+  form.append("sub_sample_id", sub_sample_id);
   form.append("current_page_number", current_page_number);
   console.log(form)
   let url = `${common_next_function_url_template}${pageName}.php`;
@@ -136,7 +138,7 @@ function commonNextFunction(current_page_number, sub_sample_id, pageName) {
       let samplebox = document.getElementById(`${pageName}`);
       samplebox.innerHTML = text;
     });
- }
+}
 
 function playmusic(x) {
   let playmusicicon = document.getElementById("playmusic" + x);
@@ -168,7 +170,7 @@ function playmusic(x) {
 
   album.style.backgroundColor = "rgb(30, 26, 26)";
   album.style.transition =
-  "background-color 0.5s ease-in-out,transform 0.5s ease-in-out";
+    "background-color 0.5s ease-in-out,transform 0.5s ease-in-out";
   let music = document.getElementById("audio" + x);
   pausemusicicon.classList.toggle("d-none");
   playmusicicon.classList.toggle("d-none");
@@ -182,8 +184,8 @@ function pausemusic(x) {
 
   album.style.transform = "scale(1.00)";
 
-   album.style.backgroundColor = "rgb(0, 0, 0)";
-   album.style.transition =
+  album.style.backgroundColor = "rgb(0, 0, 0)";
+  album.style.transition =
     "background-color 0.7s ease-in-out,transform 0.5s ease-in-out";
 
   let music = document.getElementById("audio" + x);

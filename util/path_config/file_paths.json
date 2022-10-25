@@ -25,20 +25,28 @@
             "actual_path": "/sampleSelling-master/util/file_handler.php"
         },
         {
-            "path_name": "sample_display_page",
+            "path_name": "audio_sample_display_page",
             "actual_path": "/sampleSelling-master/product_view/audio_samples/sample_display.php"
         },
         {
-            "path_name": "sample_display_page_shortend",
+            "path_name": "audio_sample_display_page_shortend",
             "actual_path": "/sampleSelling-master/sample_audio"
         },
         {
-            "path_name": "sample_display_page_script",
+            "path_name": "audio_sample_display_page_script",
             "actual_path": "/sampleSelling-master/product_view/audio_samples/script.js"
         },
         {
-            "path_name": "midi_display_page",
+            "path_name": "midi_sample_display_page",
             "actual_path": "/sampleSelling-master/product_view/midi_files/sample_display.php"
+        },
+        {
+            "path_name": "midi_sample_display_page_shortend",
+            "actual_path": "/sampleSelling-master/sample_midi"
+        },
+        {
+            "path_name": "midi_sample_display_page_script",
+            "actual_path": "/sampleSelling-master/product_view/midi_files/sample_display.js"
         },
         {
             "path_name": "home_page",
