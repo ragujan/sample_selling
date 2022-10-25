@@ -6,7 +6,7 @@ require_once $ROOT."/sampleSelling-master/util/path_config/global_link_files.php
 $site_header_script = GlobalLinkFiles::getRelativePath("site_header_script");
 $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 $midi_display_page = GlobalLinkFiles::getRelativePath("midi_display_page");
-$sample_display_page = GlobalLinkFiles::getRelativePath("sample_display_page");
+$sample_display_page = GlobalLinkFiles::getRelativePath("sample_display_page_shortend");
 $home_page = GlobalLinkFiles::getRelativePath("home_page");
 if (!isset($_SESSION["userEmail"])) {
 ?>
