@@ -12,7 +12,7 @@ const common_next_function_url_template = "/sampleSelling-master/product_view/au
 const drum_sample_div = "sample_display_drums_process";
 const melody_sample_div = "sample_display_melodies_process";
 
-let c =(text)=>{console.log(text)};
+let c = (text) => { console.log(text) };
 
 function sanitizerInput(data) {
   const div = document.createElement("div");
@@ -25,36 +25,36 @@ window.addEventListener("load", async () => {
   let samplebox1 = document.getElementById(melody_sample_div);
   let samplebox2 = document.getElementById(drum_sample_div);
 
- 
+
   document.getElementById('loadingScreen').classList.toggle('d-none');
   let form = new FormData();
   // form.append('PG', val)
-  setTimeout(async ()=>{
-  let url = sample_display_melodies_process_url;
+  setTimeout(async () => {
+    let url = sample_display_melodies_process_url;
     let abc = await fetch(url, { body: form, method: "POST" })
-      .then((response) =>response.text()  )
+      .then((response) => response.text())
       .then((text) => {
-        
+
         let sanitizeData = sanitizerInput(text);
-   
+
         samplebox1.innerHTML = text;
-      }).catch((error)=>console.error(error));
-  
+      }).catch((error) => console.error(error));
+
     let url2 = sample_display_drums_process_url;
     let def = await fetch(url2, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
-       
+
         samplebox2.innerHTML = text;
         document.getElementById('loadingScreen').classList.toggle('d-none');
         document.getElementsByClassName('container-fluid')[0].style.display = "block";
-      }).catch((error)=>console.error(error));
+      }).catch((error) => console.error(error));
 
-  },500)
+  }, 500)
 
 });
 
-function showsubsamples() {
+function show_sub_melody_samples() {
 
   let val = 0;
   let sub_sample_id = document.getElementById("sub_sample_melody_id").value;
@@ -76,16 +76,16 @@ function showsubsamples() {
     });
 }
 
-function showsubsamplesdrums() {
+function show_sub_drum_samples() {
   let val = 0;
-  let sampleselect = document.getElementById("subSampleDrumID").value;
+  let sub_sample_id = document.getElementById("sub_sample_drum_id").value;
 
   let form = new FormData();
-  form.append("PG", val);
-  if (sampleselect !== "ALL") {
-    form.append("SSTN", sampleselect);
+  if (sub_sample_id !== "ALL") {
+    form.append("sub_sample_id", sub_sample_id);
   }
-   
+
+  form.append("page_number", val);
   let url = sample_display_drums_process_url;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
@@ -175,37 +175,29 @@ function nextfunctionsearch(x, y, name) {
       samplebox.innerHTML = text;
     });
 }
-function commonNextFunction(x, y, pageName) {
-  console.log(pageName);
-  console.log(x + "  " + y);
-  let val = x;
-  let sampleselect = y;
+function commonNextFunction(page_number, sub_sample_id, pageName) {
+  console.log("page number is "+page_number," sub_sample_type_number is "+sub_sample_id," page name is "+pageName)
+
   let form = new FormData();
-
-  if (y !== 0) {
-    form.append("SSTN", sampleselect);
-  } else {
-    alert("hey");
-  }
-
-  form.append("PG", val);
-
+  
+  form.append("sub_sample_id",sub_sample_id) ; 
+  form.append("page_number", page_number);
+  console.log(form)
   let url = `${common_next_function_url_template}${pageName}.php`;
   fetch(url, { body: form, method: "POST" })
     .then((response) => response.text())
     .then((text) => {
-      let mainsampleBox = document.getElementById("mainsampleDiv");
 
       let samplebox = document.getElementById(`${pageName}`);
       samplebox.innerHTML = text;
     });
-}
+ }
 
 function playmusic(x) {
   let playmusicicon = document.getElementById("playmusic" + x);
   let pausemusicicon = document.getElementById("pausemusic" + x);
   const album = document.getElementById("beatPackDiv" + x);
- // album.style.transform = "scale(1.05)";
+  // album.style.transform = "scale(1.05)";
   let playAlbumClassDiv = document.querySelectorAll(".audiopreviewImage");
 
   playAlbumClassDiv.forEach((el) => {
@@ -229,13 +221,13 @@ function playmusic(x) {
     }
   });
 
- // album.style.backgroundColor = "rgb(30, 26, 26)";
- // album.style.transition =
-    //"background-color 0.5s ease-in-out,transform 0.5s ease-in-out";
-    let music = document.getElementById("audio" + x);
-    pausemusicicon.classList.toggle("d-none");
-    playmusicicon.classList.toggle("d-none");
-    music.play();
+  // album.style.backgroundColor = "rgb(30, 26, 26)";
+  // album.style.transition =
+  //"background-color 0.5s ease-in-out,transform 0.5s ease-in-out";
+  let music = document.getElementById("audio" + x);
+  pausemusicicon.classList.toggle("d-none");
+  playmusicicon.classList.toggle("d-none");
+  music.play();
 }
 
 function pausemusic(x) {
@@ -245,9 +237,9 @@ function pausemusic(x) {
 
   //album.style.transform = "scale(1.00)";
 
-//  album.style.backgroundColor = "rgb(0, 0, 0)";
-//  album.style.transition =
- //   "background-color 0.7s ease-in-out,transform 0.5s ease-in-out";
+  //  album.style.backgroundColor = "rgb(0, 0, 0)";
+  //  album.style.transition =
+  //   "background-color 0.7s ease-in-out,transform 0.5s ease-in-out";
 
   let music = document.getElementById("audio" + x);
   pausemusicicon.classList.toggle("d-none");
@@ -276,7 +268,7 @@ searchButton.addEventListener("click", () => {
     });
 });
 
-function upDateCartBagGui(arrayName){
+function upDateCartBagGui(arrayName) {
   let cartRowCount = Object.keys(arrayName).length;
   let cartBag = document.getElementById("cartItems");
   cartBag.innerHTML = cartRowCount;
@@ -286,7 +278,7 @@ upDateCartBagGui(getCart());
 function getCart() {
   let getItemCart = globalThis.localStorage.getItem("cart");
   let check = true;
-  if(getItemCart == undefined || getItemCart == null || getItemCart == "[]"){
+  if (getItemCart == undefined || getItemCart == null || getItemCart == "[]") {
     console.log("yo");
     console.log(getItemCart);
     globalThis.localStorage.clear();
