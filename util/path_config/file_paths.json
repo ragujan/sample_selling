@@ -11,28 +11,38 @@
         {
             "path_name": "site_header_script",
             "actual_path": "/sampleSelling-master/site_header/header.js"
-        }
-        ,{
-            "path_name":"page_buttons",
-            "actual_path" : "/sampleSelling-master/product_view/utils/page_buttons.php"
         },
         {
-            "path_name":"db",
-            "actual_path":"/sampleSelling-master/db_connection/db.php"
+            "path_name": "page_buttons",
+            "actual_path": "/sampleSelling-master/product_view/utils/page_buttons.php"
         },
         {
-            "path_name":"file_handler",
-            "actual_path":"/sampleSelling-master/util/file_handler.php"
-        },{
-            "path_name":"sample_display_page",
-            "actual_path":"/sampleSelling-master/product_view/audio_samples/sample_display.php"
+            "path_name": "db",
+            "actual_path": "/sampleSelling-master/db_connection/db.php"
         },
         {
-            "path_name":"midi_display_page",
-            "actual_path":"/sampleSelling-master/product_view/midi_samples/sample_display.php"
-        },{
-            "path_name":"home_page",
-            "actual_path":"/sampleSelling-master/home/index.php"
+            "path_name": "file_handler",
+            "actual_path": "/sampleSelling-master/util/file_handler.php"
+        },
+        {
+            "path_name": "sample_display_page",
+            "actual_path": "/sampleSelling-master/product_view/audio_samples/sample_display.php"
+        },
+        {
+            "path_name": "sample_display_page_shortend",
+            "actual_path": "/sampleSelling-master/sample_audio"
+        },
+        {
+            "path_name": "sample_display_page_script",
+            "actual_path": "/sampleSelling-master/product_view/audio_samples/script.js"
+        },
+        {
+            "path_name": "midi_display_page",
+            "actual_path": "/sampleSelling-master/product_view/midi_files/sample_display.php"
+        },
+        {
+            "path_name": "home_page",
+            "actual_path": "/sampleSelling-master/home/index.php"
         }
     ]
 }
