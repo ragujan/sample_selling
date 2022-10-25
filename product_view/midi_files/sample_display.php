@@ -5,6 +5,7 @@ require $ROOT."/sampleSelling-master/util/path_config/global_link_files.php";
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $resouces_path = GlobalLinkFiles::getDirectoryPath("resources");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
+$script_path = GlobalLinkFiles::getRelativePath("midi_sample_display_page_script");
 require_once "../query/Sample_query_functions.php";
 ?>
 
@@ -135,7 +136,7 @@ require_once "../query/Sample_query_functions.php";
         </div>
     </div>
     <div id="newDivId"></div>
-    <script src="midi_display.js"></script>
+    <script src="<?=$script_path?>"></script>
    
 </body>
 

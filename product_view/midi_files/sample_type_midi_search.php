@@ -13,7 +13,7 @@ $exactResultsPerPage = 8;
 $A = $_POST["PG"];
 $subsampletypenumber = $_POST["searchText"];
 $jsMethodName = "nextfunctionsearch";
-$pageName = "sampleTypeMidi";
+$pageName = str_replace( array( '.php' ), '', basename(__FILE__));
 if ($validation == 1) {
   require "../PDOPHP/Sample_query_functions.php";
  
