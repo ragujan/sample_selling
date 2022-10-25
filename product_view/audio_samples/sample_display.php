@@ -84,7 +84,7 @@ $sample_display_drums_process_div = "sample_display_drums_process";
                                                             <span class="fs-5 fw-bolder">Filter By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select onchange="showsubsamples()"  class="selectTAG py-3 px-1" id="sub_sample_melody_id">
+                                                            <select onchange="show_sub_melody_samples()"  class="selectTAG py-3 px-1" id="sub_sample_melody_id">
                                                                 <?php
                                                               
                                                                 $query_object = new Sample_query_functions();
@@ -137,9 +137,10 @@ $sample_display_drums_process_div = "sample_display_drums_process";
                                                             <span class="fs-5 fw-bolder">Filter33 By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select  onchange="showsubsamples();" class="selectTAG py-2 px-1" id="subSampleDrumID">
+                                                            <select onchange="show_sub_drum_samples()"  class="selectTAG py-3 px-1" id="sub_sample_drum_id">
                                                                 <?php
-         
+                                                              
+                                                                $query_object = new Sample_query_functions();
                                                                 $subsamples = $query_object->listSubSampleTypes("drums");
                                                                 $arrsize = count($subsamples);
                                                                 if (!$subsamples > 0) {
