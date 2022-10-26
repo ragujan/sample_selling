@@ -1,3 +1,5 @@
+// import { ServerSide } from "/sampleSelling-master/util/server_side.js";
+
 let nlinks = document.querySelectorAll(".navlinks");
 let upBTN = document.getElementById("uploadbutton");
 let upBTN2 = document.getElementById("uploadbutton2");
@@ -61,12 +63,17 @@ function show_sub_melody_samples() {
   form.append("current_page_number", val);
 
   let url = sample_display_melodies_process_url;
-  fetch(url, { body: form, method: "POST" })
-    .then((response) => response.text())
-    .then((text) => {
-      let samplebox = document.getElementById(melody_sample_div);
-      samplebox.innerHTML = text;
-    });
+  
+  let server_side = new ServerSide();
+  server_side.method = "POST";
+  server_side.form = form;
+  server_side.url = url;
+  server_side.container = document.getElementById(melody_sample_div)
+  function doThis(){
+    server_side.container.innerHTML = server_side.text;
+  } 
+  server_side.sendPostRequest(doThis);  
+
 }
 
 function show_sub_drum_samples() {

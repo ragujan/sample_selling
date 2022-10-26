@@ -51,6 +51,10 @@
         {
             "path_name": "home_page",
             "actual_path": "/sampleSelling-master/home/index.php"
+        },
+        {
+            "path_name": "server_side",
+            "actual_path": "/sampleSelling-master/util/server_side.js"
         }
     ]
 }
