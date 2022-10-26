@@ -1,12 +1,12 @@
 <?php
 session_start();
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
-require_once $ROOT."/sampleSelling-master/util/path_config/global_link_files.php";
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $resouces_path = GlobalLinkFiles::getDirectoryPath("resources");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $sample_display_script_page = GlobalLinkFiles::getRelativePath("audio_sample_display_page_script");
-
+$server_side_script = GlobalLinkFiles::getRelativePath("server_side");
 require_once "../query/Sample_query_functions.php";
 $sample_display_melodies_process_div = "sample_display_melodies_process";
 $sample_display_drums_process_div = "sample_display_drums_process";
@@ -19,11 +19,11 @@ $sample_display_drums_process_div = "sample_display_drums_process";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?=$style_path ?>bootstrap.css">
+    <link rel="stylesheet" href="<?= $style_path ?>bootstrap.css">
 
 
-    <link rel="stylesheet" href="<?=$style_path ?>showsamples.css">
-    <link rel="stylesheet" href="<?=$style_path?>navbar.css">
+    <link rel="stylesheet" href="<?= $style_path ?>showsamples.css">
+    <link rel="stylesheet" href="<?= $style_path ?>navbar.css">
 
     <title>BeatSample</title>
 </head>
@@ -40,7 +40,7 @@ $sample_display_drums_process_div = "sample_display_drums_process";
             <div class="row">
                 <div class="maindiv col-12">
                     <div class="row">
-    
+
                         <?php
                         require_once $site_header;
                         ?>
@@ -51,7 +51,44 @@ $sample_display_drums_process_div = "sample_display_drums_process";
                             <div class="row">
                                 <div class="col-12 pt-4">
                                     <div class="row">
-                                        <div class="col-lg-7 col-5 text-start   text-lg-end">
+                                        <div class="col-4 text-start">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-2 col-3  text-start">
+                                                    <span class="fs-5 fw-bolder">Filter By</span>
+                                                </div>
+                                                <div class="col-lg-6 col-md-10 col-9 text-start">
+                                                    <select onchange="show_sub_melody_samples()" class="selectTAG py-2 px-1" id="sub_sample_melody_id">
+                                                        <?php
+
+                                                        $query_object = new Sample_query_functions();
+                                                        $subsamples = $query_object->listSubSampleTypes("melodies");
+                                                        $arrsize = count($subsamples);
+                                                        if (!$subsamples > 0) {
+                                                        ?>
+                                                            <option class="text-white"> NOPE</option>
+                                                        <?php
+
+                                                        } else {
+                                                        ?>
+                                                            <option value="ALL" class="text-white"> All</option>
+                                                            <?php
+                                                            for ($i = 0; $i < $arrsize; $i++) {
+                                                                $sampleName = $subsamples[$i]['subsampleName'];
+                                                                $sampleID = $subsamples[$i]['subsampleID'];
+
+                                                            ?>
+                                                                <option value="<?php echo $sampleID; ?>" class="text-white"> <?php echo $sampleName; ?></option>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-lg-4 col-5 text-start   text-lg-center">
                                             <h1 class="sampleheading text-white">Samples & Drums</h1>
                                         </div>
                                         <div class="col-lg-4 col-7 text-start text-lg-end">
@@ -61,7 +98,7 @@ $sample_display_drums_process_div = "sample_display_drums_process";
                                                     <input id="searchBox" class="text-dark px-2 py-1 " type="text">
                                                 </div>
                                                 <div class="col-lg-2 col-5 text-lg-start text-center">
-                                                    <img id="searchButton" class="searchIconImage" src="<?=$resouces_path?>icons/search.png" alt="" srcset="">
+                                                    <img id="searchButton" class="searchIconImage" src="<?= $resouces_path ?>icons/search.png" alt="" srcset="">
                                                 </div>
                                             </div>
 
@@ -73,53 +110,14 @@ $sample_display_drums_process_div = "sample_display_drums_process";
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
+
                                                 <div class="col-12">
                                                     <hr class="HRTAG ">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 ">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="row">
-                                                        <div class="col-lg-1 col-md-2 col-3 py-2 text-center">
-                                                            <span class="fs-5 fw-bolder">Filter By</span>
-                                                        </div>
-                                                        <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select onchange="show_sub_melody_samples()"  class="selectTAG py-3 px-1" id="sub_sample_melody_id">
-                                                                <?php
-                                                              
-                                                                $query_object = new Sample_query_functions();
-                                                                $subsamples = $query_object->listSubSampleTypes("melodies");
-                                                                $arrsize = count($subsamples);
-                                                                if (!$subsamples > 0) {
-                                                                ?>
-                                                                    <option class="text-white"> NOPE</option>
-                                                                <?php
 
-                                                                } else {
-                                                                ?>
-                                                                    <option value="ALL" class="text-white"> All</option>
-                                                                    <?php
-                                                                    for ($i = 0; $i < $arrsize; $i++) {
-                                                                        $sampleName = $subsamples[$i]['subsampleName'];
-                                                                        $sampleID = $subsamples[$i]['subsampleID'];
-
-                                                                    ?>
-                                                                        <option value="<?php echo $sampleID; ?>" class="text-white"> <?php echo $sampleName; ?></option>
-                                                                <?php
-                                                                    }
-                                                                }
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="<?=$sample_display_melodies_process_div?>" style="padding-left: 2.5%;padding-right: 2.5%;" class="col-12 pb-5 pt-3">
+                                        <div id="<?= $sample_display_melodies_process_div ?>" style="padding-left: 2.5%;padding-right: 2.5%;" class="col-12 pb-5 pt-3">
 
                                         </div>
 
@@ -131,17 +129,17 @@ $sample_display_drums_process_div = "sample_display_drums_process";
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 ">
+                                        <div class="col-12  ">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="row">
-                                                        <div class="col-lg-1 col-md-2 col-3 py-2 text-center">
+                                                        <div class="col-lg-1 col-md-2 col-3  text-center">
                                                             <span class="fs-5 fw-bolder">Filter33 By</span>
                                                         </div>
                                                         <div class="col-lg-11 col-md-10 col-9 text-start">
-                                                            <select onchange="show_sub_drum_samples()"  class="selectTAG py-3 px-1" id="sub_sample_drum_id">
+                                                            <select onchange="show_sub_drum_samples()" class="selectTAG py-3 px-1" id="sub_sample_drum_id">
                                                                 <?php
-                                                              
+
                                                                 $query_object = new Sample_query_functions();
                                                                 $subsamples = $query_object->listSubSampleTypes("drums");
                                                                 $arrsize = count($subsamples);
@@ -172,7 +170,7 @@ $sample_display_drums_process_div = "sample_display_drums_process";
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 " id="<?=$sample_display_drums_process_div?>">
+                                        <div class="col-12 " id="<?= $sample_display_drums_process_div ?>">
 
                                         </div>
 
@@ -190,8 +188,9 @@ $sample_display_drums_process_div = "sample_display_drums_process";
         </div>
     </div>
     <div id="newDivId"></div>
-    <script src="<?= $sample_display_script_page?>"></script>
- 
+    <script src="<?= $server_side_script ?>"></script>
+    <script src="<?= $sample_display_script_page ?>"></script>
+
 
 </body>
 

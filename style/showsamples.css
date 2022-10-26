@@ -316,7 +316,9 @@ body {
         margin-top: 00%;
     }
 }
-
+.navbar_navigate_color{
+    color: darkgray;
+}
 .deshead {
     font-size: 5vw;
     font-weight: bolder;
