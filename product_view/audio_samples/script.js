@@ -63,7 +63,7 @@ function show_sub_melody_samples() {
   form.append("current_page_number", val);
 
   let url = sample_display_melodies_process_url;
-  
+
   let server_side = new ServerSide();
   server_side.method = "POST";
   server_side.form = form;
@@ -200,7 +200,11 @@ function pausemusic(x) {
   playmusicicon.classList.toggle("d-none");
   music.pause();
 }
-
+function audioEnded(audio){
+  
+  let audio_id = audio.split("audio")[1];
+  pausemusic(audio_id);
+}
 function viewbuy(x) {
   window.location = "../viewsingleproduct/viewsingleproduct.php?X=" + x;
 }

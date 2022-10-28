@@ -12,7 +12,9 @@ echo $pageName;
     <title>Document</title>
 </head>
 <body>
+    <div id="mydiv"></div>
     
-
+<script  src="server_side.js"></script>
+<script src="next.js"></script>
 </body>
 </html>

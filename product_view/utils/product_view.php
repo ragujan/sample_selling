@@ -44,8 +44,8 @@ class ProductView
 
                                     <div id="beatPackDiv<?php echo $inputarrayID; ?>" class=" col-10 beatpackdiv  py-lg-0 py-md-0 py-0 offset-1">
                                         <div class="row">
-                                            <div class="col-12   audiopreviewdiv px-0 pt-0 pb-1 ">
-                                                <audio id="audio<?php echo $inputarrayID ?>" class="audiopreviewImage">
+                                            <div class="col-12   audiopreviewdiv px-0 pt-3 pb-1 ">
+                                                <audio onended="audioEnded('audio'+<?=$inputarrayID?>);" id="audio<?php echo $inputarrayID ?>" class="audiopreviewImage">
                                                     <source src="<?php echo $audioPath; ?>" type="audio/ogg">
                                                     <source src="<?php echo $audioPath; ?>" type="audio/mpeg">
                                                     Your browser does not support the audio element.
@@ -125,7 +125,7 @@ class ProductView
 
                                     <div id="beatPackDiv<?php echo $inputarrayID; ?>" class=" col-10 beatpackdiv  py-lg-0 py-md-0 py-0 offset-1">
                                         <div class="row">
-                                            <div class="col-12   audiopreviewdiv px-0 pt-0 pb-1 ">
+                                            <div class="col-12   audiopreviewdiv px-0 pt-3 pb-1 ">
 
                                                 <img src="<?php echo $imagePath ?>" class="beatPACKIMAGE " alt="">
 
@@ -170,6 +170,7 @@ class ProductView
 <?php
         }
     }
+
 }
 
 ?>
