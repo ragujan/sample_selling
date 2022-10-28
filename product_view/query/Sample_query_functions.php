@@ -240,7 +240,7 @@ class Sample_query_functions extends DB
     }
 
 
-
+    //Search section 
 
     public function searchByText($searchtext, $PG)
     {
@@ -316,6 +316,82 @@ class Sample_query_functions extends DB
             return $totalPages;
         }
     }
+    public function searchByTextMidi($searchtext, $PG)
+    {
+        if ($searchtext == "") {
+            $cal = $this->midi_sample_query;
+            $statement1 = $this->connect()->prepare($cal);
+            $statement1->execute();
+        } else {
+            $cal = $this->midi_sample_query . " " . "WHERE samples.Sample_Name LIKE ? OR samples.SampleDescription LIKE ? ;";
+            $propertext = '%' . $searchtext . '%';
+            $statement1 = $this->connect()->prepare($cal);
+            $statement1->execute([$propertext, $propertext]);
+        }
+
+
+
+        $this->totalcount = count($statement1->fetchAll());
+
+        if ($this->totalcount == 0) {
+            $this->fetcharray = array("Nothing");
+            return $this->fetcharray;
+        } else {
+            $totalPages = ceil($this->totalcount / $this->exactResultsPerPage);
+
+            if ($PG >= ($totalPages - 1) * $this->exactResultsPerPage) {
+                $PG = ($totalPages - 1) * $this->exactResultsPerPage;
+            } else if ($PG <= 0) {
+                $PG = 0;
+            }
+            if ($searchtext == "") {
+                $sql = $this->midi_sample_query . " " . "LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG ";
+                $statement2 = $this->connect()->prepare($sql);
+                $statement2->execute();
+            } else {
+
+
+                $sql = $this->midi_sample_query . " " . "WHERE samples.Sample_Name LIKE ? OR samples.SampleDescription LIKE ? LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG ";
+                $propertext = '%' . $searchtext . '%';
+
+                $statement2 = $this->connect()->prepare($sql);
+                $statement2->execute([$propertext, $propertext]);
+            }
+
+
+            return $statement2->fetchAll();
+        }
+    }
+
+    public function searchByTextPagesMidi($searchtext)
+    {
+        if ($searchtext == "") {
+            $cal = $this->midi_sample_query;
+            $statement1 = $this->connect()->prepare($cal);
+            $statement1->execute();
+        } else {
+            $cal = "SELECT * FROM samples WHERE samples.Sample_Name LIKE ? OR samples.SampleDescription LIKE ?;";
+            $propertext = '%' . $searchtext . '%';
+            $statement1 = $this->connect()->prepare($cal);
+            $statement1->execute([$propertext, $propertext]);
+        }
+
+
+
+
+
+        $this->totalcount = count($statement1->fetchAll());
+        if ($this->totalcount == 0) {
+            $this->fetcharray = array("Nothing");
+            return 0;
+        } else {
+            $totalPages = (ceil($this->totalcount / $this->exactResultsPerPage) - 1);
+
+            return $totalPages;
+        }
+    }
+
+
     public function returnTotalCount()
     {
         return $this->totalcount;

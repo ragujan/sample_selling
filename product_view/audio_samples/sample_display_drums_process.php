@@ -3,7 +3,7 @@ require "../query/Sample_query_functions.php";
 require "../utils/pagination.php";
 require "../utils/product_view.php";
 require "../utils/page_buttons.php";
-// require "../PDOPHP/Validations.php";
+require "../utils/Validations.php";
 $query_object = new Sample_query_functions();
 $pageName = str_replace( array( '.php' ), '', basename(__FILE__));
 
@@ -17,18 +17,22 @@ $current_page_number ;
 
 $total_pages;
 
-if(isset($_POST["current_page_number"]) && isset($_POST["sub_sample_id"])){
+if (isset($_POST["current_page_number"]) && isset($_POST["sub_sample_id"])) {
     // echo "page number and sub sample id is received";
+    if (!Validations::validateTypeIds($_POST["sub_sample_id"])) return;
+    if (!Validations::validatePageNumbers($_POST["current_page_number"])) return;
 }
 
-if(isset($_POST["current_page_number"])){
+if (isset($_POST["current_page_number"])) {
     // echo "Page number is received";
+    if (!Validations::validatePageNumbers($_POST["current_page_number"])) return;
 }
-if(isset($_POST["sub_sample_id"])){
+if (isset($_POST["sub_sample_id"])) {
     // echo "sub sample id is received";
+    if (!Validations::validateTypeIds($_POST["sub_sample_id"])) return;
 }
-if(!isset($_POST["current_page_number"]) && !isset($_POST["sub_sample_id"])){
-   // echo "neither page number or sub sample id is received";
+if (!isset($_POST["current_page_number"]) && !isset($_POST["sub_sample_id"])) {
+    // echo "neither page number or sub sample id is received";
 }
 
 if (isset($_POST["current_page_number"]) && isset($_POST["sub_sample_id"])) {
