@@ -7,9 +7,8 @@ $resouces_path = GlobalLinkFiles::getDirectoryPath("resources");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $script_path = GlobalLinkFiles::getRelativePath("midi_sample_display_page_script");
 $secondary_navbar = GlobalLinkFiles::getRelativePath("secondary_navbar_display");
-require_once "../utils/secondary_navbar.php";
 require_once "../query/Sample_query_functions.php";
-
+require_once "../utils/secondary_navbar.php";
 $page_name_title = "midi_kits";
 $div_id = "sub_sample_id_midies";
 $method_name = "showsubsamples()";

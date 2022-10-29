@@ -13,13 +13,13 @@ const load_sub_midi_url = "../process/sub_midies.php";
 sampletypeselect.addEventListener('change', () => {
     let subsample = document.getElementById('mtDIV');
     subsample.className = "rag";
- 
-  
+
+
 
     fetch(load_sub_midi_url, { method: "GET" })
         .then(response => response.text())
         .then(text => {
-            console.log(text) 
+            console.log(text)
             subsample.innerHTML = text;
         })
 
@@ -27,11 +27,7 @@ sampletypeselect.addEventListener('change', () => {
 
 
 
-function uploadProcess() {
 
-
-
-}
 
 upBTN.addEventListener('click', function () {
     let samplePrice = document.getElementById('samplePrice');
@@ -49,16 +45,33 @@ upBTN.addEventListener('click', function () {
     form_2.append('SampleName', sampleName.value);
     form_2.append('SampleType', sampleType.value);
     form_2.append('SampleFile', sampleFile.files[0]);
- 
+
     form_2.append('SampleImage', sampleImage.files[0]);
     form_2.append('SampleSubMelody', submelodytype.value);
     form_2.append('SampleDescription', sampledescription.value);
 
 
-    let url = "";
     fetch(upload_midi_process_url, { body: form_2, method: "POST" })
         .then(response => response.text())
-        .then((text) => { document.getElementById("showmessage").innerHTML = text; })
+        .then((text) => { 
+            if (text === "Success") {
+                samplePrice.value = "";
+                sampleName.value = "";
+                sampledescription.value = "";
+                sampleType.value = "Select Midi Type";
+                document.getElementById("mtDIV").innerHTML = "";
+                sampleFile.value = "";
+                sampleImage.value = "";
+             
+                window.location.reload();
+
+            } else {
+
+                document.getElementById("showmessage").innerHTML = text;
+            }
+        
+        
+        })
 
 
 

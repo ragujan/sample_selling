@@ -1,3 +1,6 @@
 <?php
-echo $_POST["HEY"];
+
+require "template.php";
+echo "<br>";
+echo $abc;
 ?>
