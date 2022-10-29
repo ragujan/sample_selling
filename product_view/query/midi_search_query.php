@@ -140,7 +140,7 @@ class MidiSearchQueries extends DB
 
                 $sql = $this->midi_sample_query . " " . "WHERE sampletype.sampleTypeID = '" . $this->sample_type_id . "' AND (samples.Sample_Name LIKE ? OR samples.SampleDescription LIKE ?) LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG ";
                 $propertext = '%' . $searchtext . '%';
-                echo  "sql is  ".$sql;
+                
                 $statement2 = $this->connect()->prepare($sql);
                 $statement2->execute([$propertext, $propertext]);
             }

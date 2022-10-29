@@ -53,6 +53,18 @@
             "actual_path": "/sampleSelling-master/home/index.php"
         },
         {
+            "path_name": "home_page_shortend",
+            "actual_path": "/sampleSelling-master/homepage"
+        },
+        {
+            "path_name": "home_page_script",
+            "actual_path": "/sampleSelling-master/home/home.js"
+        },
+        {
+          "path_name":"secondary_navbar_display",
+          "actual_path": "/sampleSelling-master/product_view/utils/secondary_navbar.php"
+        },
+        {
             "path_name": "server_side",
             "actual_path": "/sampleSelling-master/util/server_side.js"
         }

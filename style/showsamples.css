@@ -560,7 +560,7 @@ body {
     }
 
     #searchBox {
-        width: 150px;
+        width: 250px;
         transition: width 0.5s ease-out;
     }
 

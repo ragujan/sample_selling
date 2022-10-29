@@ -91,7 +91,7 @@ body {
 }
 
 .beatPACKIMAGE {
-    width: 300px;
+    width: 500px;
     max-width: 100%;
     object-fit: contain;
 }
@@ -380,9 +380,7 @@ body {
 }
 
 @media(max-width:768px) {
-    .mostsold {
-        width: 150px;
-    }
+ 
     .introheader {
         font-size: 6vw;
     }
@@ -418,7 +416,7 @@ body {
         max-width: 100%;
     }
     .mostsold {
-        width: 100px;
+        width: 400px;
     }
     .introheader {
         font-size: 7vw;

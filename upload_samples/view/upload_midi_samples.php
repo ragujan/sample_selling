@@ -1,6 +1,6 @@
 <?php
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
-require_once $ROOT."/sampleSelling-master/util/path_config/global_link_files.php";
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
 ?>
 
@@ -11,32 +11,33 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="<?=$style_path?>bootstrap.css"> 
-
+    <link rel="stylesheet" href="<?= $style_path ?>bootstrap.css">
+    <link rel="stylesheet" href="<?=$style_path ?>common_theme_related.css">
+    <link rel="stylesheet" href="<?= $style_path ?>upload.css">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"> -->
 
     <title>Upload_Samples</title>
 </head>
 
 <body>
-    <span class="text-dark">Midi name</span>
+    <span class="">Midi name</span>
     <input type="text" id="sampleName">
-    <span class="text-dark">sample price</span>
+    <span class="">sample price</span>
     <input type="text" id="samplePrice">
     <br>
-    <span class="text-dark">sample type</span>
+    <span class="">sample type</span>
     <select name="" id="sampleType">
-        <option value="null">"   " </option>
+        <option value="null">" " </option>
 
         <?php
         require "../query/sample_queries.php";
         $object = new SampleQueries();
         $sampleDB = $object->showMidiTypes();
-    
+
         $typenum_rows = count($sampleDB);
         if ($typenum_rows > 0) {
             for ($i = 0; $i < $typenum_rows; $i++) {
-                $typenamerow =$sampleDB;
+                $typenamerow = $sampleDB;
                 $typename = $typenamerow[$i]["typeName"];
                 $typenameID = $typenamerow[$i]["sampleTypeID"];
         ?>
@@ -56,22 +57,22 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
 
     </div>
 
-     <div>
-         <textarea name="" id="sampleDescription" cols="30" rows="10"></textarea>
-     </div>
+    <div>
+        <textarea name="" id="sampleDescription" cols="30" rows="10"></textarea>
+    </div>
 
     <br>
-    <span class="text-dark">File</span>
+    <span class="">File</span>
     <input type="file" id="sampleFile"> <button id="uploadFileOnly">UploadZipFile</button>
     <br>
 
-    <span class="text-dark">Image</span>
+    <span class="">Image</span>
     <input type="file" id="sampleImage"> <button id="uploadImageOnly">UploadImage</button>
     <br>
-    <button class="text-dark" id="uploadbutton">Upload</button>
+    <button class="" id="uploadbutton">Upload</button>
     <div id="showmessage">
 
-</div>
+    </div>
     <script src="upload_midi_sample.js"></script>
 </body>
 

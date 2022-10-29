@@ -8,7 +8,7 @@ $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 $midi_display_page = GlobalLinkFiles::getRelativePath("midi_sample_display_page");
 $sample_audio_display_page = GlobalLinkFiles::getRelativePath("audio_sample_display_page_shortend");
 $sample_midi_display_page = GlobalLinkFiles::getRelativePath("midi_sample_display_page_shortend");
-$home_page = GlobalLinkFiles::getRelativePath("home_page");
+$home_page_shortend = GlobalLinkFiles::getRelativePath("home_page_shortend");
 if (!isset($_SESSION["userEmail"])) {
 ?>
     <div style="height: 70px;" class="col-12   navbarMainDivHolder ">
@@ -19,7 +19,7 @@ if (!isset($_SESSION["userEmail"])) {
 
             <div class="py-0 col-lg-9 d-none d-lg-block col-md-9 col-8 offset-0  my-auto">
                 <div class="row">
-                    <div class="col-3 text-center"><a href="<?=$home_page?>" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
+                    <div class="col-3 text-center"><a href="<?=$home_page_shortend?>" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
                     <div class="col-3 text-center"><a href="<?=$sample_audio_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
                     <div class="col-3 text-center"><a href="<?=$sample_midi_display_page?>" class="  text-white navLinkTexts  text-decoration-none">midi packs</a></div>
                     <div class="col-3 text-center"><a href="" class="  text-white navLinkTexts  text-decoration-none">contact & services</a></div>
@@ -47,9 +47,9 @@ if (!isset($_SESSION["userEmail"])) {
         <div class="row">
             <div class="py-1 d-block d-lg-none  col-12 offset-0  my-auto">
                 <div class="row">
-                    <div class="col-10 offset-1 text-center py-3"><a href="../home/home.php" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
-                    <div class="col-10 offset-1 text-center py-3"><a href="../products/audio_samples/sampleselling.php" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
-                    <div class="col-10 offset-1 text-center py-3"><a href="../midiFiles/sample.php" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
+                    <div class="col-10 offset-1 text-center py-3"><a href="<?=$home_page_shortend?>" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
+                    <div class="col-10 offset-1 text-center py-3"><a href="<?=$sample_audio_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
+                    <div class="col-10 offset-1 text-center py-3"><a href="<?=$sample_midi_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
                     <div class="col-10 offset-1 text-center py-3"><a href="" class="  text-white navLinkTexts  text-decoration-none">Contact & Services</a></div>
                 </div>
             </div>
@@ -66,9 +66,9 @@ if (!isset($_SESSION["userEmail"])) {
 
             <div class="py-0 col-lg-9 d-none d-lg-block col-md-9 col-8 offset-0  my-auto">
                 <div class="row">
-                    <div class="col-3 text-center"><a href="../home/home.php" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
-                    <div class="col-3 text-center"><a href="../showsamples/sampleselling.php" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
-                    <div class="col-3 text-center"><a href="../midiFiles/sample.php" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
+                    <div class="col-3 text-center"><a href="<?=$home_page_shortend?>" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
+                    <div class="col-3 text-center"><a href="<?=$sample_audio_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
+                    <div class="col-3 text-center"><a href="<?=$sample_midi_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
                     <div class="col-3 text-center"><a href="" class="  text-white navLinkTexts  text-decoration-none">Contact & Services</a></div>
                 </div>
             </div>
@@ -115,9 +115,9 @@ if (!isset($_SESSION["userEmail"])) {
         <div class="row">
             <div class="py-1 d-block d-lg-none  col-12 offset-0  my-auto">
                 <div class="row">
-                    <div class="col-10 offset-1 text-center py-3"><a href="../home/home.php" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
-                    <div class="col-10 offset-1 text-center py-3"><a href="../showsamples/sampleselling.php" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
-                    <div class="col-10 offset-1 text-center py-3"><a href="../midiFiles/sample.php" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
+                    <div class="col-10 offset-1 text-center py-3"><a href="<?=$home_page_shortend?>" class="   text-white navLinkTexts  text-decoration-none">Home</a></div>
+                    <div class="col-10 offset-1 text-center py-3"><a href="<?=$sample_audio_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Samples & Drum Kits</a></div>
+                    <div class="col-10 offset-1 text-center py-3"><a href="<?=$sample_midi_display_page?>" class="  text-white navLinkTexts  text-decoration-none">Midi Packs</a></div>
                     <div class="col-10 offset-1 text-center py-3"><a href="" class="  text-white navLinkTexts  text-decoration-none">Contact & Services</a></div>
                 </div>
             </div>
