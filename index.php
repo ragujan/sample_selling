@@ -13,8 +13,18 @@ echo $pageName;
 </head>
 <body>
     <div id="mydiv"></div>
-    
-<script  src="server_side.js"></script>
-<script src="next.js"></script>
+    <form action="backend.php" method="post">
+        <input type="text" name="HEY" value="RAGJN">
+        <button type="submit">CLIKC</button>
+    </form> 
+    <select id="abc">
+      <option value="abc">abc</option> 
+      <option value="rag">rag</option>
+    </select>
+    <button onclick="clickFunction();">click</button>
+
+    <input id="myfile" type="file" >
+
+<script src="script.js"></script>
 </body>
 </html>

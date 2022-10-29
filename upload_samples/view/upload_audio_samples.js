@@ -33,7 +33,7 @@ sampletypeselect.addEventListener('change', () => {
     fetch(loc, { method: "GET" })
         .then(response => response.text())
         .then(text => {
-            alert(loc);
+
             subsample.innerHTML = text;
         })
 
@@ -41,11 +41,7 @@ sampletypeselect.addEventListener('change', () => {
 
 
 
-function uploadProcess() {
 
-
-
-}
 
 upBTN.addEventListener('click', function () {
     let samplePrice = document.getElementById('samplePrice');
@@ -73,7 +69,25 @@ upBTN.addEventListener('click', function () {
     let url = "";
     fetch(upload_audio_process_url, { body: form_2, method: "POST" })
         .then(response => response.text())
-        .then((text) => { document.getElementById("showmessage").innerHTML = text; })
+        .then((text) => {
+            if (text === "Success") {
+                samplePrice.value = "";
+                sampleName.value = "";
+                sampledescription.value = "";
+                sampleType.value = "Select Sample";
+                document.getElementById("mtDIV").innerHTML = "";
+                sampleFile.value = "";
+                sampleImage.value = "";
+                sampleAudio.value = "";
+                window.location.reload();
+
+            } else {
+
+                document.getElementById("showmessage").innerHTML = text;
+            }
+        })
+
+
 
 
 
