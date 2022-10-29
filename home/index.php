@@ -5,7 +5,8 @@ require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.p
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $query_path = GlobalLinkFiles::getFilePath("sample_queries");
-
+$resource_path = GlobalLinkFiles::getDirectoryPath("resources");
+$home_page_script = GlobalLinkFiles::getRelativePath("home_page_script");
 // include_once $query_path;
 ?>
 <!DOCTYPE html>
@@ -16,7 +17,7 @@ $query_path = GlobalLinkFiles::getFilePath("sample_queries");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?=$style_path?>bootstrap.css">
-    <link rel="stylesheet" href="../home/home.css">
+    <link rel="stylesheet" href="<?=$style_path?>home.css">
     <link rel="stylesheet" href="<?=$style_path?>navbar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 
@@ -44,7 +45,7 @@ $query_path = GlobalLinkFiles::getFilePath("sample_queries");
                         <div class="col-12   homevideodiv">
                             <div class="back1">
                                 <video id="background-video" class="homevideo" autoplay loop muted>
-                                    <source src="../resources/video/home.mp4" type="video/mp4">
+                                    <source src="<?=$resource_path?>video/home.mp4" type="video/mp4">
                                 </video>
                             </div>
 
@@ -58,7 +59,7 @@ $query_path = GlobalLinkFiles::getFilePath("sample_queries");
                                                 <p class=" des  text-white-50">Get high quality samples from RAG</p>
                                             </div>
                                             <div class="col-12 text-center ">
-                                                <img src="../RagImages/RAG JNTransparent.png" class="ragnormal" alt="">
+                                                <img src="<?=$resource_path?>icon_images/logo_transparent.png" class="ragnormal" alt="">
                                             </div>
                                         </div>
 
@@ -162,19 +163,19 @@ $query_path = GlobalLinkFiles::getFilePath("sample_queries");
                         <div class="col-6 offset-3 pt-2 pb-5">
                             <div class="row">
                                 <div class="col text-center">
-                                    <img src="../resources/payment_method_images/1.png" class="paymentmethods" alt="">
+                                    <img src="<?=$resource_path?>payment_method_images/1.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="../resources/payment_method_images/2.png" class="paymentmethods" alt="">
+                                    <img src="<?=$resource_path?>payment_method_images/2.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="../resources/payment_method_images/3.png" class="paymentmethods" alt="">
+                                    <img src="<?=$resource_path?>payment_method_images/3.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="../resources/payment_method_images/4.png" class="paymentmethods" alt="">
+                                    <img src="<?=$resource_path?>payment_method_images/4.png" class="paymentmethods" alt="">
                                 </div>
                                 <div class="col text-center">
-                                    <img src="../resources/payment_method_images/5.png" class="paymentmethods" alt="">
+                                    <img src="<?=$resource_path?>payment_method_images/5.png" class="paymentmethods" alt="">
                                 </div>
                             </div>
                         </div>
@@ -186,7 +187,7 @@ $query_path = GlobalLinkFiles::getFilePath("sample_queries");
 
         </div>
     </div>
-    <script src="home.js"></script>
+    <script src="<?=$home_page_script?>"></script>
 </body>
 
 </html>

@@ -34,29 +34,27 @@ GROUP BY sampleID  ORDER BY qty  DESC LIMIT 3 ";
 
 
 ?>
-                <div class="col-lg-4 py-3   col-4 col-md-4 ">
+                <div class="py-3 py-md-3 py-lg-3 col-lg-4  offset-lg-0  col-md-4  offset-md-0 col-sm-8 offset-sm-2 col-10 offset-1">
                     <div class="row">
-                        <div class="col-12 col-md-10 offset-md-1 beatpackdiv py-lg-3 py-md-2 py-1 offset-0">
-                            <div class="row">
-                                <div class="col-12 audiopreviewdiv">
-                                    <img src="<?php echo $imagePath; ?>" class="beatPACKIMAGE mostsold" alt="">
+                        <div class="row">
+                            <div class="col-12 audiopreviewdiv py-2">
+                                <img src="<?php echo $imagePath; ?>" class="beatPACKIMAGE " alt="">
 
 
-                                </div>
+                            </div>
 
-                                <div class="col-12 pt-2">
-                                    <div class="row">
-                                        <div class="col-12 pt-2 text-center">
-                                            <span class="sampleName "><?php echo $melodyname; ?></span>
-                                        </div>
-
-
-                                        <div class="col-12  pt-2 d-grid  text-center">
-                                            <button class="buyBTN py-lg-2 py-sm-1">View</button>
-                                        </div>
+                            <div class="col-12 py-2">
+                                <div class="row">
+                                    <div class="col-12 pt-2 text-center">
+                                        <span class="sampleName "><?php echo $melodyname; ?></span>
                                     </div>
 
+
+                                    <div class="col-6 offset-3  pt-2 d-grid  text-center">
+                                        <button class="buyBTN py-lg-2 py-sm-3 py-3">View</button>
+                                    </div>
                                 </div>
+
                             </div>
 
                         </div>
