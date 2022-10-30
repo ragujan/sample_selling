@@ -1,7 +1,7 @@
 <?php
 
 if ($_POST["id"] && !empty($_POST["id"]) && $_POST["id"] > 0 &&   $_POST["qty"] && $_POST["qty"] > 0  && !empty($_POST["qty"])) {
-    require "../PDOPHP/Sample_query_functions.php";
+    require "../query/Sample_query_functions.php";
     $ID = $_POST["id"];
     $QTY = $_POST["qty"];
     if (intval($ID) && intval($QTY) && $ID > 0 && $QTY > 0) {

@@ -24,9 +24,9 @@ if (isset($_SESSION["userEmail"])) {
         <div class="container-fluid">
             <div class="col-12">
                 <div class="row">
-                    <?php
-                    require "../siteHeader/header.php"
-                    ?>
+                    <!-- <?php
+                    // require "../siteHeader/header.php"
+                    ?> -->
                     <div id="signInSignUpPage" style="margin-top: 65px;z-index: 899;" class=" col-12 colorBlack   text-center signInSignUpPage">
                         <div class="row">
                             <div id="signInOnly" class=" col-md-4 offset-md-4 col-8 offset-2 signInOnly ">

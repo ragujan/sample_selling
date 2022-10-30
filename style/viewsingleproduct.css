@@ -36,53 +36,23 @@
   border-bottom: 2px solid white;
   right: 0%;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-
-   opacity: 1;
-
+.mainInfoDiv{
+  padding-left: 5%;
+  padding-right: 5%;
 }
 .sampleImageDiv {
-  /* border: 1px solid rgb(58, 58, 58); */
-  margin-left: 5%;
-  border-radius: 2%;
-  background-color: #0e0e0e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* box-shadow: inset 0px 0px 23px 5px #47474786; */
+ 
+  margin-left: 0%;
+
+  background-color: #584e4e00;
 }
 .sampleImage {
   width: 500px;
-  max-width: 100%;
-  object-fit: cover;
-  background-color: rgb(41, 41, 41);
 }
 .sampleInfoDIV {
-  /* border: 1px solid rgb(58, 58, 58); */
-  margin-left: 5%;
-  border-radius: 2%;
-
-  /* box-shadow: inset 0px 0px 23px 5px #47474786;*/
+ background-color: rgb(17, 17, 17);
 }
-@media (max-width: 900px) {
-  .sampleImage {
-    width: 300px;
-    max-width: 100%;
-  }
-  .sampleImageDiv {
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 2%;
-  }
-  .sampleInfoDIV {
-    /* border: 1px solid rgb(58, 58, 58); */
-    margin-left: 0%;
-    border-radius: 2%;
 
-    /* box-shadow: inset 0px 0px 23px 5px #47474786;*/
-  }
-}
 
 .buyButton,
 .cartButton {
@@ -97,8 +67,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .buyButton {
   background-color: rgb(121, 4, 0);
-  transition: background-color 0.5s ease-in-out;
-  transition: color 0.5s ease-in;
+  transition: background-color 0.5s ease-in-out,color 0.5s ease-in-out;
 }
 
 .buyButton:hover {
@@ -109,8 +78,8 @@ input[type=number]::-webkit-outer-spin-button {
 .cartButton {
   background-color: rgb(5, 177, 76);
   color: black;
-  transition: background-color 0.5s ease-in-out;
-  transition: color 0.5s ease-in;
+  transition: background-color 0.5s ease-in-out,color 0.5s ease-in-out;
+ 
 }
 
 .cartButton:hover {
@@ -146,23 +115,57 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: rgb(255, 0, 43);
   
 }
-@media (max-width: 576px) {
+@media (max-width: 1200px) {
+  .sampleImageDiv {
+    background-color: #5900ff00;
+    
+  }
+  .mainInfoDiv{
+    background-color: rgba(255, 192, 203, 0);
+    padding-left: 5%;
+    padding-right: 5%;
+  }
   .sampleImage {
-    margin-left: auto;
-    margin-right: auto;
-    width: 300px;
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
+     object-fit: cover;
   }
   .sampleImageDiv {
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 2%;
-    background-color: #0e0e0e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-left: 0%;
+    
   }
+  .sampleInfoDIV {
+    /* border: 1px solid rgb(58, 58, 58); */
+    margin-left: 0%;
+    
 
+    /* box-shadow: inset 0px 0px 23px 5px #47474786;*/
+  }
+}
+
+@media(max-width:992px){
+  .sampleImageDiv {
+    background-color: #00a84300;
+  }
+  .mainInfoDiv{
+    background-color: rgba(255, 0, 0, 0);
+
+  }
+  .sampleImage {
+    width: 400px;
+  
+    max-width: 100%;
+     object-fit: contain;
+  }
+}
+@media (max-width: 576px) {
+
+  .sampleImage {
+    width: 100%;
+    padding: 0;
+    max-width: 100%;
+     object-fit: contain;
+  }
   .sampleheaddiv {
     position: relative;
     font-size: 40px;
@@ -174,76 +177,4 @@ input[type=number]::-webkit-outer-spin-button {
   .cartButton {
     font-size: 4vw;
   }
-}
-.cartRowSampleImage{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cartRowSampleImage img{
-  height: 60px;
-}
-.cartRowsIndi{
-  background-color: #0f0f0fd2;
-}
-.cartRowInput input{
-  color: black;
-  font-weight: bold;
-}
-.cartRowSampleQty label{
-  background-color: black;
-  
-}
-.cartRowSampleQty img{
-  height: 15px;
-}
-.cartRowPriceDiv{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cartRowInputDiv,.cartAmountPriceDiv{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cartRowInputDiv input{
-  width: 100px;
-  outline: none;
-}
-@media(max-width:576px){
-  .cartRowSampleQty img{
-    height: 8px;
-  }.cartRowSampleImage img{
-    width: 70px;
-    max-width: 100%;
-  }
-}
-.upArrowIconDiv{
-  position: absolute;
-  background-color: rgb(240, 0, 40);
-  top: 0;
-  z-index: 4;
-}
-.downArrowIconDiv{
-  position: absolute;
-  bottom: 0;
-  background-color: pink;
-  z-index: 1;
-}
-.upArrowIconDiv img,.downArrowIconDiv img{
-
-  
-}
-.checkOutButton{
-  background-color: #b70a0a;
-  transition: background-color 0.1s linear;
-  
-}
-.checkOutButton:hover{
-  background-color: #e60000;
-  
-}
-.checkOutDescription{
-  font-size: 0.8rem;
 }

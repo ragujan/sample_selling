@@ -9,6 +9,7 @@ $midi_display_page = GlobalLinkFiles::getRelativePath("midi_sample_display_page"
 $sample_audio_display_page = GlobalLinkFiles::getRelativePath("audio_sample_display_page_shortend");
 $sample_midi_display_page = GlobalLinkFiles::getRelativePath("midi_sample_display_page_shortend");
 $home_page_shortend = GlobalLinkFiles::getRelativePath("home_page_shortend");
+$customer_cart = GlobalLinkFiles::getRelativePath("customer_cart");
 if (!isset($_SESSION["userEmail"])) {
 ?>
     <div style="height: 70px;" class="col-12   navbarMainDivHolder ">
@@ -96,7 +97,7 @@ if (!isset($_SESSION["userEmail"])) {
                             <div class="col-12">
                                 <ul type="none" class="userOptionsUL" style="cursor: pointer;">
                                     <li><a style="text-decoration: none;" href="../userAccount/userAccount.php">User Account</a></li>
-                                    <li><a style="text-decoration: none;" href="../viewcart/viewcart.php">My Cart</a></li>
+                                    <li><a style="text-decoration: none;" href="<?=$customer_cart?>">My Cart</a></li>
                                     <li><a style="text-decoration: none;" href="../userProcess/unsetUserEmail.php">Log Out</a></li>
 
 
