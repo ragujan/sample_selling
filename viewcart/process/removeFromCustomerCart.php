@@ -3,7 +3,7 @@ session_start();
 
 
 if (isset($_SESSION["userEmail"])) {
-    require "../userProcess/CheckUser.php";
+    require "../query/CheckUser.php";
     $email = $_SESSION["userEmail"];
     if (isset($_POST["id"]) && isset($_POST["cart"])) {
         $cart = json_decode($_POST["cart"]);

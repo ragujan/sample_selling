@@ -1,21 +1,21 @@
 <?php
 
 session_start();
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
+$resource_path = GlobalLinkFiles::getDirectoryPath("resources");
+$query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
 
-require "../DB/DB.php";
+require_once $query_path;
+
 $sampleID = $_GET["X"];
-$mysearchquery = DB::forsearch("SELECT * FROM `samples` INNER JOIN `sampleimages` 
-ON sampleImages.sampleID=samples.sampleID
-INNER JOIN `subsampletype`
-ON subsampletype.subsampleID=samples.SubsampleID
-WHERE samples.sampleID='" . $sampleID . "'  ;");
-$searchobject = new SearchClass();
-$searchobject->searchqueryinput = $mysearchquery;
-$searchobject->search();
-$fetchedresults = $searchobject->returnfetch();
-$serachfinalrows = $searchobject->returnrows();
-$searchedarrays = $searchobject->returnarrays();
+
+$searchobject = new Sample_query_functions();
+
+$searchedarrays = $searchobject->getSampleDetails($sampleID);
 $arrsize = count($searchedarrays);
 $sampleRow = $searchedarrays[0];
 $sampleName = $sampleRow["Sample_Name"];
@@ -24,7 +24,7 @@ $imagePath = $sampleRow["source_URL"];
 $sampleType = $sampleRow["subsampleName"];
 $sampleDescription = $sampleRow["SampleDescription"];
 $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $samplePrice, 'image' => $imagePath);
-
+// $site_header = "../sampleSelling-master/site_heaer/header.php";
 
 ?>
 
@@ -35,11 +35,11 @@ $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $sampl
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <link rel="stylesheet" href="../style/bootstrap.css">
-    <link rel="stylesheet" href="../style/sampleselling.css">
-    <link rel="stylesheet" href="viewsingleproduct.css">
-    <link rel="stylesheet" href="../style/navbar.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="<?=$style_path?>bootstrap.css">
+    <link rel="stylesheet" href="<?=$style_path?>sampleselling.css">
+    <link rel="stylesheet" href="<?=$style_path?>viewsingleproduct.css">
+    <link rel="stylesheet" href="<?=$style_path?>navbar.css">
+    <title>Single View</title>
 </head>
 
 <body>
@@ -49,7 +49,7 @@ $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $sampl
                 <div class="col-12 ">
                     <div class="row">
                         <?php
-                        require "../siteHeader/header.php"
+                        require $site_header;
                         ?>
                         <div class="d-none" id="cartItems"></div>
                         <div class="col-12  ">
@@ -124,19 +124,19 @@ $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $sampl
                                 <div class="col-12 py-5">
                                     <div class="row">
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/1.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/1.png" class="paymentmethods" alt="">
                                         </div>
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/2.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/2.png" class="paymentmethods" alt="">
                                         </div>
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/3.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/3.png" class="paymentmethods" alt="">
                                         </div>
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/4.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/4.png" class="paymentmethods" alt="">
                                         </div>
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/5.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/5.png" class="paymentmethods" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -151,19 +151,19 @@ $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $sampl
                                 <div class="col-12 py-5">
                                     <div class="row">
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/1.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/1.png" class="paymentmethods" alt="">
                                         </div>
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/2.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/2.png" class="paymentmethods" alt="">
                                         </div>
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/3.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/3.png" class="paymentmethods" alt="">
                                         </div>
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/4.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/4.png" class="paymentmethods" alt="">
                                         </div>
                                         <div class="col text-center">
-                                            <img src="../paymentMethods/5.png" class="paymentmethods" alt="">
+                                            <img src="<?=$resource_path?>payment_method_images/5.png" class="paymentmethods" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@ $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $sampl
 
 
     <!-- <script src="viewsingleproduct.js"></script> -->
-    <script src="cart.js"></script>
+    <script src="viewsingleproduct.js"></script>
 </body>
 
 </html>

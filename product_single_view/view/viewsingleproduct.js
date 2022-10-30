@@ -1,4 +1,21 @@
-const cartQtySelect = document.getElementById("selectQTY");
+let cartQtySelect = document.getElementById("selectQTY");
+
+let linkPathUrl4 = "/sampleSelling-master/util/path_config/get_relative_paths.php";
+let getUrls = async (name, type) => {
+  let url;
+  let formData = new FormData();
+  formData.append("type", type);
+  formData.append("name", name);
+
+  await fetch(linkPathUrl4, { method: "POST", body: formData })
+    .then((res) => res.text())
+    .then((text) => {
+      url = text;
+
+    });
+  return url;
+};
+
 cartQtySelect.addEventListener("change", () => {
   if (cartQtySelect.value <= 1) {
     cartQtySelect.value = 1;
@@ -6,17 +23,13 @@ cartQtySelect.addEventListener("change", () => {
 });
 
 function upDateCartBagGui(arrayName) {
-
-  let cartRowCount = Object.keys(arrayName).length;
-  console.log("cartRow Count is "+cartRowCount)
   let cartBag = document.getElementById("cartItems");
-  cartBag.innerHTML = cartRowCount;
+  cartBag.innerHTML = Object.keys(arrayName).length;
 }
 
 upDateCartBagGui(getCart());
 function getCart() {
   let getItemCart = globalThis.localStorage.getItem("cart");
-  let check = true;
   if (getItemCart == undefined || getItemCart == null || getItemCart == "[]") {
 
     globalThis.localStorage.clear();
@@ -25,65 +38,32 @@ function getCart() {
 }
 
 function saveCart(cart) {
-  
+
   globalThis.localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function addToCart(id) {
-  let cartQTY = document.getElementById("selectQTY").value;
 
-  if (cartQTY == "") {
-    document.getElementById("selectQTY").style.background = "red";
-  } else {
-    let cartQTYString = `${cartQTY}`;
-    let productIDString = `${id}`;
-    let combined = productIDString + " " + cartQTYString;
-    let form = new FormData();
-    form.append("ID", combined);
-    let url = "../viewsingleproduct/addtoCartLocalStorage.php";
-    fetch(url, { body: form, method: "POST" })
-      .then((response) => response.text())
-      .then((text) => {
-        console.log(text);
-        let cartQtyinNum = parseInt(cartQTY);
-        let cart = getCart();
-        if (typeof cart[id] === "number") {
-          //cart[id] = cartQtyinNum;
-          cart = { id, cartQTYString };
-        } else {
-          // cart[id] = cartQtyinNum;
-          cart = { id, cartQTYString };
-        }
-        saveCart(cart);
-        // let cartRows = getCart();
-        // let cartRowCount = Object.keys(cartRows).length;
-        // let cartBag = document.getElementById("cartItems");
-        // cartBag.innerHTML = cartRowCount;
-      });
-  }
-  upDateCartBagGui(getCart());
-}
 
-let newAddtoCart = (id) => {
+let newAddtoCart = async (id) => {
   let existingCart = getCart();
   let localArray = [];
   let intID;
   let intQTY;
   const cartRowCount = Object.keys(existingCart).length;
   let qty = document.getElementById("selectQTY").value;
- 
+
   const f = new FormData();
   f.append("id", id);
   f.append("qty", qty);
-  let url = "../viewsingleproduct/addtoCartLocalStorage.php";
+  let url = await getUrls("add_to_cart_local_storage");
   let api = fetch(url, { body: f, method: "POST" })
     .then((response) => response.json())
     .then((data) => {
       console.log(data)
-     
+
       if (data["ID"] !== "Nope") {
         intQTY = parseInt(data["qty"]);
-        intID =  parseInt(data["id"]);
+        intID = parseInt(data["id"]);
 
         if (existingCart.length === undefined) {
           let newArray = data;
@@ -138,7 +118,7 @@ function removeFromCart(id, count) {
   saveCart(cart);
 }
 
-function goToviewCart(id) {
+let goToviewCart = async (id) => {
   let existingCart = getCart();
   let localArray = [];
   let intID;
@@ -148,11 +128,11 @@ function goToviewCart(id) {
   const f = new FormData();
   f.append("id", id);
 
-  let url = "../viewsingleproduct/goToViewCartLocalStorage.php";
+  // let url = goToViewCartLocalStorageUrl;
+  let url = await getUrls("go_to_view_cart_local_storage");
   let api = fetch(url, { body: f, method: "POST" })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data["id"] !== "Nope") {
         intQTY = parseInt(data["qty"]);
         intID = parseInt(data["id"]);
@@ -185,37 +165,35 @@ function goToviewCart(id) {
             }
           });
         }
-        window.location = "../viewcart/viewcart.php?X=" + id;
-      } else {
-        console.log("Nope Nope");
-      }
+        window.location = "/sampleSelling-master/viewcart/viewcart.php?X=" + id;
+      } 
     });
 }
-let sendToCustomerCart = () => {
+let sendToCustomerCart = async () => {
   let cartArray;
   cartArray = JSON.stringify(getCart());
 
-  const url = "../viewcart/addtoCustomerCart.php";
+  let url = await getUrls("add_to_customer_cart_process");
   const formData = new FormData();
   formData.append("array", cartArray);
   fetch(url, { method: "POST", body: formData })
     .then((response) => response.text())
-    .then((text) => {});
+    .then((text) => { });
 
   upDateCartBagGui(getCart());
 };
-let sendToCustomerCartSingle = (sId, qty) => {
+let sendToCustomerCartSingle = async (sId, qty) => {
   let cartArray;
 
   cartArray = JSON.stringify([{ id: sId, qty: qty }]);
 
-  console.log("here "+cartArray);
-  const url = "../viewcart/addtoCustomerCart.php";
+  console.log("here " + cartArray);
+  let url = await getUrls("add_to_customer_cart_process");
   const formData = new FormData();
   formData.append("array", cartArray);
   fetch(url, { method: "POST", body: formData })
     .then((response) => response.text())
     .then((text) => {
-      console.log(text);
+      
     });
 };

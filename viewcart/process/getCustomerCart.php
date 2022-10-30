@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require "../userProcess/CheckUser.php";
+require "../query/CheckUser.php";
 if (isset($_SESSION["userEmail"])) {
     $email = $_SESSION["userEmail"];
  

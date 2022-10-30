@@ -1,6 +1,12 @@
 <?php
 session_start();
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
+$resource_path = GlobalLinkFiles::getDirectoryPath("resources");
+$query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
 ?>
 
 <!DOCTYPE html>
@@ -10,10 +16,10 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../bootstrap.css">
-    <link rel="stylesheet" href="../style/sampleselling.css">
-    <link rel="stylesheet" href="../style/navbar.css">
-    <link rel="stylesheet" href="../style/viewsingleproduct.css">
+    <link rel="stylesheet" href="../../style/bootstrap.css">
+    <link rel="stylesheet" href="<?=$style_path?>sampleselling.css">
+    <link rel="stylesheet" href="<?=$style_path?>navbar.css">
+    <link rel="stylesheet" href="<?=$style_path?>cart.css">
 
 
     <title>Document</title>
@@ -25,7 +31,7 @@ session_start();
             <div class="row">
          
               <?php
-             require "../siteHeader/header.php";
+             require $site_header;
               ?>
               <div id="cartItems d-none"></div>
                 <div class="col-lg-9 col-12  showCartItemsDiv">
@@ -53,5 +59,5 @@ session_start();
         </div>
     </div>
 </body>
-<script src="viewcart.js"></script>
+<script src="cart.js"></script>
 </html>

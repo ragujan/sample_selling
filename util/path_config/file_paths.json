@@ -61,12 +61,36 @@
             "actual_path": "/sampleSelling-master/home/home.js"
         },
         {
-          "path_name":"secondary_navbar_display",
-          "actual_path": "/sampleSelling-master/product_view/utils/secondary_navbar.php"
+            "path_name": "secondary_navbar_display",
+            "actual_path": "/sampleSelling-master/product_view/utils/secondary_navbar.php"
         },
         {
             "path_name": "server_side",
             "actual_path": "/sampleSelling-master/util/server_side.js"
+        },
+        {
+            "path_name": "sample_single_view",
+            "actual_path": "/sampleSelling-master/product_single_view/view/viewsingleproduct.php"
+        },
+        {
+            "path_name": "sample_single_view_query",
+            "actual_path": "/sampleSelling-master/product_single_view/query/Sample_query_functions.php"
+        },
+        {
+            "path_name": "customer_cart",
+            "actual_path": "/sampleSelling-master/viewcart/view/cart.php"
+        },
+        {
+            "path_name": "add_to_cart_local_storage",
+            "actual_path": "/sampleSelling-master/product_single_view/process/add_to_cart_local_storage.php"
+        },
+        {
+            "path_name": "go_to_view_cart_local_storage",
+            "actual_path": "/sampleSelling-master/product_single_view/process/go_to_view_cart_local_storage.php"
+        },
+        {
+            "path_name": "add_to_customer_cart_process",
+            "actual_path": "/sampleSelling-master/viewcart/process/addtoCustomerCart.php"
         }
     ]
 }
