@@ -1,6 +1,4 @@
 function getCart() {
-  let getItemCart = globalThis.localStorage.getItem("cart");
-  let check = true;
   let localstorageArray = globalThis.localStorage.getItem("cart");
 
   if (localstorageArray == null) {

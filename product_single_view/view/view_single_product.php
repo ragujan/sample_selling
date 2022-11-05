@@ -8,7 +8,7 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 $query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
-
+$single_product_view_script = GlobalLinkFiles::getRelativePath("single_product_view_script");
 require_once $query_path;
 
 $sampleID = $_GET["X"];
@@ -179,8 +179,8 @@ $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $sampl
     </div>
 
 
-    <!-- <script src="viewsingleproduct.js"></script> -->
-    <script src="view_single_product.js"></script>
+     
+    <script src="<?=$single_product_view_script?>"></script>
 </body>
 
 </html>

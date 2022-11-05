@@ -4,4 +4,6 @@ RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 RewriteRule sample_audio product_view/audio_samples/sample_display.php [NC,L]
 RewriteRule sample_midi product_view/midi_files/sample_display.php [NC,L]
+RewriteRule singleview product_single_view/view/view_single_product.php [NC,L]
+RewriteRule viewcart view_cart/view/cart.php [NC,L]
 RewriteRule homepage home/index.php [NC,L]

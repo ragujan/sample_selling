@@ -19,7 +19,7 @@ let getUrls_header = async (name) => {
 
 document.getElementById("cartItemsDiv").addEventListener("click",async () => {
   let url = await getUrls_header("customer_cart");
-  window.location = url;
+  window.location = "/sampleSelling-master/viewcart";
 
 });
 const burgerMenu = document.getElementById("burgerMenu");
