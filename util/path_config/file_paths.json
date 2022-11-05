@@ -91,6 +91,14 @@
         {
             "path_name": "add_to_customer_cart_process",
             "actual_path": "/sampleSelling-master/view_cart/process/addtoCustomerCart.php"
+        },
+        {
+            "path_name": "single_product_view_script",
+            "actual_path": "/sampleSelling-master/product_single_view/view/view_single_product.js"
+        },
+        {
+            "path_name": "cart_script",
+            "actual_path": "/sampleSelling-master/view_cart/view/cart.js"
         }
     ]
 }

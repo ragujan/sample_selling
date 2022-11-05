@@ -111,7 +111,7 @@ function commonNextFunction(current_page_number, sub_sample_id, pageName) {
 
 
 function viewbuy(x) {
-  window.location = "/sampleSelling-master/product_single_view/view/view_single_product.php?X=" + x;
+  window.location = "/sampleSelling-master/singleview?X=" + x;
 }
 
 

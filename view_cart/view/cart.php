@@ -7,6 +7,7 @@ $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 $query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
+$cart_script = GlobalLinkFiles::getRelativePath("cart_script");
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +17,7 @@ $query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../style/bootstrap.css">
+    <link rel="stylesheet" href="<?=$style_path?>bootstrap.css">
     <link rel="stylesheet" href="<?=$style_path?>sampleselling.css">
     <link rel="stylesheet" href="<?=$style_path?>navbar.css">
     <link rel="stylesheet" href="<?=$style_path?>cart.css">
@@ -59,5 +60,5 @@ $query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
         </div>
     </div>
 </body>
-<script src="cart.js"></script>
+<script src="<?=$cart_script?>"></script>
 </html>
