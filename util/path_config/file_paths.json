@@ -70,7 +70,7 @@
         },
         {
             "path_name": "sample_single_view",
-            "actual_path": "/sampleSelling-master/product_single_view/view/viewsingleproduct.php"
+            "actual_path": "/sampleSelling-master/product_single_view/view/view_single_product.php"
         },
         {
             "path_name": "sample_single_view_query",
@@ -78,7 +78,7 @@
         },
         {
             "path_name": "customer_cart",
-            "actual_path": "/sampleSelling-master/viewcart/view/cart.php"
+            "actual_path": "/sampleSelling-master/view_cart/view/cart.php"
         },
         {
             "path_name": "add_to_cart_local_storage",
@@ -90,7 +90,7 @@
         },
         {
             "path_name": "add_to_customer_cart_process",
-            "actual_path": "/sampleSelling-master/viewcart/process/addtoCustomerCart.php"
+            "actual_path": "/sampleSelling-master/view_cart/process/addtoCustomerCart.php"
         }
     ]
 }

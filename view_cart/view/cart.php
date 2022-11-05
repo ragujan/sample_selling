@@ -22,7 +22,7 @@ $query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
     <link rel="stylesheet" href="<?=$style_path?>cart.css">
 
 
-    <title>Document</title>
+    <title>Cart</title>
 </head>
 
 <body style="background-color: black;">

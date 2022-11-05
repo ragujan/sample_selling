@@ -1,13 +1,13 @@
 let cartQtySelect = document.getElementById("selectQTY");
 
-let linkPathUrl4 = "/sampleSelling-master/util/path_config/get_relative_paths.php";
-let getUrls = async (name, type) => {
+let linkPathUrl_single_product_view = "/sampleSelling-master/product_single_view/util/get_relative_paths.php";
+let getUrls_single_product_view = async (name) => {
   let url;
   let formData = new FormData();
-  formData.append("type", type);
+ 
   formData.append("name", name);
 
-  await fetch(linkPathUrl4, { method: "POST", body: formData })
+  await fetch(linkPathUrl_single_product_view, { method: "POST", body: formData })
     .then((res) => res.text())
     .then((text) => {
       url = text;
@@ -55,7 +55,7 @@ let newAddtoCart = async (id) => {
   const f = new FormData();
   f.append("id", id);
   f.append("qty", qty);
-  let url = await getUrls("add_to_cart_local_storage");
+  let url = await getUrls_single_product_view("add_to_cart_local_storage");
   let api = fetch(url, { body: f, method: "POST" })
     .then((response) => response.json())
     .then((data) => {
@@ -129,7 +129,7 @@ let goToviewCart = async (id) => {
   f.append("id", id);
 
   // let url = goToViewCartLocalStorageUrl;
-  let url = await getUrls("go_to_view_cart_local_storage");
+  let url = await getUrls_single_product_view("go_to_view_cart_local_storage");
   let api = fetch(url, { body: f, method: "POST" })
     .then((response) => response.json())
     .then((data) => {
@@ -165,7 +165,7 @@ let goToviewCart = async (id) => {
             }
           });
         }
-        window.location = "/sampleSelling-master/viewcart/viewcart.php?X=" + id;
+        window.location = "/sampleSelling-master/view_cart/view/cart.php?X=" + id;
       } 
     });
 }
@@ -173,7 +173,7 @@ let sendToCustomerCart = async () => {
   let cartArray;
   cartArray = JSON.stringify(getCart());
 
-  let url = await getUrls("add_to_customer_cart_process");
+  let url = await getUrls_single_product_view("add_to_customer_cart_process");
   const formData = new FormData();
   formData.append("array", cartArray);
   fetch(url, { method: "POST", body: formData })
@@ -188,7 +188,8 @@ let sendToCustomerCartSingle = async (sId, qty) => {
   cartArray = JSON.stringify([{ id: sId, qty: qty }]);
 
   console.log("here " + cartArray);
-  let url = await getUrls("add_to_customer_cart_process");
+  let url = await getUrls_single_product_view("add_to_customer_cart_process");
+  console.log("url is "+url)
   const formData = new FormData();
   formData.append("array", cartArray);
   fetch(url, { method: "POST", body: formData })

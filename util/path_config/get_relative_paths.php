@@ -2,8 +2,8 @@
 
 $type;
 $name;
-if ($_POST["type"] && $_POST["name"]) {
-    $type = $_POST["type"];
+if (  $_POST["name"]) {
+ 
     $name = $_POST["name"];
     require_once "../path_config/global_link_files.php";
 

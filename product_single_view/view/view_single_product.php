@@ -180,7 +180,7 @@ $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $sampl
 
 
     <!-- <script src="viewsingleproduct.js"></script> -->
-    <script src="viewsingleproduct.js"></script>
+    <script src="view_single_product.js"></script>
 </body>
 
 </html>
