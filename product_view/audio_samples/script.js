@@ -206,7 +206,7 @@ function audioEnded(audio){
   pausemusic(audio_id);
 }
 function viewbuy(x) {
-  window.location = "/sampleSelling-master/product_single_view/view/viewsingleproduct.php?X=" + x;
+  window.location = "/sampleSelling-master/product_single_view/view/view_single_product.php?X=" + x;
 }
 
 

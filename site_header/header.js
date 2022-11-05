@@ -1,17 +1,25 @@
-const linkPathUrl = "/sampleSelling-master/util/path_config/get_link.php";
-let getLinkPathUrl = (name, type) => {
-  let form = new FormData();
-  form.append("type", type);
-  form.append("name", name);
-  fetch(linkPathUrl, { method: "POST", body: form })
+let linkPathUrl_header = "/sampleSelling-master/util/path_config/get_relative_paths.php";
+let getUrls_header = async (name) => {
+  let url;
+  let formData = new FormData();
+
+  formData.append("name", name);
+
+  await fetch(linkPathUrl_header, { method: "POST", body: formData })
     .then((res) => res.text())
-    .then((text) => text)
-}
+    .then((text) => {
+      url = text;
+
+      console.log(url);
+    });
+  return url;
+};
 
 
-document.getElementById("cartItemsDiv").addEventListener("click", () => {
 
-  window.location = "../payment-testing/viewcart.php";
+document.getElementById("cartItemsDiv").addEventListener("click",async () => {
+  let url = await getUrls_header("customer_cart");
+  window.location = url;
 
 });
 const burgerMenu = document.getElementById("burgerMenu");

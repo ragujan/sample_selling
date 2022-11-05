@@ -1,16 +1,18 @@
 <?php
-
+echo "boo boob";
 if ($_POST["cartArrays"] && !empty($_POST["cartArrays"]) && isset($_POST["cartArrays"])) {
     require "../query/Sample_query_functions.php";
     $object = new Sample_query_functions();
     $a  = $_POST["cartArrays"];
-  
+    print_r($a);
+    echo "<br>";
+  echo "oiojjsdf";
     $b = json_decode($a);
     // print_r($b[0]);
-    if($b[0]->id == "Nope"){
-        echo "Nothing to show";
-        return;
-    }
+    // if($b[0]->id == "Nope"){
+    //     echo "Nothing to show";
+    //     return;
+    // }
     $idQtyArray = [];
     $productCount = 0;
     foreach ($b as $c) {
