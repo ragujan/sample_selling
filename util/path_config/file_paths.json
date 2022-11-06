@@ -99,6 +99,10 @@
         {
             "path_name": "cart_script",
             "actual_path": "/sampleSelling-master/view_cart/view/cart.js"
+        },
+        {
+            "path_name": "user_authorization_script",
+            "actual_path": "/sampleSelling-master/user/authorization/view/script.js"
         }
     ]
 }

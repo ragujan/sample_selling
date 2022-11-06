@@ -1,6 +1,9 @@
 <?php
-require "../PDOPHP/DB.php";
-class CheckUser extends DB
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+$db_path = GlobalLinkFiles::getFilePath("db");
+require_once $db_path;
+class User extends Db
 {
     private $generatedUniqueId = "0";
     public function genRandomUniqueId(): string

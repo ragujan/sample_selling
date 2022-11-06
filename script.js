@@ -32,3 +32,6 @@ console.log(customerurl);
 console.log(customerurl);
 console.log(customerurl);
 console.log(customerurl);
+
+const authorization_process_path = "/sampleSelling-master/user/authorization/process/";
+console.log(authorization_process_path+"user_view.php");

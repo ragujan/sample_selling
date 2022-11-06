@@ -6,7 +6,7 @@ if (isset($_POST["FN"]) && isset($_POST["LN"]) && isset($_POST["PWD"]) && isset(
     $email = $_POST["EM"];
     $userName = $_POST["UN"];
 
-    require "../userProcess/UserInputValidation.php";
+    require "../util/UserInputValidation.php";
    
     $validate = new UserinputValidation($firstName, $lastName, $userName, $password, $email);
     if ($validate->emptyCheck() == false  ) {
@@ -33,8 +33,8 @@ if (isset($_POST["FN"]) && isset($_POST["LN"]) && isset($_POST["PWD"]) && isset(
         
     } else {
        $hashPassword= password_hash($password,PASSWORD_DEFAULT);
-        require "../userProcess/CheckUser.php";
-        $checkUser = new CheckUser();
+       require "../query/User.php";
+       $checkUser = new User();
         $userRegState =$checkUser->checkUandE($userName,$email);
         if($userRegState==false){
            
