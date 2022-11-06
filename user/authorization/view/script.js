@@ -1,3 +1,8 @@
+const authorization_process_path = "/sampleSelling-master/user/authorization/process/";
+const view_cart_process_path = "/sampleSelling-master/view_cart/process/" 
+const authorization_view_path = "/sampleSelling-master/user/authorization/view/"
+const home_path = "/sampleSelling-master/home/index.php"
+const resources_path = "/sampleSelling-master/resources/"
 function getCart() {
 
   return JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}");
@@ -18,7 +23,7 @@ let sendToCustomerCart = () => {
   let cartArray;
   cartArray = JSON.stringify(getCart());
 
-  const url = "../viewcart/addtoCustomerCart.php";
+  const url = view_cart_process_path+"add_to_customer_cart.php";
   const formData = new FormData();
   formData.append("array", cartArray);
   fetch(url, { method: "POST", body: formData })
@@ -30,7 +35,7 @@ let sendToCustomerCart = () => {
 let forgotPassword = () => {
   let inputFieldsEmail = document.getElementById("inputFieldsEmail");
 
-  let url = "../userProcess/forgotPasswordProcess.php";
+  let url = authorization_process_path+"forgot_password_process.php";
   const form = new FormData();
   form.append("I", inputFieldsEmail.value);
   fetch(url, { method: "POST", body: form })
@@ -42,7 +47,7 @@ let forgotPassword = () => {
         const errorMessageDiv = document.getElementById("errorMessage");
         errorMessageDiv.classList.remove("py-2");
         errorMessageDiv.getElementsByTagName("span")[0].innerHTML = "";
-        window.location = "../userProcess/verifyForgotPassword.php";
+        window.location = authorization_process_path+"verify_forgot_password.php";
       } else {
         const errorMessageDiv = document.getElementById("errorMessage");
         errorMessageDiv.classList.add("py-2");
@@ -54,7 +59,7 @@ let forgotPassword = () => {
 let verifyCode = () => {
   let inputVerifyCode = document.getElementById("inputVerifyCode");
 
-  let url = "../userProcess/verifyForgotPasswordProcess.php";
+  let url = authorization_process_path+"verify_forgot_password_process.php";
   const form = new FormData();
   form.append("I", inputVerifyCode.value);
   fetch(url, { method: "POST", body: form })
@@ -63,7 +68,7 @@ let verifyCode = () => {
       if (text == "Success") {
         inputVerifyCode.value = "";
           
-        window.location = "../userProcess/changePassword.php";
+        window.location = authorization_view_path+"change_password.php";
       } else {
         const errorMessageDiv = document.getElementById("errorMessage");
         errorMessageDiv.classList.add("py-2");
@@ -78,7 +83,7 @@ let changePassword = () => {
   
   let inputReEnterNewPasswordR = document.getElementById("inputReEnterNewPassword");
   console.log(inputNewPasswordR.value+" "+inputReEnterNewPasswordR.value);
-  let url = "../userProcess/changePasswordProcess.php";
+  let url = authorization_process_path+"change_password_process.php";
   const form = new FormData();
   form.append("I", inputNewPasswordR.value);
   form.append("IR", inputReEnterNewPasswordR.value);
@@ -86,10 +91,10 @@ let changePassword = () => {
     .then((response) => response.text())
     .then((text) => {
       if (text == "Success") {
-        inputNewPassword.value = "";
-        inputReEnterNewPassword.value = "";
-        window.location = "../userProcess/signInsignUpPages.php";
-        //window.location ="../userProcess/changePasswordProcess.php";
+        inputNewPasswordR.value = "";
+        inputReEnterNewPasswordR.value = "";
+        window.location = authorization_view_path+"signin_signup.php";
+        //window.location =authorization_process_path+"change_password_process.php";
       } else {
         const errorMessageDiv = document.getElementById("errorMessage");
         errorMessageDiv.classList.add("py-2");
@@ -100,7 +105,7 @@ let changePassword = () => {
 let userSignIn = () => {
   let pwd = document.getElementById("signpwd").value;
   let em = document.getElementById("signem").value;
-  let url = "../userProcess/signInProcess.php";
+  let url = authorization_process_path+"signin_process.php";
   const form = new FormData();
 
   form.append("PWD", pwd);
@@ -114,7 +119,7 @@ let userSignIn = () => {
         document.getElementById("signpwd").value = "";
         document.getElementById("signem").value = "";   
         sendToCustomerCart();
-        window.location = "../home/home.php";   
+        window.location = home_path;   
       }
     });
 };
@@ -125,7 +130,7 @@ let userSignUp = () => {
   let un = document.getElementById("un").value;
   let em = document.getElementById("em").value;
   let repwd = document.getElementById("repwd").value;
-  let url = "../userProcess/signUpProcess.php";
+  let url = authorization_process_path+"signup_process.php";
   const form = new FormData();
   form.append("FN", fn);
   form.append("LN", ln);
@@ -166,7 +171,7 @@ function hideSignUPDiv() {
   signUpDiv.classList.toggle("d-none");
 }
 let forgotPasswordClick =()=>{
-  window.location = "../userProcess/forgotPassword.php";
+  window.location = authorization_process_path+"forgotPassword.php";
 }
 
 
@@ -187,8 +192,8 @@ function openCloseEyes(iconID,inputID){
         const inputType = inputField.getAttribute("type")==='password'? 'text':'password';
         inputField.setAttribute('type',inputType);
         let imageName = "showPassEyeIcon";
-        let srcOpen = `../resources/icons/showPassEyeIcon.png`;
-        let srcClose =`../resources/icons/closePassEyeIcon.png`;
+        let srcOpen = `${resources_path}icons/showPassEyeIcon.png`;
+        let srcClose =`${resources_path}icons/closePassEyeIcon.png`;
         const imageSrc= reeyeIconSup.getAttribute("src") === srcOpen ? srcClose:srcOpen;
         reeyeIconSup.src= imageSrc;      
       })

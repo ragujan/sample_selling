@@ -7,8 +7,8 @@ $_SESSION["changePasswordProcessEmail"]=$_SESSION["verifyForgotPasswordEmail"];
     $PR = $_POST["IR"];
    
     if($P==$PR){
-        require "../userProcess/CheckUser.php";
-        $checkUser = new CheckUser();
+        require "../query/User.php";
+        $checkUser = new User();
         $updatePassword=$checkUser->reCreatePassword($_SESSION["changePasswordProcessEmail"], $PR);
         if($updatePassword){
           session_destroy();

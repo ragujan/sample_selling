@@ -5,8 +5,8 @@ $_SESSION["verifyForgotPasswordEmail"]=$_SESSION["userEmail"];
 if (isset($_POST["I"]) && !empty($_POST["I"]) && isset($_SESSION["verifyForgotPasswordEmail"]) )  {
   
     $P= $_POST["I"];
-    require "../userProcess/CheckUser.php";
-    $checkUser = new CheckUser();
+    require "../query/User.php";
+    $checkUser = new User();
     if($checkUser->checkPandE($P, $_SESSION["verifyForgotPasswordEmail"])){
       
       exit("Success");
