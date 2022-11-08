@@ -17,7 +17,7 @@ let getUrls_header = async (name) => {
 
 
 
-document.getElementById("cartItemsDiv").addEventListener("click",async () => {
+document.getElementById("cartItemsDiv").addEventListener("click", async () => {
   let url = await getUrls_header("customer_cart");
   window.location = "/sampleSelling-master/viewcart";
 
@@ -34,8 +34,9 @@ burgerMenu.addEventListener("click", () => {
   // document.body.classList.toggle('stopScrolling')
 });
 if (userButton != null) {
-  userButton.addEventListener("click", () => {
-    window.location = "../userProcess/signInsignUpPages.php";
+  userButton.addEventListener("click", async () => {
+    window.location = "/sampleSelling-master/login";
+   // window.location = await getUrls_header("sigin_signup_pages_shortend");
 
     //document.body.classList.toggle('stopScrolling')
   });

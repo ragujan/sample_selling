@@ -53,10 +53,9 @@ class User extends Db
     {
         $ok = true;
         while ($ok) {
-            $userquery = new CheckUser();
-            $uniqueId = $userquery->genRandomUniqueId();
+            $uniqueId = $this->genRandomUniqueId();
 
-            $state = $userquery->isGeneratedIdUnique($uniqueId);
+            $state = $this->isGeneratedIdUnique($uniqueId);
 
             if ($state) {
 

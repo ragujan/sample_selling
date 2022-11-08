@@ -192,8 +192,8 @@ function openCloseEyes(iconID,inputID){
         const inputType = inputField.getAttribute("type")==='password'? 'text':'password';
         inputField.setAttribute('type',inputType);
         let imageName = "showPassEyeIcon";
-        let srcOpen = `${resources_path}icons/showPassEyeIcon.png`;
-        let srcClose =`${resources_path}icons/closePassEyeIcon.png`;
+        let srcOpen =  resources_path+"icons/showPassEyeIcon.png";
+        let srcClose = resources_path+"icons/closePassEyeIcon.png";
         const imageSrc= reeyeIconSup.getAttribute("src") === srcOpen ? srcClose:srcOpen;
         reeyeIconSup.src= imageSrc;      
       })
