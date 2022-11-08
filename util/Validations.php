@@ -1,5 +1,7 @@
 <?php
 
+use Validations as GlobalValidations;
+
 class Validations
 {
     private static  $check;
@@ -10,9 +12,23 @@ class Validations
             return Validations::$check = true;
         }
     }
-    public static function removeSpecialCharacters($string){
+    public static function removeSpecialCharacters($string)
+    {
         $pattern = '/([!;\':\-\[\] ])/';
         return preg_replace($pattern, '', $string);
+    }
+    public static function wordsOnly($string)
+    {
+        $status = false;
+        $pattern = '/^[a-zA-Z]+$/';
+
+        $preg_match = preg_match($pattern, $string);
+
+        if ($preg_match == '1' || $preg_match == true) {
+
+            $status = true;
+        }
+        return $status;
     }
     public static function validatePageNumbers($pageNumber)
     {

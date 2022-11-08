@@ -63,7 +63,7 @@ if (isset($_SESSION["userEmail"])) {
                                                         <input id="signpwd" class="py-2 w-100 px-2  inputFieldsLogin" type="password">
                                                     </div>
                                                     <div class="col-lg-1 col-2 bg-white d-flex align-items-center justify-content-lg-start justify-content-md-end justify-content-center">
-                                                        <img id="showPasswordIcon" style="cursor: pointer;" class="my-auto" src="../resources/icons/showPassEyeIcon.png" alt="" srcset="">
+                                                        <img id="showPasswordIcon" style="cursor: pointer;" class="my-auto" src="<?=$resource_path?>icons/showPassEyeIcon.png" alt="" srcset="">
 
                                                     </div>
                                                 </div>
@@ -150,7 +150,7 @@ if (isset($_SESSION["userEmail"])) {
                                                         <input id="pwd" class="py-2 w-100 px-2  inputFieldsLogin" type="password">
                                                     </div>
                                                     <div class="col-lg-1 col-2 bg-white d-flex align-items-center justify-content-lg-start justify-content-md-end justify-content-center">
-                                                        <img id="showPasswordIconSignUp" style="cursor: pointer;" class="my-auto" src="../resources/icons/showPassEyeIcon.png" alt="" srcset="">
+                                                        <img id="showPasswordIconSignUp" style="cursor: pointer;" class="my-auto" src="<?=$resource_path?>icons/showPassEyeIcon.png" alt="" srcset="">
 
                                                     </div>
                                                 </div>
@@ -171,7 +171,7 @@ if (isset($_SESSION["userEmail"])) {
                                                         <input id="repwd" class="py-2 w-100 px-2  inputFieldsLogin" type="password">
                                                     </div>
                                                     <div class="col-lg-1 col-2 bg-white d-flex align-items-center justify-content-lg-start justify-content-md-end justify-content-center">
-                                                        <img id="reshowPasswordIconSignUp" style="cursor: pointer;" class="my-auto" src="../icons/showPassEyeIcon.png" alt="" srcset="">
+                                                        <img id="reshowPasswordIconSignUp" style="cursor: pointer;" class="my-auto" src="<?=$resource_path?>icons/showPassEyeIcon.png" alt="" srcset="">
 
                                                     </div>
                                                 </div>

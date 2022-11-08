@@ -101,6 +101,18 @@
             "actual_path": "/sampleSelling-master/view_cart/view/cart.js"
         },
         {
+            "path_name": "signin_signup_pages",
+            "actual_path": "/sampleSelling-master/user/authorization/view/signin_signup.php"
+        },
+        {
+            "path_name": "signin_signup_pages_shortend",
+            "actual_path": "/sampleSelling-master/login"
+        },
+        {
+            "path_name": "logout",
+            "actual_path": "/sampleSelling-master/user/authorization/process/unset_user_email.php"
+        },
+        {
             "path_name": "user_authorization_script",
             "actual_path": "/sampleSelling-master/user/authorization/view/script.js"
         }

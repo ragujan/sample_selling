@@ -10,12 +10,14 @@ $sample_audio_display_page = GlobalLinkFiles::getRelativePath("audio_sample_disp
 $sample_midi_display_page = GlobalLinkFiles::getRelativePath("midi_sample_display_page_shortend");
 $home_page_shortend = GlobalLinkFiles::getRelativePath("home_page_shortend");
 $customer_cart = GlobalLinkFiles::getRelativePath("customer_cart");
+$signin_signup_pages = GlobalLinkFiles::getRelativePath("signin_signup_pages_shortend");
+$logout = GlobalLinkFiles::getRelativePath("logout");
 if (!isset($_SESSION["userEmail"])) {
 ?>
     <div style="height: 70px;" class="col-12   navbarMainDivHolder ">
         <div class="row ">
             <div class="py-0 col-lg-1  col-md-9 col-7 text-md-start  text-start my-auto">
-                <img src="/sampleSelling-master/resources/icon_images/logo_transparent.png " class=" navbarImage p-0" alt="">
+                <img src="<?=$resource_path?>/icon_images/logo_transparent.png " class=" navbarImage p-0" alt="">
             </div>
 
             <div class="py-0 col-lg-9 d-none d-lg-block col-md-9 col-8 offset-0  my-auto">
@@ -62,7 +64,7 @@ if (!isset($_SESSION["userEmail"])) {
     <div style="height: 70px;" class="col-12   navbarMainDivHolder ">
         <div class="row ">
             <div class="py-0 col-lg-1  col-md-9 col-7 text-md-start  text-start my-auto">
-                <img src="../RagImages/RAG JNTransparent.png " class=" navbarImage p-0" alt="">
+            <img src="<?=$resource_path?>/icon_images/logo_transparent.png "class=" navbarImage p-0" alt="">
             </div>
 
             <div class="py-0 col-lg-9 d-none d-lg-block col-md-9 col-8 offset-0  my-auto">
@@ -98,7 +100,7 @@ if (!isset($_SESSION["userEmail"])) {
                                 <ul type="none" class="userOptionsUL" style="cursor: pointer;">
                                     <li><a style="text-decoration: none;" href="../userAccount/userAccount.php">User Account</a></li>
                                     <li><a style="text-decoration: none;" href="<?=$customer_cart?>">My Cart</a></li>
-                                    <li><a style="text-decoration: none;" href="../userProcess/unsetUserEmail.php">Log Out</a></li>
+                                    <li><a style="text-decoration: none;" href="<?=$logout?>">Log Out</a></li>
 
 
                                 </ul>
