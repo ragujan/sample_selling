@@ -2,7 +2,7 @@ function getCart() {
   let localstorageArray = globalThis.localStorage.getItem("cart");
 
   if (localstorageArray == null) {
-    const url = "/sampleSelling-master/view_cart/process/getCustomerCart.php";
+    const url = "/sampleSelling-master/view_cart/process/get_customer_cart.php";
     fetch(url, { method: "POST" })
       .then((response) => response.json())
       .then((text) => {
@@ -17,8 +17,7 @@ function getCart() {
 }
 
 let sendToCustomerCart = () => {
-  let cartArray;
-  cartArray = JSON.stringify(getCart());
+  let cartArray = JSON.stringify(getCart());
 
   const url = "/sampleSelling-master/view_cart/process/add_to_customer_cart.php";
   const formData = new FormData();
@@ -43,7 +42,7 @@ let sendToCustomerCartSingle = (sId, qty) => {
       console.log(text);
     });
 };
-sendToCustomerCart();
+
 
 function upDateCartBagGui(arrayName) {
   let cartBag = document.getElementById("cartItems");
@@ -56,69 +55,9 @@ function upDateCartBagGui(arrayName) {
   }
 }
 
-upDateCartBagGui(getCart());
+
 const rowHolderDiv = document.getElementById("cartRowHolder");
 
-function loadCart() {
-  let cartRows = getCart();
-  let outArray = [];
-  let myid = 111;
-
-  if (cartRows.length == undefined) {
-    let myArray = { id: myid, qty: 33 };
-    let secondMyArray = { id: 555, qty: 33 };
-    let thirdMyArray = { id: 1000, qty: 1000 };
-    let ab = [];
-    ab.push(myArray);
-    ab.push(secondMyArray);
-    ab.push(thirdMyArray);
-    globalThis.localStorage.setItem("cart", JSON.stringify(ab));
-  } else {
-    let mA = cartRows.find((a, i) => {
-      if (a.id === myid) {
-        cartRows[i] = { id: myid, qty: 25 };
-      } else {
-        outArray.push(cartRows[i]);
-      }
-
-      if (outArray.length === cartRows.length) {
-        let newIDQ = { id: myid, qty: 2000 };
-        outArray.push(newIDQ);
-        globalThis.localStorage.setItem("cart", JSON.stringify(outArray));
-      } else {
-        globalThis.localStorage.setItem("cart", JSON.stringify(cartRows));
-      }
-    });
-  }
-}
-
-let newAddtoCart = (id, qty) => {
-  let existingCart = getCart();
-  let localArray = [];
-  const cartRowCount = Object.keys(existingCart).length;
-
-  if (existingCart.length === undefined) {
-    let newArray = { id: id, qty: qty };
-    let objectArray = [];
-    objectArray.push(newArray);
-    globalThis.localStorage.setItem("cart", JSON.stringify(objectArray));
-  } else {
-    let searchArray = existingCart.find((a, index) => {
-      if (a.id == id) {
-        existingCart[index] = { id: id, qty: qty };
-      } else {
-        localArray.push(existingCart[index]);
-      }
-      if (localArray.length === existingCart.length) {
-        let newItemarray = { id: id, qty: qty };
-        localArray.push(newItemarray);
-        globalThis.localStorage.setItem("cart", JSON.stringify(localArray));
-      } else {
-        globalThis.localStorage.setItem("cart", JSON.stringify(existingCart));
-      }
-    });
-  }
-};
 
 let showCartItems = (cart) => {
   let cartRows = cart;
@@ -139,7 +78,7 @@ let showCartItems = (cart) => {
   upDateCartBagGui(getCart());
 };
 
-showCartItems(getCart());
+
 
 let newQtySelect = (id, qtynSPrice) => {
   let inputID = document.getElementById("cartQtyId" + id);
@@ -150,11 +89,11 @@ let newQtySelect = (id, qtynSPrice) => {
   let localArray = [];
   let intID;
   let intQTY;
-  let f = new FormData();
-  f.append("id", id);
-  f.append("qty", changingQty);
+  let form = new FormData();
+  form.append("id", id);
+  form.append("qty", changingQty);
   let checkID = fetch(url, {
-    body: f,
+    body: form,
     method: "POST",
   })
     .then((response) => response.json())
@@ -204,7 +143,6 @@ let newQtySelect = (id, qtynSPrice) => {
 
 let removeFromCart = (id) => {
   let cartRows = getCart();
-  let newCartRows = [];
   const url = "/sampleSelling-master/view_cart/process/remove_from_customer_cart.php";
   const formdata = new FormData();
 
@@ -216,9 +154,10 @@ let removeFromCart = (id) => {
     .then((text) => {
       console.log(text);
       globalThis.localStorage.setItem("cart", JSON.stringify(text));
-      upDateSubTotal();
+      
       upDateCartBagGui(getCart());
       showCartItems(getCart());
+      upDateSubTotal();
     });
 
 };
@@ -243,4 +182,12 @@ let upDateSubTotal = () => {
   } else {
   }
 };
+
+
+sendToCustomerCart();
+
+upDateCartBagGui(getCart());
+
+showCartItems(getCart());
+
 upDateSubTotal();

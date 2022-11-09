@@ -4,7 +4,7 @@ let linkPathUrl_single_product_view = "/sampleSelling-master/product_single_view
 let getUrls_single_product_view = async (name) => {
   let url;
   let formData = new FormData();
- 
+
   formData.append("name", name);
 
   await fetch(linkPathUrl_single_product_view, { method: "POST", body: formData })
@@ -37,31 +37,28 @@ function getCart() {
   return JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}");
 }
 
-function saveCart(cart) {
-
-  globalThis.localStorage.setItem("cart", JSON.stringify(cart));
-}
 
 
 
 let newAddtoCart = async (id) => {
+
   let existingCart = getCart();
   let localArray = [];
   let intID;
   let intQTY;
   const cartRowCount = Object.keys(existingCart).length;
   let qty = document.getElementById("selectQTY").value;
-
-  const f = new FormData();
-  f.append("id", id);
-  f.append("qty", qty);
+  //sending to add to cart local storage.php is for validating the sample ids
+  const form = new FormData();
+  form.append("id", id);
+  form.append("qty", qty);
   let url = await getUrls_single_product_view("add_to_cart_local_storage");
-  let api = fetch(url, { body: f, method: "POST" })
+  let api = fetch(url, { body: form, method: "POST" })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
-
+      
       if (data["ID"] !== "Nope") {
+        //if validation is succeeded comes here
         intQTY = parseInt(data["qty"]);
         intID = parseInt(data["id"]);
 
@@ -100,23 +97,9 @@ let newAddtoCart = async (id) => {
 
   sendToCustomerCartSingle(id, qty);
   upDateCartBagGui(JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}"));
-  //console.log(JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}"));
+
 };
 
-function removeFromCart(id, count) {
-  count = count ?? 1;
-  let cart = getCart();
-
-  if (typeof cart[id] === "number") {
-    cart[id] -= count;
-  } else {
-    cart[id] = 0;
-  }
-  if (cart[id] < 0) {
-    cart[id] = 0;
-  }
-  saveCart(cart);
-}
 
 let goToviewCart = async (id) => {
   let existingCart = getCart();
@@ -166,7 +149,7 @@ let goToviewCart = async (id) => {
           });
         }
         window.location = "/sampleSelling-master/view_cart/view/cart.php?X=" + id;
-      } 
+      }
     });
 }
 let sendToCustomerCart = async () => {
@@ -189,12 +172,12 @@ let sendToCustomerCartSingle = async (sId, qty) => {
 
   console.log("here " + cartArray);
   let url = await getUrls_single_product_view("add_to_customer_cart_process");
-  console.log("url is "+url)
+  console.log("url is " + url)
   const formData = new FormData();
   formData.append("array", cartArray);
   fetch(url, { method: "POST", body: formData })
     .then((response) => response.text())
     .then((text) => {
-      
+
     });
 };
