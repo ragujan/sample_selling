@@ -1,6 +1,10 @@
 forgot_password_process.php
 forgotPasswordProcess.php
 SendMail.php
+index.php
+composer.json
+composer.lock
+script.js
 zip
 image
 audio
