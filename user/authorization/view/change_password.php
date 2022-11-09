@@ -1,5 +1,14 @@
 <?php
 session_start();
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
+$resource_path = GlobalLinkFiles::getDirectoryPath("resources");
+$query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
+$script_path = GlobalLinkFiles::getRelativePath("user_authorization_script");
+
 unset($_SESSION["userEmail"]);
 if (!isset($_SESSION["verifyForgotPasswordEmail"])) {
     header('Location: /brymo8/userProcess/forgotPassword.php');
