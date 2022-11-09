@@ -7,8 +7,9 @@ $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 $query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
 $script = GlobalLinkFiles::getRelativePath("user_authorization_script");
+session_start();
 if (isset($_SESSION["userEmail"])) {
-    header('Location: http://localhost/sampleSelling-master/home/home.php'); 
+    header('Location: http://localhost/sampleSelling-master/homepage'); 
 } else {
 ?>
     <!DOCTYPE html>
@@ -23,7 +24,7 @@ if (isset($_SESSION["userEmail"])) {
         <link rel="stylesheet" href="<?=$style_path?>navbar.css">
         <link rel="stylesheet" href="<?=$style_path?>forgotPassword.css">
 
-        <title>Document</title>
+        <title>Signin Signup</title>
     </head>
 
     <body>

@@ -3,9 +3,26 @@ const view_cart_process_path = "/sampleSelling-master/view_cart/process/"
 const authorization_view_path = "/sampleSelling-master/user/authorization/view/"
 const home_path = "/sampleSelling-master/home/index.php"
 const resources_path = "/sampleSelling-master/resources/"
-function getCart() {
+function getCart2() {
 
   return JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}");
+}
+function getCart() {
+  let localstorageArray = globalThis.localStorage.getItem("cart");
+
+  if (localstorageArray == null) {
+    const url = "/sampleSelling-master/view_cart/process/get_customer_cart.php";
+    fetch(url, { method: "POST" })
+      .then((response) => response.json())
+      .then((text) => {
+        globalThis.localStorage.setItem("cart", JSON.stringify(text));
+        showCartItems(
+          JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}")
+        );
+      });
+  } else {
+    return JSON.parse(globalThis.localStorage.getItem("cart") ?? "{}");
+  }
 }
 
 function upDateCartBagGui(arrayName){
@@ -18,7 +35,12 @@ function upDateCartBagGui(arrayName){
   }
  
 }
-upDateCartBagGui(getCart());
+
+
+(async () => {
+  upDateCartBagGui(getCart());
+
+})();
 let sendToCustomerCart = () => {
   let cartArray;
   cartArray = JSON.stringify(getCart());
@@ -102,7 +124,7 @@ let changePassword = () => {
       }
     });
 };
-let userSignIn = () => {
+let userSignIn =async () => {
   let pwd = document.getElementById("signpwd").value;
   let em = document.getElementById("signem").value;
   let url = authorization_process_path+"signin_process.php";
@@ -119,6 +141,7 @@ let userSignIn = () => {
         document.getElementById("signpwd").value = "";
         document.getElementById("signem").value = "";   
         sendToCustomerCart();
+        
         window.location = home_path;   
       }
     });

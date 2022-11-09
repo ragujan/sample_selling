@@ -19,7 +19,7 @@ if(!isset($_SESSION["userEmail"])){
     <link rel="stylesheet" href="../style/bootstrap.css">
     <link rel="stylesheet" href="../style/forgotPassword.css">
 
-    <title>Document</title>
+    <title>Verify Forgot Password</title>
 </head>
 
 <body>
