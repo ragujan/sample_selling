@@ -15,7 +15,7 @@ echo $pageName;
     <div id="mydiv"></div>
     <form action="backend.php" method="post">
         <input type="text" name="HEY" value="RAGJN">
-        <button type="submit">CLIKC</button>
+        <button type="submit">click</button>
     </form> 
     <select id="abc">
       <option value="abc">abc</option> 
