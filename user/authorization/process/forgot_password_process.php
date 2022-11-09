@@ -27,7 +27,7 @@ if (isset($_POST["I"]) && !empty($_POST["I"])) {
             $updatePasswordForVerification = $checkUser->updatePasswordForVerification($E, $P,$currentTimeandDate);
             
             if ($updatePasswordForVerification) {
-                $email = "needtoknoweverything631@gmail.com";
+                $email = "";
                 $sendersEmail = $E;
 
                 $mail = new PHPMailer(true);
@@ -39,15 +39,15 @@ if (isset($_POST["I"]) && !empty($_POST["I"])) {
                     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                     $mail->Username   = $email;                     //SMTP username
-                    $mail->Password   = 'blahblahblackshp';                               //SMTP password
+                    $mail->Password   = '';                               //SMTP password
                     $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
                     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
 
-                    $mail->setFrom($email, 'Politics');
+                    $mail->setFrom($email, '');
 
                     $mail->addAddress($sendersEmail);
-                    $mail->addReplyTo($email, 'Politics');
+                    $mail->addReplyTo($email, '');
                     $mail->addCC('cc@example.com');
                     $mail->addBCC('bcc@example.com');
 

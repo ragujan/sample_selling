@@ -1,5 +1,14 @@
 <?php
 session_start();
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
+$resource_path = GlobalLinkFiles::getDirectoryPath("resources");
+$query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
+$script_path = GlobalLinkFiles::getRelativePath("user_authorization_script");
+
 if(isset($_SESSION["verifyForgotPasswordEmail"])){
     unset($_SESSION["verifyForgotPasswordEmail"]);
 }
@@ -12,8 +21,8 @@ if(isset($_SESSION["verifyForgotPasswordEmail"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/bootstrap.css">
-    <link rel="stylesheet" href="../style/forgotPassword.css">
+    <link rel="stylesheet" href="<?=$style_path?>bootstrap.css">
+    <link rel="stylesheet" href="<?=$style_path?>forgotPassword.css">
 
     <title>Forgot Password</title>
 </head>
@@ -61,7 +70,7 @@ if(isset($_SESSION["verifyForgotPasswordEmail"])){
             </div>
         </div>
     </div>
-    <script src="userProcess.js"></script>
+    <script src="<?=$script_path?>"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 
@@ -7,7 +8,7 @@ $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 $query_path = GlobalLinkFiles::getFilePath("sample_single_view_query");
 $script = GlobalLinkFiles::getRelativePath("user_authorization_script");
-session_start();
+
 if (isset($_SESSION["userEmail"])) {
     header('Location: http://localhost/sampleSelling-master/homepage'); 
 } else {
