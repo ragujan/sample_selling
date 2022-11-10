@@ -1,14 +1,20 @@
 <?php
 session_start();
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$script = GlobalLinkFiles::getRelativePath("user_account_script");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
 if (!isset($_SESSION["userEmail"])) {
     header('Location: http://localhost/sampleSelling-master/home/home.php');
 ?>
 
 <?php
 } else {
-    require "../userProcess/CheckUser.php";
+    require "../query/User.php";
     $userEmail = $_SESSION["userEmail"];
-    $userQuery = new CheckUser();
+    $userQuery = new User();
     $userDetails = $userQuery->getUserDetails($userEmail);
     $userName = $userDetails[0]["UserName"];
     $userFName = $userDetails[0]["FName"];
@@ -23,14 +29,14 @@ if (!isset($_SESSION["userEmail"])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../style/bootstrap.css">
-        <link rel="stylesheet" href="../style/userAccount.css">
-        <link rel="stylesheet" href="../style/navbar.css">
+        <link rel="stylesheet" href="<?=$style_path?>bootstrap.css">
+        <link rel="stylesheet" href="<?=$style_path?>userAccount.css">
+        <link rel="stylesheet" href="<?=$style_path?>navbar.css">
         
-        <link rel="stylesheet" href="../style/purchasedHistory.css">
+        <link rel="stylesheet" href="<?=$style_path?>purchasedHistory.css">
 
 
-        <title>Document</title>
+        <title>User Account</title>
     </head>
 
     <body>
@@ -39,7 +45,7 @@ if (!isset($_SESSION["userEmail"])) {
             <div class="col-12">
                 <div class="row">
                     <?php
-                    require "../site_header/header.php"
+                    require $site_header;
                     ?>
                     <div id="signInSignUpPage" class="userDetailsMainDiv pt-3 col-10 offset-1    text-center ">
                         <div class="row ">
@@ -109,7 +115,7 @@ if (!isset($_SESSION["userEmail"])) {
             </div>
         </div>
 
-        <script src="userAccount.js"></script>
+        <script src="<?=$script?>"></script>
 
     </body>
 

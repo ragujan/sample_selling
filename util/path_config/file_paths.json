@@ -115,6 +115,14 @@
         {
             "path_name": "user_authorization_script",
             "actual_path": "/sampleSelling-master/user/authorization/view/script.js"
+        },
+        {
+            "path_name": "user_account_script",
+            "actual_path": "/sampleSelling-master/user/account/view/script.js"
+        },
+        {
+            "path_name": "user_account_shortend",
+            "actual_path": "/sampleSelling-master/user/account/view/user_account.php"
         }
     ]
 }

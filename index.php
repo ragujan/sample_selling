@@ -1,7 +1,7 @@
 <?php
 $pageName = str_replace( array( '.php' ), '', basename(__FILE__));
 echo $pageName;
-
+echo 'PHP version: ' . phpversion();
 ?>
 <!DOCTYPE html>
 <html lang="en">
