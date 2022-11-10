@@ -1,5 +1,5 @@
 <?php
-require "DB.php";
+
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $db_path = GlobalLinkFiles::getFilePath("db");

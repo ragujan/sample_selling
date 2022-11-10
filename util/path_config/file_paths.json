@@ -122,7 +122,7 @@
         },
         {
             "path_name": "user_account_shortend",
-            "actual_path": "/sampleSelling-master/user/account/view/user_account.php"
+            "actual_path": "/sampleSelling-master/useraccount"
         }
     ]
 }
