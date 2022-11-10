@@ -1,7 +1,11 @@
 <?php
 require "DB.php";
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+$db_path = GlobalLinkFiles::getFilePath("db");
+require_once $db_path;
 
-class MidiSearchQueries extends DB
+class MidiSearchQueries extends Db
 {
     private $exactResultsPerPage = 2;
     private $totalcount;
