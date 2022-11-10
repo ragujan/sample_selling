@@ -1,10 +1,21 @@
+const add_to_cart_local_storage_url = "/sampleSelling-master/checkout/process/add_to_cart_local_storage.php"
+const add_to_customer_cart_url = "/sampleSelling-master/checkout/process/add_to_customer_cart.php"
+const get_customer_cart_url = "/sampleSelling-master/checkout/process/get_customer_cart.php";
+const get_sub_total_url = "/sampleSelling-master/checkout/process/get_sub_total.php"
+const remove_from_customer_cart_url = "/sampleSelling-master/checkout/process/remove_from_customer_cart.php"
+const show_cart_rows_url = "/sampleSelling-master/checkout/process/show_cart_rows.php";
+const validate_products_url = "/sampleSelling-master/checkout/process/validate_products.php";
+
+
+
 function getCart() {
+
   let getItemCart = globalThis.localStorage.getItem("cart");
   let check = true;
   let localstorageArray = globalThis.localStorage.getItem("cart");
 
   if (localstorageArray == null) {
-    const url = "../viewcart/getCustomerCart.php";
+    const url = get_customer_cart_url;
     fetch(url, { method: "POST" })
       .then((response) => response.json())
       .then((text) => {
@@ -22,7 +33,7 @@ let sendToCustomerCart = () => {
   let cartArray;
   cartArray = JSON.stringify(getCart());
 
-  const url = "../viewcart/addtoCustomerCart.php";
+  const url = add_to_customer_cart_url;
   const formData = new FormData();
   formData.append("array", cartArray);
   fetch(url, { method: "POST", body: formData })
@@ -36,7 +47,7 @@ let sendToCustomerCartSingle = (sId, qty) => {
   cartArray = JSON.stringify([{ id: sId, qty: qty }]);
 
   console.log(cartArray);
-  const url = "../viewcart/addtoCustomerCart.php";
+  const url = add_to_customer_cart_url;
   const formData = new FormData();
   formData.append("array", cartArray);
   fetch(url, { method: "POST", body: formData })
@@ -122,32 +133,34 @@ let newAddtoCart = (id, qty) => {
   }
 };
 
-let showCartItems = (cart) => {
+let showCartItems = async(cart) => {
   let cartRows = cart;
 
   if (getCart != null && cartRows != undefined) {
-    const f = new FormData();
-    f.append("cartArrays", JSON.stringify(cartRows));
-    let url = "../viewcart/showCartRows.php";
-    let send = fetch(url, { body: f, method: "POST" })
+    const form = new FormData();
+    form.append("cartArrays", JSON.stringify(cartRows));
+    let url = show_cart_rows_url;
+    let send = fetch(url, { body: form, method: "POST" })
       .then((response) => response.text())
       .then((text) => {
         if (rowHolderDiv != null) {
           rowHolderDiv.innerHTML = text;
+          document.getElementById("checkout-btn-click").click();
         }
       });
   } else {
   }
   upDateCartBagGui(getCart());
 };
-
-showCartItems(getCart());
+window.addEventListener('load', async () => {
+  showCartItems(getCart());
+})
 
 let newQtySelect = (id, qtynSPrice) => {
   let inputID = document.getElementById("cartQtyId" + id);
   let changingQty = inputID.value;
   console.log(changingQty);
-  let url = "../viewcart/addtoCartLocalStorage.php";
+  let url = add_to_cart_local_storage_url;
   let existingCart = getCart();
   let localArray = [];
   let intID;
@@ -207,7 +220,7 @@ let newQtySelect = (id, qtynSPrice) => {
 let removeFromCart = (id) => {
   let cartRows = getCart();
   let newCartRows = [];
-  const url = "../viewcart/removeFromCustomerCart.php";
+  const url = remove_from_customer_cart_url;
   const formdata = new FormData();
 
   formdata.append("id", id);
@@ -230,7 +243,7 @@ let upDateSubTotal = () => {
   let cartRows = JSON.stringify(getCart());
   console.log("cartrows is " + cartRows);
   if (cartRows != undefined) {
-    let url = "../viewcart/getSubTotal.php";
+    let url = get_sub_total_url;
     const form = new FormData();
     form.append("cartRows", cartRows);
     let sendFetch = fetch(url, { body: form, method: "POST" })

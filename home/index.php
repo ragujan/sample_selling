@@ -8,6 +8,7 @@ $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $query_path = GlobalLinkFiles::getFilePath("sample_queries");
 $resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 $home_page_script = GlobalLinkFiles::getRelativePath("home_page_script");
+$audio_sample_display_page_shortend = GlobalLinkFiles::getRelativePath("audio_sample_display_page_shortend");
 // include_once $query_path;
 ?>
 <!DOCTYPE html>
@@ -136,7 +137,7 @@ $home_page_script = GlobalLinkFiles::getRelativePath("home_page_script");
                                 </div>
 
                                 <div class="col-12 py-5 text-center ">
-                                    <button class="checksamplebutton"><a href="../showsamples/sampleselling.php" class="text-decoration-none">Check Samples Store</a></button>
+                                    <button class="checksamplebutton"><a href="<?=$audio_sample_display_page_shortend?>" class="text-decoration-none">Check Samples Store</a></button>
                                 </div>
                                 <div class="col-12 sociallinkholdingdiv ">
                                     <div class="row">

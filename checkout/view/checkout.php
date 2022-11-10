@@ -1,5 +1,11 @@
 <?php
 session_start();
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
+$site_header = GlobalLinkFiles::getFilePath("site_header_php");
+$checkout_script = GlobalLinkFiles::getRelativePath("checkout_script");
 
 ?>
 
@@ -10,24 +16,24 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../bootstrap.css">
-    <link rel="stylesheet" href="../style/sampleselling.css">
-    <link rel="stylesheet" href="../style/navbar.css">
-    <link rel="stylesheet" href="../style/viewsingleproduct.css">
+    <link rel="stylesheet" href="<?= $style_path ?>bootstrap.css">
+    <link rel="stylesheet" href="<?= $style_path ?>sampleselling.css">
+    <link rel="stylesheet" href="<?= $style_path ?>navbar.css">
+    <link rel="stylesheet" href="<?= $style_path ?>checkout.css">
 
     <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
     <script src="https://js.stripe.com/v3/"></script>
-    <title>Document</title>
+    <title>Checkout</title>
 </head>
 
 <body style="background-color: black;">
     <div class="container-fluid">
         <div class="col-12">
-            <form action="create-checkout-session.php" method="post">
+            <form action="../stripe/create-checkout-session.php" method="post">
                 <div class="row">
-
+                   
                     <?php
-                    require "../siteHeader/header.php";
+                    require $site_header;
                     ?>
                     <div id="cartItems d-none"></div>
                     <div class="col-lg-9 col-12  showCartItemsDiv">
@@ -43,7 +49,7 @@ session_start();
                             </div>
                             <div class=" pt-1 pb-4 px-4 col-12 offset-0 d-flex flex-row justify-content-center">
                                 <input type="hidden" name="lookup_key" value="price_1L99mSKy85cwwCHPgHmvEJij" />
-                                <button class="checkOutButton w-75 py-2" type="submit"> Check Out</button>
+                                <button id="checkout-btn-click" class="checkOutButton w-75 py-2" type="submit"> Check Out</button>
                             </div>
                             <div class=" py-1 px-1 col-12 offset-0 d-flex flex-row justify-content-center">
                                 <span class="text-white checkOutDescription">Shipping, taxes, and discount codes calculated at checkout.</span>
@@ -57,6 +63,6 @@ session_start();
         </div>
     </div>
 </body>
-<script src="viewcart.js"></script>
+<script src="script.js"></script>
 
 </html>

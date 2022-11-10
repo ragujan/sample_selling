@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-require "../userProcess/CheckUser.php";
+require "../query/User.php";
 if (isset($_SESSION["userEmail"])) {
     $email = $_SESSION["userEmail"];
     $cartItems = $_POST["array"];
 
     $array = json_decode($cartItems);
-    $customerQuery = new CheckUser();
+    $customerQuery = new User();
     $getId = $customerQuery->getCusIdByEmail($email);
     //echo $customerQuery->getCustomerCart($email);
    

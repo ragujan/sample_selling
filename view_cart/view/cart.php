@@ -47,7 +47,7 @@ $cart_script = GlobalLinkFiles::getRelativePath("cart_script");
                             <span class="text-white" >$ <span id="subTotalValue"></span></span>
                         </div>
                         <div class=" pt-1 pb-4 px-4 col-12 offset-0 d-flex flex-row justify-content-center">
-                            <button class="checkOutButton w-75 py-2" > Check Out</button>
+                            <button id="checkout-btn" class="checkOutButton w-75 py-2" > Check Out</button>
                         </div>
                         <div class=" py-1 px-1 col-12 offset-0 d-flex flex-row justify-content-center">
                             <span class="text-white checkOutDescription">Shipping, taxes, and discount codes calculated at checkout.</span>

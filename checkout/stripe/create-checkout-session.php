@@ -1,7 +1,10 @@
 <?php
 session_start();
-include "../vendor/autoload.php";
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 
+$vendor_path = GlobalLinkFiles::getFilePath("vendor_autoload");
+require_once $vendor_path;
 // This is your test secret API key.
 \Stripe\Stripe::setApiKey('sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K');
 $stripe = new \Stripe\StripeClient(
@@ -14,7 +17,8 @@ header('Content-Type: application/json');
 
 $YOUR_DOMAIN = 'http://localhost:80/sampleSelling-master';
 
-require_once "Samples.php";
+require_once "../query/Samples.php";
+include_once "../query/User.php";
 $object = new Samples();
 $sampleids;
 $qtys;
@@ -25,9 +29,9 @@ if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId
   $lineItems = array();
   $userId = "not_a_logged_in_user";
   if ($_SESSION["userEmail"]) {
-    include_once "../userProcess/CheckUser.php";
+    
     $userEmail = $_SESSION["userEmail"];
-    $user = new CheckUser();
+    $user = new User();
     $userId = $user->getCustomerUniqueIdByEmail($userEmail);
   }
 
