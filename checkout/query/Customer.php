@@ -1,6 +1,9 @@
 <?php
-require "../PDOPHP/DB.php";
-class Query extends DB
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+$db_path = GlobalLinkFiles::getFilePath("db");
+require_once $db_path;
+class Customer extends Db
 {
 
     public function verify_customer_by_id($customer_id)

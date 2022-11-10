@@ -1,5 +1,10 @@
 
 <?php
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+
+$vendor_path = GlobalLinkFiles::getFilePath("vendor_autoload");
+
 // webhook.php
 //
 // Use this sample code to handle webhook events in your integration.
@@ -14,8 +19,8 @@
 
 use Stripe\Stripe;
 
-require '../vendor/autoload.php';
-require '../customer/Query.php';
+require $vendor_path;
+require '../query/Customer.php';
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 $endpoint_secret = 'whsec_22a91502bfc987c641589ec8928c3eef6654686db591d387a662e2e6602c7713';
 
@@ -45,7 +50,7 @@ switch ($event->type) {
     $paymentIntent = $event->data->object;
     $customer_entered_email = $paymentIntent->id;
     $event_name = $paymentIntent->object;
-    $customer = new Query();
+    $customer = new Customer();
     break;
   case 'checkout.session.completed':
     $event_name = $event->data->object->object;
@@ -74,7 +79,7 @@ switch ($event->type) {
       $sample_id = $lists["price"]["metadata"]["sample_id"];
       $user_id = $lists["price"]["metadata"]["user_id"];
       $qty = $lists["price"]["metadata"]["qty"];
-      $customer = new Query();
+      $customer = new Customer();
       $customer_id = 0;
       $dnt = date("Y-m-d h:i:s");
 

@@ -123,6 +123,14 @@
         {
             "path_name": "user_account_shortend",
             "actual_path": "/sampleSelling-master/useraccount"
+        },
+        {
+            "path_name": "checkout_script",
+            "actual_path": "/sampleSelling-master/checkout/view/script.js"
+        },
+        {
+            "path_name": "vendor_autoload",
+            "actual_path": "/sampleSelling-master/vendor/autoload.php"
         }
     ]
 }

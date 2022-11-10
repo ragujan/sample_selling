@@ -1,11 +1,11 @@
 <?php
 
 if ($_POST["id"] && !empty($_POST["id"]) && $_POST["id"] > 0 &&   $_POST["qty"] && $_POST["qty"] > 0  && !empty($_POST["qty"])) {
-    require "../PDOPHP/Sample_query_functions.php";
+    require "../query/QueryFunctions.php";
     $ID = $_POST["id"];
     $QTY = $_POST["qty"];
     if (intval($ID) && intval($QTY) && $ID > 0 && $QTY > 0) {
-        $object = new Sample_query_functions();
+        $object = new QueryFunctions();
         $row = $object->validateCardproductID($ID);
         if ($row == 1) {
             $validatedArray = array("id" => $ID, "qty" => $QTY);
@@ -20,9 +20,7 @@ if ($_POST["id"] && !empty($_POST["id"]) && $_POST["id"] > 0 &&   $_POST["qty"] 
     }
 
 ?>
-    
       
-    
 <?php
 } else {
     $errorArray = array("ID" => "Nope");

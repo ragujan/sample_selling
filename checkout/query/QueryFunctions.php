@@ -1,7 +1,9 @@
 <?php
-require "connectDB.php";
-
-class Sample_query_functions extends DBh
+$ROOT = $_SERVER["DOCUMENT_ROOT"];
+require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
+$db_path = GlobalLinkFiles::getFilePath("db");
+require_once $db_path;
+class QueryFunctions extends Db
 {
 
 
@@ -28,27 +30,6 @@ class Sample_query_functions extends DBh
     INNER JOIN sampleimages
     ON sampleimages.sampleID=samples.sampleID";
 
-private $midi_sample_query = "SELECT * FROM samples 
-INNER JOIN subsampletype
-ON subsampletype.subsampleID =samples.SubsampleID
-INNER JOIN sampletype
-ON sampletype.sampleTypeID = subsampletype.sampleTypeID
-INNER JOIN sampleimages
-ON sampleimages.sampleID=samples.sampleID";
-
-
-    public function listSubSampleTypes($sample_type_name)
-    {
-        $query = "SELECT * FROM `subsampletype` WHERE `sampleTypeID` IN(SELECT `sampleTypeID` FROM `sampletype` WHERE `typeName`= ?);";
-        $statement = $this->connect()->prepare($query);
-        $statement->execute([$sample_type_name]);
-        $resultset = $statement->fetchAll();
-        if (count($resultset) > 0) {
-            return $resultset;
-        } else {
-            return $resultset;
-        }
-    }
 
 
     public function subSampleType($id, $PG)
@@ -98,12 +79,7 @@ ON sampleimages.sampleID=samples.sampleID";
 
     public function sampleType($id, $PG)
     {
-        $joined_query = $this->sampleTypeQuery;
-        if($id == 4){
-            echo "id is 4";
-           $joined_query = $this->midi_sample_query; 
-        }
-        $cal =  $joined_query . " " . "WHERE sampletype.sampleTypeID = ? ;";
+        $cal =  $this->sampleTypeQuery . " " . "WHERE sampletype.sampleTypeID = ?;";
 
         $statement1 = $this->connect()->prepare($cal);
         $statement1->execute([$id]);
@@ -122,7 +98,7 @@ ON sampleimages.sampleID=samples.sampleID";
             }
 
 
-            $sql = $joined_query . " " . "WHERE sampletype.sampleTypeID = ? LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG  ";
+            $sql = $this->sampleTypeQuery . " " . "WHERE sampletype.sampleTypeID = ? LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG  ";
 
             $statement2 = $this->connect()->prepare($sql);
             $statement2->execute([$id]);
@@ -133,27 +109,17 @@ ON sampleimages.sampleID=samples.sampleID";
 
     public function sampleTypePages($id)
     {
-        $joined_query = $this->sampleTypeQuery;
-        if($id == 4){
-            echo "id is 4";
-           $joined_query = $this->midi_sample_query; 
-        }
-        $cal =  $joined_query . " " . "WHERE sampletype.sampleTypeID = ? ;";
+        $cal =  $this->sampleTypeQuery . " " . "WHERE sampletype.sampleTypeID = ? ;";
 
         $statement1 = $this->connect()->prepare($cal);
         $statement1->execute([$id]);
         $this->totalcount = count($statement1->fetchAll());
         if ($this->totalcount == 0) {
             $this->fetcharray = array("Nothing");
-            echo "array nothing <br>";
             return 0;
         } else {
-            echo "there is a count <br>";
             // echo count($statement1->fetchAll());
             $totalPages = (ceil($this->totalcount / $this->exactResultsPerPage) - 1);
-            echo "total count is ". $this->totalcount;
-            echo "<br>";
-            echo $totalPages;
             return $totalPages;
         }
     }
@@ -187,7 +153,7 @@ ON sampleimages.sampleID=samples.sampleID";
                 $PG = 0;
             }
             if ($searchtext == "") {
-                $sql = $this->sampleTypeQuery . " " . "LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG ";
+                $sql = $this->sampleTypeQuery." "."LIMIT" . " " . $this->exactResultsPerPage . " " . "OFFSET $PG ";
                 $statement2 = $this->connect()->prepare($sql);
                 $statement2->execute();
             } else {
@@ -208,7 +174,7 @@ ON sampleimages.sampleID=samples.sampleID";
     public function searchByTextPages($searchtext)
     {
         if ($searchtext == "") {
-            $cal = $this->sampleTypeQuery;
+            $cal =$this->sampleTypeQuery;
             $statement1 = $this->connect()->prepare($cal);
             $statement1->execute();
         } else {
@@ -305,17 +271,7 @@ ON sampleimages.sampleID=samples.sampleID";
         $statement1->execute([$id]);
         return $statement1->fetchAll();
     }
-    public function get_top_three_products()
-    {
-        $query = "SELECT SUM(qty),sampleID,unique_id,CustomerID,dnt,customer_email 
-        FROM customer_purchase_history GROUP BY sampleID  ORDER BY qty  DESC LIMIT 3 ";
-        $statement = $this->connect()->prepare($query);
-        $statement->execute();
-        $rows = count($statement->fetchAll());
-        if ($rows > 2) {
-            return $statement->fetchAll();
-        }
-    }
+
 }
 
 // $bbc = "INNER JOIN sampletype

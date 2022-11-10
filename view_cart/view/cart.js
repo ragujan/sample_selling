@@ -1,3 +1,14 @@
+
+
+const checkout_page = "/sampleSelling-master/checkout/view/checkout.php";
+function checkoutPageRedirect(){
+         window.location = checkout_page;
+}
+const checkoutButton = document.getElementById("checkout-btn");
+checkoutButton.addEventListener('click',()=>{
+  checkoutPageRedirect();
+})
+
 function getCart() {
   let localstorageArray = globalThis.localStorage.getItem("cart");
 

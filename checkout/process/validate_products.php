@@ -1,7 +1,7 @@
 <?php
 $cart = json_decode($_POST["cart"]);
 
-require_once "Samples.php";
+require_once "../query/Samples.php";
 $object = new Samples();
 $validCart = array();
 foreach ($cart as $sample) {
