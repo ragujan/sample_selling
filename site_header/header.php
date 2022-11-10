@@ -12,6 +12,7 @@ $home_page_shortend = GlobalLinkFiles::getRelativePath("home_page_shortend");
 $customer_cart = GlobalLinkFiles::getRelativePath("customer_cart");
 $signin_signup_pages = GlobalLinkFiles::getRelativePath("signin_signup_pages_shortend");
 $logout = GlobalLinkFiles::getRelativePath("logout");
+$user_account_shortend = GlobalLinkFiles::getRelativePath("user_account_shortend");
 if (!isset($_SESSION["userEmail"])) {
 ?>
     <div style="height: 70px;" class="col-12   navbarMainDivHolder ">
@@ -98,7 +99,7 @@ if (!isset($_SESSION["userEmail"])) {
                         <div class="row">
                             <div class="col-12">
                                 <ul type="none" class="userOptionsUL" style="cursor: pointer;">
-                                    <li><a style="text-decoration: none;" href="../userAccount/userAccount.php">User Account</a></li>
+                                    <li><a style="text-decoration: none;" href="<?=$user_account_shortend?>">User Account</a></li>
                                     <li><a style="text-decoration: none;" href="<?=$customer_cart?>">My Cart</a></li>
                                     <li><a style="text-decoration: none;" href="<?=$logout?>">Log Out</a></li>
 
