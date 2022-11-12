@@ -1,10 +1,9 @@
 forgot_password_process.php
 forgotPasswordProcess.php
-SendMail.php
 index.php
 composer.json
 composer.lock
-
+util/send_email/config.php
 zip
 image
 audio
