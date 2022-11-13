@@ -131,6 +131,14 @@
         {
             "path_name": "vendor_autoload",
             "actual_path": "/sampleSelling-master/vendor/autoload.php"
+        },
+        {
+            "path_name": "send_email",
+            "actual_path": "/sampleSelling-master/util/send_email/SendMail.php"
+        },
+        {
+            "path_name": "folder_creation",
+            "actual_path": "/sampleSelling-master/folder_creation/"
         }
     ]
 }

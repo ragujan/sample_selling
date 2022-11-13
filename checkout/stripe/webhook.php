@@ -4,7 +4,7 @@ $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 
 $vendor_path = GlobalLinkFiles::getFilePath("vendor_autoload");
-
+$sendEmail_path = GlobalLinkFiles::getFilePath("send_email");
 // webhook.php
 //
 // Use this sample code to handle webhook events in your integration.
@@ -20,10 +20,13 @@ $vendor_path = GlobalLinkFiles::getFilePath("vendor_autoload");
 use Stripe\Stripe;
 
 require $vendor_path;
+require $sendEmail_path;
+require "config.php";
+require "../query/Cart.php";
 require '../query/Customer.php';
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-$endpoint_secret = 'whsec_22a91502bfc987c641589ec8928c3eef6654686db591d387a662e2e6602c7713';
-
+$endpoint_secret = constant("ENDPOINT_SECRET");
+$client_secret = constant("CLIENT_SECRET");
 $payload = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 $event = null;
@@ -53,54 +56,107 @@ switch ($event->type) {
     $customer = new Customer();
     break;
   case 'checkout.session.completed':
+    //after completion of checkout session you can enter the details to db
     $event_name = $event->data->object->object;
     $checkout_session_id = $event->data->object->id;
 
 
     $customer_creation = $event->data->object->customer;
-    \Stripe\Stripe::setApiKey('sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K');
+    \Stripe\Stripe::setApiKey($client_secret);
     $stripe = new \Stripe\StripeClient(
-      'sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K'
+      $client_secret
     );
 
     $customer_search =  $stripe->customers->retrieve(
       $customer_creation
     );
+    //retrive the customer email from the checkout event
     $customer_email = $customer_search->email;
+    //retrive the line items
     $line_items = \Stripe\Checkout\Session::allLineItems($checkout_session_id);
 
-    $listname = $line_items->object;
     $list_items_array = $line_items->data;
 
+    //customer query class
+    $customer = new Customer();
+
+    $dnt = date("Y-m-d h:i:s");
+
+    $unique_id = uniqid();
+
+    //get the customer id if there is no in database it will give zero
+    $customer_id = $customer->get_user_id_from_stripe($customer_email);
+
+    //insert to customer purchase table which will have the data and time, customer email and id
+    $customer->insert_customer_purchase($unique_id, $dnt, $customer_id, $customer_email);
+
+    //retive the customer purchase id to input in the customer purchase history table
+    $customer_purchase_id = $customer->get_customer_purchase_id_by_unique_id_and_customer_email($unique_id, $customer_email);
 
     foreach ($list_items_array as $lists) {
+
       $price_id = $lists["price"]["id"];
 
       $sample_id = $lists["price"]["metadata"]["sample_id"];
       $user_id = $lists["price"]["metadata"]["user_id"];
       $qty = $lists["price"]["metadata"]["qty"];
-      $customer = new Customer();
-      $customer_id = 0;
-      $dnt = date("Y-m-d h:i:s");
+
+      $sample_primary_key_id = $customer->get_sample_id($sample_id);
+
+
 
       $unique_id = uniqid();
-      if ($user_id == "not_a_logged_in_user") {
+      $customer->insert_customer_purchase_history($unique_id,  $qty,  $sample_primary_key_id, $customer_purchase_id);
 
-        $customer_id = $customer->get_user_id_from_stripe($customer_email);
-        $sample_primary_key_id = $customer->get_sample_id($sample_id);
 
-        if ($customer_id == 0 || $customer_id == '0') {
-          $customer->insert_customer_purchase($unique_id, $dnt, $qty, '0', $sample_primary_key_id, $customer_email);
-        } else {
+      // if ($user_id == "not_a_logged_in_user") {
 
-          $customer->insert_customer_purchase($unique_id, $dnt, $qty, $customer_id, $sample_primary_key_id, $customer_email);
-        }
-      } else {
-        $customer_id = $customer->get_user_id_from_stripe($customer_email);
-        $sample_primary_key_id = $customer->get_sample_id($sample_id);
-        $customer->insert_customer_purchase($unique_id, $dnt, $qty, $customer_id, $sample_primary_key_id, $customer_email);
-      }
+
+      //   $sample_primary_key_id = $customer->get_sample_id($sample_id);
+
+      //   if ($customer_id == 0 || $customer_id == '0') {
+      //     $unique_id = uniqid();
+      //     $customer->insert_customer_purchase_history($unique_id,  $qty,  $sample_primary_key_id, $customer_purchase_id);
+      //   } else {
+      //     $unique_id = uniqid();
+      //     $customer->insert_customer_purchase_history($unique_id,  $qty,  $sample_primary_key_id, $customer_purchase_id);
+      //   }
+      // } else {
+      //   $unique_id = uniqid();
+      //   $sample_primary_key_id = $customer->get_sample_id($sample_id);
+      //   $customer->insert_customer_purchase_history($unique_id,  $qty,  $sample_primary_key_id, $customer_purchase_id);
+      // }
+      //create a product
+
     }
+
+    $cart = new Cart();
+
+    $product_paths = $query->get_products($unique_id, $dnt);
+    $product_path_count = count($product_paths);
+
+    $product_link_body = "";
+
+    $address_domain = "";
+    if (!isset($_SERVER['HTTPS'])) {
+      $address_domain = "http:localhost";
+    } else {
+      $address_domain = "https:localhost";
+    }
+    for ($i = 0; $i < $product_path_count; $i++) {
+
+      $product_link_body .=  $address_domain . $product_paths[$i] . "<br>";
+    }
+
+
+
+
+    $email = new SendMail();
+    $email->setReceiversEmail($customer_email);
+    $email->setHeader($customer_email . " is coming for the victory");
+
+    $email->setBody("ABCD");
+    $email->sendEmail();
     break;
 
 
