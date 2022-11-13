@@ -9,3 +9,6 @@ RewriteRule viewcart view_cart/view/cart.php [NC,L]
 RewriteRule homepage home/index.php [NC,L]
 RewriteRule login user/authorization/view/signin_signup.php [NC,L]
 RewriteRule useraccount user/account/view/user_account.php [NC,L]
+Options -Indexes
+DirectoryIndex products/samples/audio
+

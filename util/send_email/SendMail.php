@@ -30,7 +30,8 @@ class SendMail
         $this->hostname = constant("HOSTNAME");
     }
     private $headerText;
-    public function setReceiversEmail($email){
+    public function setReceiversEmail($email)
+    {
         $this->email = $email;
     }
     public function setHeader($headerText)
@@ -46,7 +47,7 @@ class SendMail
     public function sendEmail()
     {
         $this->setCredentials();
-        
+
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
@@ -66,7 +67,7 @@ class SendMail
             $mail->Body    = $this->body;
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients eee';
             $mail->send();
-
+            $mail->SMTPDebug = true;
             $this->emailSentStatus = true;
             echo "Success";
         } catch (Exception $e) {
@@ -76,5 +77,10 @@ class SendMail
         return $this->emailSentStatus;
     }
 }
+$customer_email = "needtoknoweverything631@gmail.com";
+$email = new SendMail();
+$email->setReceiversEmail($customer_email);
+$email->setHeader($customer_email . " is coming for the victory");
 
-
+$email->setBody("HEY HEY");
+$email->sendEmail();

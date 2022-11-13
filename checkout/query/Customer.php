@@ -17,12 +17,38 @@ class Customer extends Db
         }
         return $state;
     }
-    public function insert_customer_purchase($unique_id, $dnt, $qty, $customer_id, $sample_id,$customer_email)
-    {
-        $query = "INSERT INTO `customer_purchase_history` (`unique_id`,`dnt`,`qty`,`CustomerID`,`sampleID`,`customer_email`) 
-        VALUE (?,?,?,?,?,?)";
+    public function insert_customer_purchase($unique_id, $dnt,  $customer_id, $customer_email){
+        $query = "INSERT INTO `customer_purchase` (`unique_id`,`dnt`,`customer_id`,`customer_email`) 
+        VALUES (?,?,?,?)";
         $statement = $this->connect()->prepare($query);
-        $statement->execute([$unique_id, $dnt, $qty, $customer_id, $sample_id,$customer_email]);
+        $statement->execute([$unique_id, $dnt, $customer_id, $customer_email]);
+    }
+
+    public function get_customer_purchase_id_by_unique_id_and_customer_email($unique_id,$customer_email){
+        $customer_purchase_id = "";
+        $query = "SELECT * FROM `customer_purchase` WHERE `unique_id` =? AND `customer_email`=?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$unique_id,$customer_email]);
+        $resultset = $statement->fetchAll();
+        $row_count = count($resultset);
+        if($row_count ==1){
+               $customer_purchase_id = $resultset[0]["customer_purchase_id"];
+        }
+        return $customer_purchase_id;
+    }
+
+    public function insert_abc($unique_id){
+        $query = "INSERT INTO `abc` (`unique_id`) 
+        VALUES (?)";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$unique_id]);
+    }
+    public function insert_customer_purchase_history($unique_id, $qty, $sample_id,$customer_purchase_id)
+    {
+        $query = "INSERT INTO `customer_purchase_history` (`unique_id`,`qty`,`sampleID`,`customer_purchase_id`) 
+        VALUES (?,?,?,?)";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$unique_id,$qty , $sample_id,$customer_purchase_id]);
     }
     public function insert_just($unique_id,$event_name)
     {
@@ -69,3 +95,6 @@ class Customer extends Db
         return $id;
     }
 }
+
+$customer = new Customer();
+

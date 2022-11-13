@@ -28,6 +28,10 @@
         {
             "directory_name": "resources",
             "actual_path": "/sampleSelling-master/resources/"
+        },
+        {
+            "directory_name": "folder_creation",
+            "actual_path": "/sampleSelling-master/folder_creation/"
         }
     ]
 }
