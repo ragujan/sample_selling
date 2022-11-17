@@ -1,13 +1,11 @@
 <?php
-
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $db_path = GlobalLinkFiles::getFilePath("db");
 require_once $db_path;
+class DownloadLink extends Db{
 
-class Cart extends Db
-{
-    public function confirmCustomerPurchase($purchase_id, $dnt)
+   public function confirmCustomerPurchase($purchase_id, $dnt)
     {
         $state = false;
         $query = "SELECT * FROM `customer_purchase` WHERE `unique_id` =? AND `dnt`=? ";
@@ -20,6 +18,7 @@ class Cart extends Db
         }
         return $state;
     }
+
 
     public function get_customer_purchase_id($purchase_unique_id, $dnt)
     {
@@ -62,21 +61,6 @@ class Cart extends Db
         } else {
             echo "nothing";
         }
-    }
-    public function checkLink($unique_id,$customer_email){
-        $status = false;
-        $query = "SELECT * FROM `unique_key` WHERE `key`= ? AND `customer_email` = ?";
-        $statement = $this->connect()->prepare($query);
-        $statement->execute([$unique_id,$customer_email]);
-        $resultset = $statement->fetchAll();
-        $row_count = count($resultset);
-        if($row_count == 1){
-                $status = true; 
-        }
-        return $status;
-    }
-    public function removeDownloadLink($unique_id){
-
     }
 
 }
