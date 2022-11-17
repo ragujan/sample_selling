@@ -132,10 +132,10 @@ switch ($event->type) {
 
     $cart = new Cart();
 
-    $product_paths = $query->get_products($unique_id, $dnt);
+    $product_paths = $cart->get_products($unique_id, $dnt);
     $product_path_count = count($product_paths);
 
-    $product_link_body = "";
+    $product_link_body = "This is the body ";
 
     $address_domain = "";
     if (!isset($_SERVER['HTTPS'])) {
@@ -151,12 +151,11 @@ switch ($event->type) {
 
 
 
-    $email = new SendMail();
-    $email->setReceiversEmail($customer_email);
-    $email->setHeader($customer_email . " is coming for the victory");
-
-    $email->setBody("ABCD");
-    $email->sendEmail();
+    $sendmail = "kannadhasanragujan@gmail.com";
+    $header = "Hey Hi";
+    $body = "This is text message";
+    $email = new  SendEmail($sendmail,$header,$body);
+   
     break;
 
 

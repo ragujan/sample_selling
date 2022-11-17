@@ -1,4 +1,8 @@
 <?php
+
+$abc = "abcd";
+
+
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $db_path = GlobalLinkFiles::getFilePath("db");
@@ -8,13 +12,18 @@ class Search extends Db
 
     function limitsearch()
     {
-        $searchquery = "SELECT SUM(qty),customer_purchase_history.sampleID,unique_id,CustomerID,dnt,customer_email,source_URL,SamplePrice,Sample_Name 
+        $searchquery = "SELECT SUM(qty),
+customer_purchase_history.sampleID,
+unique_id,
+source_URL,
+SamplePrice,
+Sample_Name 
 FROM customer_purchase_history
 INNER JOIN sampleimages 
 ON sampleimages.sampleID = customer_purchase_history.sampleID
 INNER JOIN samples
 ON samples.sampleID = customer_purchase_history.sampleID
-GROUP BY sampleID  ORDER BY qty  DESC LIMIT 3 ";
+GROUP BY sampleID  ORDER BY qty  DESC LIMIT 3";
         $statement = $this->connect()->prepare($searchquery);
         $statement->execute([]);
         $resultset = $statement->fetchAll();

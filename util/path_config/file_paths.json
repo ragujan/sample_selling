@@ -134,7 +134,7 @@
         },
         {
             "path_name": "send_email",
-            "actual_path": "/sampleSelling-master/util/send_email/SendMail.php"
+            "actual_path": "/sampleSelling-master/util/send_email/SendEmail.php"
         },
         {
             "path_name": "folder_creation",
