@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 //class that is made for sending emails it has the needed methods that could be useful
 //configuring the email messages 
-class SendMail
+class SendMailPHPMailer 
 {
     private $emailSentStatus = false;
     private $sendersEmail;
@@ -77,10 +77,3 @@ class SendMail
         return $this->emailSentStatus;
     }
 }
-$customer_email = "needtoknoweverything631@gmail.com";
-$email = new SendMail();
-$email->setReceiversEmail($customer_email);
-$email->setHeader($customer_email . " is coming for the victory");
-
-$email->setBody("HEY HEY");
-$email->sendEmail();
