@@ -8,6 +8,7 @@ $script = GlobalLinkFiles::getRelativePath("user_account_script");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 if (!isset($_SESSION["userEmail"])) {
     header('Location: http://localhost/sampleSelling-master/home/home.php');
+    die();
 ?>
 
 <?php

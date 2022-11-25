@@ -139,6 +139,10 @@
         {
             "path_name": "folder_creation",
             "actual_path": "/sampleSelling-master/folder_creation/"
+        },
+        {
+            "path_name": "authenticate_download",
+            "actual_path":"/sampleSelling-master/file_testing/authenticate_download.php"
         }
     ]
 }

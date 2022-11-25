@@ -4,7 +4,28 @@ $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 
 $vendor_path = GlobalLinkFiles::getFilePath("vendor_autoload");
+$authenticate_download_path = GlobalLinkFiles::getRelativePath("authenticate_download");
+
 require_once $vendor_path;
+
+
+//success url generating process
+$protocol = "http";
+if (isset($_SERVER["HTTPS"])) {
+  $protocol = "https";
+}
+$host_name = "";
+if (array_key_exists("HTTP_HOST", $_SERVER)) {
+  $host_name = $_SERVER["HTTP_HOST"];
+  
+}
+$link = "http://localhost/sampleSelling-master/file_testing/authenticate_download.php?unique_id=6374abd38d577&dnt=2022-11-16%2010:22:27";
+$authenticate_download_url = $protocol . "://{$host_name}{$authenticate_download_path}";
+//-----------------------
+
+
+
+
 // This is your test secret API key.
 \Stripe\Stripe::setApiKey('sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K');
 $stripe = new \Stripe\StripeClient(
@@ -19,7 +40,9 @@ $YOUR_DOMAIN = 'http://localhost:80/sampleSelling-master';
 
 require_once "../query/Samples.php";
 include_once "../query/User.php";
+include_once "../util/Util.php";
 $object = new Samples();
+$util = new Util();
 $sampleids;
 $qtys;
 
@@ -32,7 +55,7 @@ if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId
   $lineItems = array();
   $userId = "not_a_logged_in_user";
   if ($_SESSION["userEmail"]) {
-    
+
     $userEmail = $_SESSION["userEmail"];
     $user = new User();
     $userId = $user->getCustomerUniqueIdByEmail($userEmail);
@@ -50,13 +73,13 @@ if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId
       $sampleImagePath = str_replace(array('.'), "", $sampleImagePath);
       $sampleImagePath = str_replace(array('jpg'), ".jpg", $sampleImagePath);
       $sampleImagePath = $YOUR_DOMAIN . $sampleImagePath;
-      
+
 
       //create a unique id to identify the purchase
       $unique_id = uniqid();
 
       //create meta data to attach to the price 
-      $meta_data = array("user_id" => $userId, "sample_id" => $sampleId, "qty" => $qty,"unique_id"=>$unique_id);
+      $meta_data = array("user_id" => $userId, "sample_id" => $sampleId, "qty" => $qty, "unique_id" => $unique_id);
       $product = \Stripe\Product::create([
         'name' => "{$samplename}",
         'images' => [
@@ -82,17 +105,26 @@ if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId
 
 
   //session creation process
+  $checkout_unique_id = $util->getCheckedRandomUniqueId();
+  $dnt = date("Y-m-d h:i:s");
+  $checkout_session_meta_data =  array("unique_id" => $checkout_unique_id, "dnt" => $dnt);
 
-  $checkout_session_meta_data =  array("unique_id" => $userId, "sample_id" => $sampleId, "qty" => $qty,"unique_id"=>$unique_id);
+  //attaching parameters to the download url for success url 
+
+  $unique_id = $checkout_unique_id;
+  $dnt = str_replace(" ","%20",$dnt);
+  $authenticate_download_url_parameters = $authenticate_download_url . "?unique_id={$unique_id}&dnt={$dnt}";
+
+
   if (count($lineItems) > 0) {
     $lineItems  = array('line_items' => $lineItems);
     $checkout_session = \Stripe\Checkout\Session::create([
       $lineItems,
       'mode' => 'payment',
-      'success_url' => $YOUR_DOMAIN . '/payment-testing/success.html',
+      'success_url' => $authenticate_download_url_parameters,
       'cancel_url' => $YOUR_DOMAIN . '/payment-testing/cancel.html',
       'customer_creation' => 'always',
-      'metadata' =>$something
+      'metadata' => $checkout_session_meta_data
     ]);
 
 

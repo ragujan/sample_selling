@@ -1,6 +1,11 @@
 <?php
 require "DownloadLink.php";
 require "DirectoryZip.php";
+
+if(!isset($_GET["unique_id"]) || !isset($_GET["dnt"])){
+    
+    die();
+}
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $folder_creation_path = GlobalLinkFiles::getFilePath("folder_creation");
@@ -109,7 +114,7 @@ $are_you_sure = "This is an one time download link for your purchase, we don't t
             </div>
             <div class="text-end">
                 <div>
-                    <button id="accept-btn" onclick="acceptBtnProcess('<?=$unique_id?>','<?=$dnt?>');" class="accept-btn">accept</button>
+                    <button onclick="acceptBtnProcess('<?=$unique_id?>','<?=$dnt?>');" id="accept-btn" class="accept-btn">accept</button>
                 </div>
             </div>
 

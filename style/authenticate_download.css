@@ -6,8 +6,8 @@ button {
 .warningInfoDiv {
 
 
-    position: relative;
-    
+   
+    font-size: 25px;
     /* -webkit-animation: 'appear';
     -webkit-animation-duration: 2s; */
 }
@@ -52,12 +52,13 @@ button {
         background-color: green;
     }
 }
+
 @keyframes appear {
     from {
         top: -200px;
     }
 
     to {
-        top:100px;
+        top: 100px;
     }
 }

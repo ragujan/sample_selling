@@ -2,7 +2,7 @@ const download_btn = document.getElementById("download-btn");
 const accept_btn = document.getElementById("accept-btn");
 const warning_div = document.getElementById("warning_div");
 const download_form_url = "download_form.php";
-
+const download_form_container = document.getElementById("download-form");
 function keyFrameStyling(className,frompostion, toposition) {
     return (
         `  
@@ -52,8 +52,9 @@ window.addEventListener('load', () => {
 })
 
 acceptBtnProcess =async (unique_id,dnt)=>{
+    console.log(unique_id,dnt)
     warning_div.remove();
-    const download_form_container = document.getElementById("download-form");
+    
     const form = new FormData();
     form.append("unique_id",unique_id)
     form.append("dnt",dnt)
@@ -62,6 +63,7 @@ acceptBtnProcess =async (unique_id,dnt)=>{
     .then((res)=>res.text())
     .then((text)=>{
         console.log(text);
+        console.log(download_form_container)
         download_form_container.classList.remove("d-none");
         download_form_container.innerHTML = text;
     })
