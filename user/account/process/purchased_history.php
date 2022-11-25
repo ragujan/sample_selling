@@ -4,6 +4,7 @@
 
     if (!isset($_SESSION["userEmail"])) {
         echo "Error";
+        exit();
     } else {
         require_once "../query/UserData.php";
         $results_per_page = 4;
@@ -48,8 +49,8 @@
     ?>
                 <div class="col-lg-10 offset-lg-1 col-md-10 offset-md-1 col-10 offset-1 px-md-5  px-2 pt-4  darkBlack ">
                     <!-- <table  class="  tableDark tableborderradius table"> -->
-                 <table class="purchasetable" >
-                        <thead >
+                    <table class="purchasetable">
+                        <thead>
                             <tr class="">
                                 <th scope="col" class="">Id</th>
                                 <th scope="col" class="">Price</th>
@@ -58,18 +59,18 @@
                                 <th scope="col" class="">UID</th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                             <?php
 
                             for ($i = 0; $i < count($resultSet); $i++) {
                             ?>
-                                <tr >
+                                <tr>
                                     <td class=" "><?php echo $resultSet[$i]["unique_id"] ?></td>
                                     <td class=" "><?php echo $resultSet[$i]["SamplePrice"] ?></td>
                                     <td class=" "><?php echo $resultSet[$i]["qty"] ?></td>
                                     <td class=" "><?php echo $resultSet[$i]["dnt"] ?></td>
                                     <td class=" "><?php echo "33Ik3*09326^^%BlRAGBAG"; ?></td>
-                               
+
                                 </tr>
 
                             <?php
@@ -89,12 +90,12 @@
             <?php
             }
         }
-    }
 
 
 
-    $totalbuttons = floor(count($totalresultSet) / $results_per_page);
-    if (count($resultSet) > 0) {
+
+        $totalbuttons = floor(count($totalresultSet) / $results_per_page);
+        if (count($resultSet) > 0) {
             ?>
             <div class="col-md-10 offset-md-1 col-12 offset-0 darkBlack ">
                 <div class="row">
@@ -161,10 +162,11 @@
                     </div>
                 </div>
             </div>
-        <?php
+    <?php
+        }
     }
-        ?>
+    ?>
 
 
 
-                </div>
+</div>

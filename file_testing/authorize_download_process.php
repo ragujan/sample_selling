@@ -4,10 +4,16 @@ require "DirectoryZip.php";
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $folder_creation_path = GlobalLinkFiles::getFilePath("folder_creation");
-
+$home_page = GlobalLinkFiles::getDirectoryPath("home_page_shortend");
 $query_object = new DownloadLink();
 $link = "http://localhost/sampleSelling-master/file_testing/authenticate.php?unique_id=6374abd38d577&dnt=2022-11-16%2010:22:27";
 
+
+
+if(!isset($_POST["unique_id"]) || !isset($_POST["dnt"])){
+
+    die();
+}
 $unique_id = $_POST["unique_id"];
 $dnt = $_POST["dnt"];
 
@@ -62,7 +68,8 @@ if (!$download->checkDownloadStatus($unique_id, $dnt)) {
     if (file_exists($folder_path_to_be_zipped)) {
         echo " yess this file exits";
         //add a row to the download history table so next time there won't be a chance to download again
-        //$download->updateDownloadStatus($unique_id, $dnt);
+        $download->updateDownloadStatus($unique_id, $dnt);
+
 
         //download section 
 
@@ -81,4 +88,6 @@ if (!$download->checkDownloadStatus($unique_id, $dnt)) {
         unlink($folder_name);
         exit();
     }
+}else{
+
 }

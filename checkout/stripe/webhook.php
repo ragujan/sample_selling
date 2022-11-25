@@ -5,6 +5,11 @@ require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.p
 
 $vendor_path = GlobalLinkFiles::getFilePath("vendor_autoload");
 $sendEmail_path = GlobalLinkFiles::getFilePath("send_email");
+
+
+//set success url
+
+
 // webhook.php
 //
 // Use this sample code to handle webhook events in your integration.
@@ -24,6 +29,11 @@ require $sendEmail_path;
 require "config.php";
 require "../query/Cart.php";
 require '../query/Customer.php';
+require "../util/Util.php";
+
+//instantiating object of class Util
+$utill = new Util();
+
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 $endpoint_secret = constant("ENDPOINT_SECRET");
 $client_secret = constant("CLIENT_SECRET");
@@ -59,7 +69,8 @@ switch ($event->type) {
     //after completion of checkout session you can enter the details to db
     $event_name = $event->data->object->object;
     $checkout_session_id = $event->data->object->id;
-
+    $dnt = $event->data->object->metadata->dnt;
+    $unique_id = $event->data->object->metadata->unique_id;
 
     $customer_creation = $event->data->object->customer;
     \Stripe\Stripe::setApiKey($client_secret);
@@ -80,9 +91,9 @@ switch ($event->type) {
     //customer query class
     $customer = new Customer();
 
-    $dnt = date("Y-m-d h:i:s");
+   
 
-    $unique_id = uniqid();
+    // $unique_id = uniqid();
 
     //get the customer id if there is no in database it will give zero
     $customer_id = $customer->get_user_id_from_stripe($customer_email);
@@ -105,7 +116,7 @@ switch ($event->type) {
 
 
 
-      $unique_id = uniqid();
+      $unique_id = $utill->getCheckedRandomUniqueIdCPHistory();
       $customer->insert_customer_purchase_history($unique_id,  $qty,  $sample_primary_key_id, $customer_purchase_id);
 
 
@@ -154,7 +165,7 @@ switch ($event->type) {
     $sendmail = "kannadhasanragujan@gmail.com";
     $header = "Hey Hi";
     $body = "This is text message";
-    $email = new  SendEmail($sendmail,$header,$body);
+    // $email = new  SendEmail($sendmail,$header,$body);
    
     break;
 
