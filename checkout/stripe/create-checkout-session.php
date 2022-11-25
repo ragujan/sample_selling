@@ -23,6 +23,9 @@ $object = new Samples();
 $sampleids;
 $qtys;
 
+
+
+
 if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId"]) == count($_POST["qty"]))) {
   $sampleids = $_POST["uniqueId"];
   $qtys = $_POST["qty"];
@@ -47,9 +50,13 @@ if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId
       $sampleImagePath = str_replace(array('.'), "", $sampleImagePath);
       $sampleImagePath = str_replace(array('jpg'), ".jpg", $sampleImagePath);
       $sampleImagePath = $YOUR_DOMAIN . $sampleImagePath;
+      
+
+      //create a unique id to identify the purchase
+      $unique_id = uniqid();
 
       //create meta data to attach to the price 
-      $meta_data = array("user_id" => $userId, "sample_id" => $sampleId, "qty" => $qty);
+      $meta_data = array("user_id" => $userId, "sample_id" => $sampleId, "qty" => $qty,"unique_id"=>$unique_id);
       $product = \Stripe\Product::create([
         'name' => "{$samplename}",
         'images' => [
@@ -71,6 +78,12 @@ if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId
     }
   }
 
+
+
+
+  //session creation process
+
+  $checkout_session_meta_data =  array("unique_id" => $userId, "sample_id" => $sampleId, "qty" => $qty,"unique_id"=>$unique_id);
   if (count($lineItems) > 0) {
     $lineItems  = array('line_items' => $lineItems);
     $checkout_session = \Stripe\Checkout\Session::create([
@@ -78,7 +91,8 @@ if (isset($_POST["uniqueId"]) && isset($_POST["qty"]) && (count($_POST["uniqueId
       'mode' => 'payment',
       'success_url' => $YOUR_DOMAIN . '/payment-testing/success.html',
       'cancel_url' => $YOUR_DOMAIN . '/payment-testing/cancel.html',
-      'customer_creation' => 'always'
+      'customer_creation' => 'always',
+      'metadata' =>$something
     ]);
 
 

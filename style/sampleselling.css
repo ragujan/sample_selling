@@ -8,7 +8,9 @@
 html {
     scroll-behavior: smooth;
 }
-
+input, button{
+    color: black;
+}
 * {
     /* don't use '0px' or any other unit, if you set the value to zero */
     padding: 0;
