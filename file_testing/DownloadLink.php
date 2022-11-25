@@ -3,9 +3,10 @@ $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $db_path = GlobalLinkFiles::getFilePath("db");
 require_once $db_path;
-class DownloadLink extends Db{
+class DownloadLink extends Db
+{
 
-   public function confirmCustomerPurchase($purchase_id, $dnt)
+    public function confirmCustomerPurchase($purchase_id, $dnt)
     {
         $state = false;
         $query = "SELECT * FROM `customer_purchase` WHERE `unique_id` =? AND `dnt`=? ";
@@ -63,6 +64,40 @@ class DownloadLink extends Db{
         } else {
             echo "nothing";
         }
+    }
+    public function checkDownloadStatus($unique_id, $dnt)
+    {
+        $already_downloaded= false;
+        $query = "SELECT * FROM `product_download_history` 
+        INNER JOIN `customer_purchase` 
+        ON `customer_purchase`.`customer_purchase_id` = `product_download_history`.`customer_purchase_id`
+         WHERE  `customer_purchase`.`unique_id` = ? AND `customer_purchase`.`dnt` = ? ";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$unique_id,$dnt]);
+        $resultset = $statement->fetchAll();
+        $row_count = count($resultset);
+        if($row_count==1){
+            $already_downloaded = true;
+        }
+        return $already_downloaded ;
+    }
+
+        public function updateDownloadStatus($unique_id, $dnt)
+    {
+        echo "<br>";
+        echo "unique_id is ". $unique_id;
+        $downloaded_times = 1;
+        $download_unique_id = uniqid(); 
+   
+        $purchase_id = $this->get_customer_purchase_id($unique_id,$dnt);
+        echo "<br>";
+        echo "purchase id is ";
+        echo $purchase_id;
+        $query = "INSERT INTO `product_download_history` (`downloaded_times`,`unique_id`,`customer_purchase_id`)
+        VALUES (?,?,?)";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$downloaded_times,$download_unique_id,$purchase_id]);
+      
     }
 
 }
