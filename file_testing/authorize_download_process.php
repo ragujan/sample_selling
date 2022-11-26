@@ -12,7 +12,7 @@ require_once "DirectoryZip.php";
 require_once "Validation.php";
 
 $query_object = new DownloadLink();
-$link = "http://localhost/sampleSelling-master/file_testing/authenticate.php?unique_id=6374abd38d577&dnt=2022-11-16%2010:22:27";
+$link = "http://localhost/sampleSelling-master/file_testing/authenticate_download.php?unique_id=6374abd38d577&dnt=2022-11-16%2010:22:27";
 
 //error states to display error messages in html
 $input_received = true;
@@ -129,17 +129,25 @@ if (
 
 
     $error_code = "0";
+    $message = "";
+    $url_dnt = str_replace(" ","%20",$dnt);
     if (!$input_validation) {
         $error_code = "0001";
+        $message = "?error_code={$error_code}";
     } else if ($one_time_download_completed) {
-        $error_code = "0002";
+        $error_code = "0002";     
+        $message = "?error_code={$error_code}&unique_id={$unique_id}&dnt={$url_dnt}";
     } else if ($no_matches_found) {
         $error_code = "0003";
+        $message = "?error_code={$error_code}&unique_id={$unique_id}&dnt={$url_dnt}";
     } else if (!$file_is_made) {
         $error_code = "0004";
+        $message = "?error_code={$error_code}";
     } else if (!$directory_is_made) {
         $error_code = "0005";
+        $message = "?error_code={$error_code}&unique_id={$unique_id}&dnt={$url_dnt}";
+        
     }
-    $error_url = HeaderUrl::getUrl($download_error_page) . "?error_code={$error_code}";
+    $error_url = HeaderUrl::getUrl($download_error_page) . "{$message}";
     HeaderUrl::regularHeaderFunction($error_url);
 } 

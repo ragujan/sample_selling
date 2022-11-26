@@ -5,7 +5,7 @@
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $folder_creation_path = GlobalLinkFiles::getFilePath("folder_creation");
-$style = GlobalLinkFiles::getDirectoryPath("style");
+$style_path = GlobalLinkFiles::getDirectoryPath("style");
 $home_page_shortend = GlobalLinkFiles::getRelativePath("home_page_shortend");
 $header_url = GlobalLinkFiles::getFilePath("header_url");
 require_once $header_url;
@@ -13,9 +13,9 @@ require_once "Validation.php";
 
 
 $link = "http://localhost/sampleSelling-master/file_testing/authenticate_download.php?unique_id=6374abd38d577&dnt=2022-11-16%2010:22:27";
-$style_path = $style . "authenticate_download.css";
-$bootstap_path = $style . "bootstrap.css";
-$sample_selling_path = $style . "sampleselling.css";
+$style = $style_path . "authenticate_download.css";
+$bootstap_path = $style_path . "bootstrap.css";
+$sample_selling_path = $style_path . "sampleselling.css";
 
 $unique_id;
 $dnt;
@@ -72,7 +72,7 @@ $are_you_sure = "This is an one time download link for your purchase, we don't t
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= $bootstap_path ?>">
     <link rel="stylesheet" href="<?= $sample_selling_path ?>">
-    <link rel="stylesheet" href="<?= $style_path ?>">
+    <link rel="stylesheet" href="<?= $style ?>">
     <title>authenticate_download</title>
 
 </head>
