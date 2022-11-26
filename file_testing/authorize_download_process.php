@@ -22,6 +22,10 @@ $no_matches_found = false;
 $file_is_made = false;
 $directory_is_made = false;
 
+//to keep the  created sample zip files' names
+$created_sample_zip_files = array();
+
+
 if (!isset($_POST["unique_id"]) || !isset($_POST["dnt"])) {
     $input_received = false;
     HeaderUrl::headerFunction($home_page_shortend);
@@ -68,6 +72,8 @@ if (!$download->checkDownloadStatus($unique_id, $dnt)) {
                     $unique_name = $products[$i]["UniqueId"] . uniqid() . $products[$i]["Sample_Name"];
                     //generate file path for the copy of original zip file 
                     $folder_path = $folder_name . "/" . $unique_name . ".zip";
+                    //add the created folder path names to the  array 
+                    array_push($created_sample_zip_files,$folder_path);
                     //original product will be copied to this $folder_path
                     copy($product, $folder_path);
                 }
@@ -101,7 +107,17 @@ if (!$download->checkDownloadStatus($unique_id, $dnt)) {
                 flush(); // Flush system output buffer
                 readfile($folder_path_to_be_zipped);
                 unlink($folder_path_to_be_zipped);
-                unlink($folder_name);
+                // unlink($folder_name);
+
+                //delete all the newly copied from the original zip files
+                foreach ($created_sample_zip_files as $file) {
+                    # code...
+                    if(is_file($file)){
+                        unlink($file);
+                    }
+                }
+                //delete the folder of copied sample zip files
+                rmdir($folder_name);
             } else {
                 //if file is failed to created
                 $file_is_made = false;
