@@ -5,6 +5,7 @@ $folder_creation_path = GlobalLinkFiles::getFilePath("folder_creation");
 $style = GlobalLinkFiles::getDirectoryPath("style");
 $home_page_shortend = GlobalLinkFiles::getRelativePath("home_page_shortend");
 $header_url = GlobalLinkFiles::getFilePath("header_url");
+$download_error_page = GlobalLinkFiles::getRelativePath("download_error_page");
 require_once $header_url;
 $protocol= "http";
 if(isset($_SERVER["HTTPS"])){
@@ -18,7 +19,7 @@ if(array_key_exists("HTTP_HOST",$_SERVER)){
 $link = "http://localhost/sampleSelling-master/file_testing/authenticate_download.php?unique_id=6374abd38d577&dnt=2022-11-16%2010:22:27";
 $authenticate_download_url = $protocol."://{$host_name}";
 $header = $authenticate_download_url.$home_page_shortend;
-
+echo HeaderUrl::getUrl($download_error_page);
 //  HeaderUrl::headerFunction($home_page_shortend);
 // header($header);
 // header("http:localhost/sampleSelling-master/homepage.php");

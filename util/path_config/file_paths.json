@@ -142,11 +142,16 @@
         },
         {
             "path_name": "authenticate_download",
-            "actual_path":"/sampleSelling-master/file_testing/authenticate_download.php"
+            "actual_path": "/sampleSelling-master/file_testing/authenticate_download.php"
         },
-{
+        {
             "path_name": "header_url",
-            "actual_path":"/sampleSelling-master/util/HeaderUrl.php"
+            "actual_path": "/sampleSelling-master/util/HeaderUrl.php"
+        }
+        ,
+        {
+            "path_name": "download_error_page",
+            "actual_path": "/sampleSelling-master/file_testing/download_error_page.php"
         }
     ]
 }
