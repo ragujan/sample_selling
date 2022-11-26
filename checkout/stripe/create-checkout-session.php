@@ -7,6 +7,14 @@ $vendor_path = GlobalLinkFiles::getFilePath("vendor_autoload");
 $authenticate_download_path = GlobalLinkFiles::getRelativePath("authenticate_download");
 
 require_once $vendor_path;
+require_once "../query/Samples.php";
+include_once "../query/User.php";
+include_once "../util/Util.php";
+include_once "config.php";
+
+
+//client secret key
+$client_secret = constant("CLIENT_SECRET");
 
 
 //success url generating process
@@ -27,9 +35,9 @@ $authenticate_download_url = $protocol . "://{$host_name}{$authenticate_download
 
 
 // This is your test secret API key.
-\Stripe\Stripe::setApiKey('sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K');
+\Stripe\Stripe::setApiKey($client_secret);
 $stripe = new \Stripe\StripeClient(
-  'sk_test_51J7i2wKy85cwwCHP7ZguJXqQVemWwnfr5mPfrW2Ujkao6iJ9JLDGi5YdRLg2Qj67nTFeTtaKDRqlY7444JLmMidx00TNEnpW0K'
+  $client_secret
 );
 
 $token = $_POST['stripeToken'];
@@ -38,9 +46,8 @@ header('Content-Type: application/json');
 
 $YOUR_DOMAIN = 'http://localhost:80/sampleSelling-master';
 
-require_once "../query/Samples.php";
-include_once "../query/User.php";
-include_once "../util/Util.php";
+
+
 $object = new Samples();
 $util = new Util();
 $sampleids;
