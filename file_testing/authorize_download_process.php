@@ -4,6 +4,9 @@ $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $folder_creation_path = GlobalLinkFiles::getFilePath("folder_creation");
 $home_page_shortend = GlobalLinkFiles::getRelativePath("home_page_shortend");
+$download_error_page = GlobalLinkFiles::getRelativePath("download_error_page");
+$header_url = GlobalLinkFiles::getFilePath("header_url");
+require_once $header_url;
 require_once "DownloadLink.php";
 require_once "DirectoryZip.php";
 require_once "Validation.php";
@@ -16,7 +19,7 @@ $input_received = true;
 $input_validation = true;
 $one_time_download_completed = false;
 $no_matches_found = false;
-$file_is_made = true;
+$file_is_made = false;
 $directory_is_made = false;
 
 if (!isset($_POST["unique_id"]) || !isset($_POST["dnt"])) {
@@ -73,16 +76,13 @@ if (!$download->checkDownloadStatus($unique_id, $dnt)) {
 
             //to zip out the entire folder which contains the zip files as products
             $folder_path_to_be_zipped = $ROOT . "/" . "sampleSelling-master/downloadable_zip_files/" . uniqid() . ".zip";
-            echo $folder_path_to_be_zipped;
+
             $zip = new DirectoryZip($folder_path_to_be_zipped, $folder_name);
             $zip_creation_status = $zip->makeDirectory();
-            echo "<br>";
-            echo $zip_creation_status;
-            echo "<br>";
-            echo $zip->getZipCreationStatus();
+
             $file_is_made = file_exists($folder_path_to_be_zipped);
             if ($file_is_made) {
-                echo " yess this file exits";
+
                 //add a row to the download history table so next time there won't be a chance to download again
                 $download->updateDownloadStatus($unique_id, $dnt);
 
@@ -102,20 +102,44 @@ if (!$download->checkDownloadStatus($unique_id, $dnt)) {
                 readfile($folder_path_to_be_zipped);
                 unlink($folder_path_to_be_zipped);
                 unlink($folder_name);
-                HeaderUrl::headerFunction($home_page_shortend);
-                exit();
-            }else{
+            } else {
                 //if file is failed to created
+                $file_is_made = false;
             }
         } else {
             //no matching rows found in customer purchase table for the values of unique id and dnt
             $no_matches_found = true;
         }
-    }else{
+    } else {
         //directory was not made
+        $directory_is_made = false;
     }
 } else {
     $one_time_download_completed = true;
     // HeaderUrl::headerFunction($home_page_shortend);
     // die();
 }
+
+
+
+if (
+    !$input_validation || $one_time_download_completed ||
+    $no_matches_found || !$file_is_made  || !$directory_is_made
+) {
+
+
+    $error_code = "0";
+    if (!$input_validation) {
+        $error_code = "0001";
+    } else if ($one_time_download_completed) {
+        $error_code = "0002";
+    } else if ($no_matches_found) {
+        $error_code = "0003";
+    } else if (!$file_is_made) {
+        $error_code = "0004";
+    } else if (!$directory_is_made) {
+        $error_code = "0005";
+    }
+    $error_url = HeaderUrl::getUrl($download_error_page) . "?error_code={$error_code}";
+    HeaderUrl::regularHeaderFunction($error_url);
+} 
