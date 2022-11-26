@@ -14,19 +14,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping structure for table sampleselling.abc
-CREATE TABLE IF NOT EXISTS `abc` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `unique_id` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
-
--- Dumping data for table sampleselling.abc: ~2 rows (approximately)
-INSERT INTO `abc` (`id`, `unique_id`) VALUES
-	(4, '8'),
-	(5, '50'),
-	(6, '50');
-
 -- Dumping structure for table sampleselling.customer
 CREATE TABLE IF NOT EXISTS `customer` (
   `UserName` varchar(45) COLLATE utf8_bin DEFAULT NULL,
@@ -56,16 +43,31 @@ CREATE TABLE IF NOT EXISTS `customer_purchase` (
   PRIMARY KEY (`customer_purchase_id`),
   KEY `fk_customer_purchase_customer1_idx` (`customer_id`),
   CONSTRAINT `fk_customer_purchase_customer1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`CustomerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table sampleselling.customer_purchase: ~6 rows (approximately)
+-- Dumping data for table sampleselling.customer_purchase: ~11 rows (approximately)
 INSERT INTO `customer_purchase` (`customer_purchase_id`, `unique_id`, `dnt`, `customer_id`, `customer_email`) VALUES
 	(11, 'rag', '2022-11-13 14:31:53', 4, 'rag'),
 	(12, '6370bff5c3094', '2022-11-13 10:59:17', 0, 'kannadhasanragujan@gmail.com'),
 	(13, '6370c2e8b71f0', '2022-11-13 11:11:52', 0, 'kannadhasanragujan@gmail.com'),
 	(14, '6370c33cb872c', '2022-11-13 11:13:16', 0, 'kannadhasanragujan@gmail.com'),
 	(15, '6370c38619a76', '2022-11-13 11:14:30', 0, 'stiflerwedontgiveup@gmail.com'),
-	(16, '6370c4d9de3c3', '2022-11-13 11:20:09', 0, 'needtoknoweverything631@gmail.com');
+	(16, '6370c4d9de3c3', '2022-11-13 11:20:09', 0, 'needtoknoweverything631@gmail.com'),
+	(17, '6374a3fdca91d', '2022-11-16 09:49:01', 0, 'needtoknoweverything631@gmail.com'),
+	(18, '6374a4bfa2907', '2022-11-16 09:52:15', 0, 'needtoknoweverything631@gmail.com'),
+	(19, '6374a53e8e694', '2022-11-16 09:54:22', 0, 'kannadhasanragujan@gmail.com'),
+	(20, '6374a6cb90944', '2022-11-16 10:00:59', 0, 'stiflerwedontgiveup@gmail.com'),
+	(21, '6374abd38d577', '2022-11-16 10:22:27', 0, 'needtoknoweverything631@gmail.com'),
+	(22, '6374ae4b36291', '2022-11-16 10:32:59', 0, 'needtoknoweverything631@gmail.com'),
+	(23, '63808e86a25a6', '2022-11-25 10:44:38', 1, 'rag@gmail.com'),
+	(24, '63808ee849908', '2022-11-25 10:46:16', 1, 'rag@gmail.com'),
+	(25, '6380908d04900', '2022-11-25 10:53:17', 0, 'marshallrag@gmail.com'),
+	(26, 'RRgzJQ7N7PoR638090dc396f1', '2022-11-25 10:55:09', 0, 'jasonmarshall@gmail.com'),
+	(27, '6xB6owvq7YQR63809838047e3', '2022-11-25 11:26:25', 0, 'kanewilliamson@gmail.com'),
+	(28, 'S8rwYxIpfR8R6380b877ab114', '2022-11-25 01:44:04', 0, 'marshallrag@gmail.com'),
+	(29, '32DoyE7s5gkR6380b96c6b549', '2022-11-25 01:48:15', 0, 'jasonborne@gmail.com'),
+	(30, 'SlDvix4ko7IR6380baa3e81b6', '2022-11-25 01:53:20', 0, 'eminemandcoworkers@gmail.com'),
+	(31, 'TRrcq2dXpzQR6380bb91f09e7', '2022-11-25 01:56:50', 0, 'brojogan@gmail.com');
 
 -- Dumping structure for table sampleselling.customer_purchase_history
 CREATE TABLE IF NOT EXISTS `customer_purchase_history` (
@@ -79,17 +81,69 @@ CREATE TABLE IF NOT EXISTS `customer_purchase_history` (
   KEY `fk_customer_purchase_history_customer_purchase1_idx` (`customer_purchase_id`),
   CONSTRAINT `fk_customer_purchase_history_customer_purchase1` FOREIGN KEY (`customer_purchase_id`) REFERENCES `customer_purchase` (`customer_purchase_id`),
   CONSTRAINT `fk_customer_purchase_history_samples1` FOREIGN KEY (`sampleID`) REFERENCES `samples` (`sampleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb3;
 
--- Dumping data for table sampleselling.customer_purchase_history: ~6 rows (approximately)
+-- Dumping data for table sampleselling.customer_purchase_history: ~15 rows (approximately)
 INSERT INTO `customer_purchase_history` (`id`, `unique_id`, `qty`, `sampleID`, `customer_purchase_id`) VALUES
-	(39, NULL, NULL, 60, 11),
-	(40, NULL, NULL, 57, 11),
+	(39, '6372330bff533d7742', 3, 60, 11),
+	(40, '6370bff533d7742', 3, 57, 11),
 	(41, '6370bff5d7742', 1, 50, 12),
 	(42, '6370c2e8ca3df', 1, 50, 13),
 	(43, '6370c33ccb53f', 1, 50, 14),
 	(44, '6370c38629f47', 1, 50, 15),
-	(45, '6370c4d9f107b', 1, 50, 16);
+	(45, '6370c4d9f107b', 1, 50, 16),
+	(46, '6374a3fddc6f0', 1, 50, 17),
+	(47, '6374a4bfb5e79', 5, 56, 18),
+	(48, '6374a4bfbd5e0', 1, 50, 18),
+	(49, '6374a53e99a66', 1, 50, 19),
+	(50, '6374a6cba53fe', 1, 51, 20),
+	(51, '6374a6cbac47d', 1, 61, 20),
+	(52, '6374abd3a2485', 1, 51, 21),
+	(53, '6374abd3a79a2', 3, 61, 21),
+	(54, '6374ae4b44ef8', 1, 51, 22),
+	(55, '1111', 1, 61, 21),
+	(56, '63808e86b4a7e', 1, 50, 23),
+	(57, '63808e86bdde2', 11, 61, 23),
+	(58, '63808e86c55b9', 6, 56, 23),
+	(59, '63808ee84cdbf', 1, 50, 24),
+	(60, '63808ee85130c', 11, 61, 24),
+	(61, '63808ee855113', 6, 56, 24),
+	(62, '6380908d11174', 1, 50, 25),
+	(63, '6380908d1a87c', 11, 61, 25),
+	(64, '6380908d2254d', 6, 56, 25),
+	(65, '638090fd346d0', 1, 50, 26),
+	(66, '638090fd3c1a0', 11, 61, 26),
+	(67, '638090fd45808', 6, 56, 26),
+	(68, 'VxRZ9wEgAuwR638098515424d', 1, 50, 27),
+	(69, 'neBF1PZcJdQR6380985163a66', 11, 61, 27),
+	(70, 'Kq0kCcwxipkR6380985172679', 6, 56, 27),
+	(71, 'zwMH7wdrT2YR6380b8946fbac', 1, 50, 28),
+	(72, 'kHRclonuaxsR6380b89478b20', 11, 61, 28),
+	(73, 'uId6RBmZVfUR6380b8948533f', 6, 56, 28),
+	(74, 'shwfO3JT5yMR6380b98f55bbc', 7, 50, 29),
+	(75, 'uRKCwDobtBAR6380b98f64f6d', 11, 61, 29),
+	(76, 'l3xMHht0A54R6380b98f747f6', 6, 56, 29),
+	(77, 'LRrjfaqAVR8R6380bac0ce740', 7, 50, 30),
+	(78, 'njB0qTfp35UR6380bac0d869a', 11, 61, 30),
+	(79, 'zjbPNwmlDaMR6380bac0e8bce', 6, 56, 30),
+	(80, '8MM5F0SaGiER6380bbb2c7875', 7, 50, 31),
+	(81, 'F1AM9QawfooR6380bbb2d6973', 11, 61, 31),
+	(82, 'mpH7p1NLURER6380bbb2e2089', 6, 56, 31);
+
+-- Dumping structure for table sampleselling.product_download_history
+CREATE TABLE IF NOT EXISTS `product_download_history` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `downloaded_times` int DEFAULT NULL,
+  `unique_id` varchar(200) DEFAULT NULL,
+  `customer_purchase_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_product_download_history_customer_purchase1_idx` (`customer_purchase_id`),
+  CONSTRAINT `fk_product_download_history_customer_purchase1` FOREIGN KEY (`customer_purchase_id`) REFERENCES `customer_purchase` (`customer_purchase_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table sampleselling.product_download_history: ~0 rows (approximately)
+INSERT INTO `product_download_history` (`id`, `downloaded_times`, `unique_id`, `customer_purchase_id`) VALUES
+	(18, 1, '6381f826e76ae', 21);
 
 -- Dumping structure for table sampleselling.sampleaudio
 CREATE TABLE IF NOT EXISTS `sampleaudio` (
