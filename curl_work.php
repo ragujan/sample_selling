@@ -6,6 +6,7 @@ $style = GlobalLinkFiles::getDirectoryPath("style");
 $home_page_shortend = GlobalLinkFiles::getRelativePath("home_page_shortend");
 $header_url = GlobalLinkFiles::getFilePath("header_url");
 $download_error_page = GlobalLinkFiles::getRelativePath("download_error_page");
+
 require_once $header_url;
 $protocol= "http";
 if(isset($_SERVER["HTTPS"])){
@@ -20,6 +21,9 @@ $link = "http://localhost/sampleSelling-master/file_testing/authenticate_downloa
 $authenticate_download_url = $protocol."://{$host_name}";
 $header = $authenticate_download_url.$home_page_shortend;
 echo HeaderUrl::getUrl($download_error_page);
+echo "<br>";
+$authenticate_download_url = GlobalLinkFiles::getRelativePath("authenticate_download");
+echo HeaderUrl::getUrl($authenticate_download_url);
 //  HeaderUrl::headerFunction($home_page_shortend);
 // header($header);
 // header("http:localhost/sampleSelling-master/homepage.php");
