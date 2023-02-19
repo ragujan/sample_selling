@@ -39,6 +39,7 @@ $sampleArray = array('ID' => $sampleID, 'name' => $sampleName, 'price' => $sampl
     <link rel="stylesheet" href="<?=$style_path?>sampleselling.css">
     <link rel="stylesheet" href="<?=$style_path?>viewsingleproduct.css">
     <link rel="stylesheet" href="<?=$style_path?>navbar.css">
+    <link rel="shortcut icon" href="<?=$resource_path?>/icon_images/logo_transparent.png" type="image/x-icon">
     <title>Single View</title>
 </head>
 

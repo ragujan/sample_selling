@@ -3,7 +3,7 @@ session_start();
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
-$resouces_path = GlobalLinkFiles::getDirectoryPath("resources");
+$resources_path = GlobalLinkFiles::getDirectoryPath("resources");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $sample_display_script_page = GlobalLinkFiles::getRelativePath("audio_sample_display_page_script");
 $server_side_script = GlobalLinkFiles::getRelativePath("server_side");
@@ -26,11 +26,11 @@ $sample_type_name = "melodies";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= $style_path ?>bootstrap.css">
 
-
     <link rel="stylesheet" href="<?= $style_path ?>showsamples.css">
     <link rel="stylesheet" href="<?= $style_path ?>navbar.css">
 
-    <title>BeatSample</title>
+    <link rel="shortcut icon" href="<?=$resources_path?>/icon_images/logo_transparent.png" type="image/x-icon">
+    <title>sample display </title>
 </head>
 
 
@@ -57,7 +57,7 @@ $sample_type_name = "melodies";
                                 <div class="col-12 pt-4">
                                     <div class="row">
                                         <?php
-                                        SecondaryNavbar::setHtmlContent($div_id,$method_name,$sample_type_name,$resouces_path,$page_name_title);
+                                        SecondaryNavbar::setHtmlContent($div_id,$method_name,$sample_type_name,$resources_path,$page_name_title);
                                         ?>
                                     </div>
                

@@ -3,7 +3,7 @@ session_start();
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
-$resouces_path = GlobalLinkFiles::getDirectoryPath("resources");
+$resources_path = GlobalLinkFiles::getDirectoryPath("resources");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $script_path = GlobalLinkFiles::getRelativePath("midi_sample_display_page_script");
 $secondary_navbar = GlobalLinkFiles::getRelativePath("secondary_navbar_display");
@@ -27,8 +27,8 @@ $sample_type_name = "midi";
 
     <link rel="stylesheet" href="<?= $style_path ?>showsamples.css">
     <link rel="stylesheet" href="<?= $style_path ?>navbar.css">
-
-    <title>BeatSample</title>
+    <link rel="shortcut icon" href="<?=$resources_path?>/icon_images/logo_transparent.png" type="image/x-icon">
+    <title>Midi Kits</title>
 </head>
 
 <body>
@@ -52,16 +52,16 @@ $sample_type_name = "midi";
 
                         <div style="position: relative;" class="thecontentdiv  col-12 ">
                             <div class="row">
-                                
-                                
+
+
                                 <div class="col-12 pt-4 ">
                                     <div class="row">
                                         <?php
-                                          SecondaryNavbar::setHtmlContent($div_id,$method_name,$sample_type_name,$resouces_path,$page_name_title);
+                                        SecondaryNavbar::setHtmlContent($div_id, $method_name, $sample_type_name, $resources_path, $page_name_title);
                                         ?>
                                     </div>
                                 </div>
-                    
+
                                 <div id="mainsampleDiv" class="col-12">
                                     <div class="row">
                                         <div class="col-12">

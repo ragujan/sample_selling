@@ -6,7 +6,7 @@ require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.p
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $checkout_script = GlobalLinkFiles::getRelativePath("checkout_script");
-
+$resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +23,7 @@ $checkout_script = GlobalLinkFiles::getRelativePath("checkout_script");
 
     <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
     <script src="https://js.stripe.com/v3/"></script>
+    <link rel="shortcut icon" href="<?=$resource_path?>/icon_images/logo_transparent.png" type="image/x-icon">
     <title>Checkout</title>
 </head>
 
