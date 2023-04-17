@@ -1,4 +1,23 @@
 <?php
+
+session_start();
+if (isset($_SESSION["admin_session"])) {
+
+    if(isset($_SESSION["admin_verify_session"])){
+        unset($_SESSION["admin_verify_session"]);
+    }
+
+    header('Location: http://localhost/sampleSelling-master/admin/view/home.php');
+    die();
+}
+if (isset($_SESSION["admin_verify_session"])) {
+    if(isset($_SESSION["admin_session"])){
+        unset($_SESSION["admin_session"]);
+    }
+    header('Location: http://localhost/sampleSelling-master/admin/view/admin_verify.php');
+    die();
+}
+
 $ROOT = $_SERVER["DOCUMENT_ROOT"];
 require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.php";
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
