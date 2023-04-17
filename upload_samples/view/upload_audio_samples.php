@@ -6,8 +6,7 @@ if (isset($_SESSION["admin_session"])) {
         unset($_SESSION["admin_verify_session"]);
     }
 
-    header('Location: http://localhost/sampleSelling-master/admin/view/home.php');
-    die();
+ 
 }
 if (isset($_SESSION["admin_verify_session"])) {
     if(isset($_SESSION["admin_session"])){

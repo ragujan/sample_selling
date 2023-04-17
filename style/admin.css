@@ -29,7 +29,7 @@
     width: 100%;
     /* margin-right: 25%;
     margin-left: 25%; */
-    background: #202020;
+    background: #20202049;
 
     -webkit-animation: appear 1s ease forwards;
     
@@ -49,3 +49,16 @@
     width: 20px;
 }
 
+.uploadAudioSamplesBtn{
+
+   color: white;
+   font-weight: bold;
+   background-color: rgb(40, 40, 40);
+   border: white 1px solid;
+}
+.uploadMidiSamplesBtn{
+    color: white;
+    font-weight: bold;
+    background-color: rgb(40, 40, 40);
+    border: white 1px solid;
+}
