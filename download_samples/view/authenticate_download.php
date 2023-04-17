@@ -32,7 +32,7 @@ if (!isset($_GET["unique_id"]) || !isset($_GET["dnt"])) {
 
 //make sure credentials are valid
 if (isset($_GET["unique_id"]) && isset($_GET["dnt"])) {
-    
+
     $cart = new Cart();
     $unique_id = $_GET["unique_id"];
     $dnt = $_GET["dnt"];

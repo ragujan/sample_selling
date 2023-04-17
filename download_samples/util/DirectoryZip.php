@@ -10,19 +10,20 @@ class DirectoryZip
         $this->zip_creation_failed = false;
         $this->zip_file_name = $zip_file_name;
         $this->folder_to_be_zipped = $folder_to_be_zipped;
-
     }
-    public function getZipCreationStatus(){
+    public function getZipCreationStatus()
+    {
         //if zip creation failed return false
         //if zip creation succeeded return true
         $status = false;
-        if($this->zip_creation_failed == false){
+        if ($this->zip_creation_failed == false) {
             $status = true;
         }
         return $status;
     }
     public function makeDirectory()
-    {   $status = false;
+    {
+        $status = false;
         $zip = new ZipArchive;
         if ($zip->open($this->zip_file_name, ZipArchive::CREATE) === TRUE) {
             //open directory
@@ -49,7 +50,6 @@ class DirectoryZip
         } else {
             echo "Error";
         }
-     
     }
 }
 // $zip_file_name = 'test_folder_change.zip';

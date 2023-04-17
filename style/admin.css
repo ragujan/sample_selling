@@ -1,0 +1,14 @@
+.loginButton{
+    transition: all 0.3s ease-in-out;
+
+}
+.loginButton:hover{
+
+   color: white ;
+   font-weight: bold;
+   background-color: rgb(40, 40, 40);
+   border: white 1px solid;
+   
+
+
+}
