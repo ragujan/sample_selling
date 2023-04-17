@@ -45,10 +45,10 @@ if (!isset($_SESSION["admin_session"]) && !isset($_SESSION["admin_verify_session
     </head>
 
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row py-3">
                 <!-- to show the uploading buttons -->
-                <div class="col-12 uploadBtnDiv d-none" id="upload-btns-div">
+                <div class="col-12 uploadBtnDiv d-none  " id="upload-btns-div">
                     
                 </div>
                 <div class="col-12">
