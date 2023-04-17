@@ -152,6 +152,15 @@
         {
             "path_name": "download_error_page",
             "actual_path": "/sampleSelling-master/download_samples/view/download_error_page.php"
+        },
+        {
+            "path_name":"admin_db",
+            "actual_path":"/sampleSelling-master/admin/query/Admin.php"
+        }
+        ,
+        {
+            "path_name":"admin_login_script",
+            "actual_path":"/sampleSelling-master/admin/view/admin_login_script.js"
         }
     ]
 }

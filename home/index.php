@@ -6,7 +6,7 @@ require_once $ROOT . "/sampleSelling-master/util/path_config/global_link_files.p
 $style_path = GlobalLinkFiles::getDirectoryPath("style");
 $site_header = GlobalLinkFiles::getFilePath("site_header_php");
 $query_path = GlobalLinkFiles::getFilePath("sample_queries");
-$resources_path = GlobalLinkFiles::getDirectoryPath("resources");
+$resource_path = GlobalLinkFiles::getDirectoryPath("resources");
 $home_page_script = GlobalLinkFiles::getRelativePath("home_page_script");
 $audio_sample_display_page_shortend = GlobalLinkFiles::getRelativePath("audio_sample_display_page_shortend");
 // include_once $query_path;
@@ -22,7 +22,7 @@ $audio_sample_display_page_shortend = GlobalLinkFiles::getRelativePath("audio_sa
     <link rel="stylesheet" href="<?=$style_path?>home.css">
     <link rel="stylesheet" href="<?=$style_path?>navbar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-    <link rel="shortcut icon" href="<?=$resources_path?>/icon_images/logo_transparent.png" type="image/x-icon">
+    <link rel="shortcut icon" href="<?=$resource_path?>/icon_images/logo_transparent.png" type="image/x-icon">
     <title>Home</title>
 </head>
 
