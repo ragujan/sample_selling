@@ -147,20 +147,27 @@
         {
             "path_name": "header_url",
             "actual_path": "/sampleSelling-master/util/HeaderUrl.php"
-        }
-        ,
+        },
         {
             "path_name": "download_error_page",
             "actual_path": "/sampleSelling-master/download_samples/view/download_error_page.php"
         },
         {
-            "path_name":"admin_db",
-            "actual_path":"/sampleSelling-master/admin/query/Admin.php"
-        }
-        ,
+            "path_name": "admin_db",
+            "actual_path": "/sampleSelling-master/admin/query/Admin.php"
+        },
         {
-            "path_name":"admin_login_script",
-            "actual_path":"/sampleSelling-master/admin/view/admin_login_script.js"
+            "path_name": "admin_login_script",
+            "actual_path": "/sampleSelling-master/admin/view/admin_login_script.js"
+        },
+        {
+            "path_name": "upload_audio_samples",
+            "actual_path": "/sampleSelling-master/upload_samples/view/upload_audio_samples.php"
+        },
+        {
+            "path_name": "upload_midi_samples",
+            "actual_path": "/sampleSelling-master/upload_samples/view/upload_midi_samples.php"
+
         }
     ]
 }
